@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Data;
@@ -24,6 +24,15 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         {
             var today = DateTime.Today;
 
+            // Siparişleri önce belleğe al, sonra filtrele ve topla
+            var allOrders = await _context.Orders
+                .Where(o => o.Status != OrderStatus.Cancelled)
+                .ToListAsync();
+
+            var todayOrders = allOrders
+                .Where(o => o.OrderDate.Date == today)
+                .ToList();
+
             var viewModel = new AdminDashboardViewModel
             {
                 TotalCategories = await _context.Categories.CountAsync(),
@@ -32,13 +41,11 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
                 NewOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.New),
                 ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Processing),
                 CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Completed),
-                TodayOrders = await _context.Orders.CountAsync(o => o.OrderDate.Date == today),
-                TodayRevenue = await _context.Orders
-                                   .Where(o => o.OrderDate.Date == today && o.Status != OrderStatus.Cancelled)
-                                   .SumAsync(o => (decimal?)o.TotalAmount) ?? 0
+                TodayOrders = todayOrders.Count,
+                TodayRevenue = todayOrders.Sum(o => o.TotalAmount)
             };
 
             return View(viewModel);
         }
     }
-}
+} 

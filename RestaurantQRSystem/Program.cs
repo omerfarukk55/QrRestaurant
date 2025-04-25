@@ -6,28 +6,28 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// SQLite veritabaný yapýlandýrmasý
+// SQLite veritabanï¿½ yapï¿½landï¿½rmasï¿½
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=restaurant.db";
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddSignalR();
-// Identity yapýlandýrmasý
+// Identity yapï¿½landï¿½rmasï¿½
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    // Þifre gereksinimleri
+    // ï¿½ifre gereksinimleri
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
 
-    // Kullanýcý gereksinimleri
+    // Kullanï¿½cï¿½ gereksinimleri
     options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Cookie ayarlarý
+// Cookie ayarlar
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Admin/Account/Login";
@@ -43,7 +43,7 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Geliþtirme ortamý yapýlandýrmasý
+// Geliï¿½tirme ortamï¿½ yapï¿½landï¿½rmasï¿½
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -65,7 +65,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Route yapýlandýrmasý
+// Route yapï¿½landï¿½rmasï¿½
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -76,7 +76,7 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-// Veritabanýný oluþtur ve admin kullanýcýsýný ekle
+// Veritabanï¿½nï¿½ oluï¿½tur ve admin kullanï¿½cï¿½sï¿½nï¿½ ekle
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -88,13 +88,13 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-        // Admin rolünü oluþtur
+        // Admin rolï¿½nï¿½ oluï¿½tur
         if (!await roleManager.RoleExistsAsync("Admin"))
         {
             await roleManager.CreateAsync(new IdentityRole("Admin"));
         }
 
-        // Admin kullanýcýsýný oluþtur
+        // Admin kullanï¿½cï¿½sï¿½nï¿½ oluï¿½tur
         var adminEmail = "admin@restaurant.com";
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
@@ -119,7 +119,7 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Veritabaný baþlatýlýrken bir hata oluþtu.");
+        logger.LogError(ex, "Veritabanï¿½ baï¿½latï¿½lï¿½rken bir hata oluï¿½tu.");
     }
 }
 
