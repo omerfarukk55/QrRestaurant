@@ -1,0 +1,97 @@
+﻿@model IEnumerable<RestaurantQRSystem.Models.Order>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Sipariş Raporu";
+}
+
+<h2 class="mb-3">Sipariş Geçmişi ve Rapor</h2>
+<form method="get" class="row g-2 mb-4">
+    <div class="col-auto">
+        <label class="form-label mb-0" for="startDate">Tarih Başlangıç:</label>
+        <input type="date" id="startDate" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+    </div>
+    <div class="col-auto">
+        <label class="form-label mb-0" for="endDate">Tarih Bitiş:</label>
+        <input type="date" id="endDate" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+    </div>
+    <div class="col-auto align-self-end">
+        <button type="submit" class="btn btn-primary">Filtrele</button>
+    </div>
+</form>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm text-bg-success mb-3">
+            <div class="card-body">
+                <i class="fas fa-cash-register fa-2x me-2"></i> <b>Toplam Satış:</b>
+                <span class="float-end">@((ViewBag.TotalSales ?? 0.0M).ToString("C2"))</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm text-bg-info mb-3">
+            <div class="card-body">
+                <i class="fas fa-check-circle fa-2x me-2"></i> <b>Tamamlanan Sipariş:</b>
+                <span class="float-end">@ViewBag.TotalCount adet</span>
+               </div>
+            </div>
+            </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm text-bg-danger mb-3">
+            <div class="card-body">
+                <i class="fas fa-times-circle fa-2x me-2"></i>
+                <b>İptal edilen Sipariş:</b>
+                <span class="float-end">@ViewBag.TotalCancelled adet</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Masa</th>
+            <th>Tarih</th>
+            <th>Durum</th>
+            <th>Tutar</th>
+            <th>Açıklama</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var o in Model)
+    {
+        <tr>
+            <td>@o.Id</td>
+            <td>@o.Table?.Name</td>
+            <td>@o.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>
+                <span class="badge 
+                    @(o.Status == RestaurantQRSystem.Models.Enums.OrderStatus.Completed ? "bg-success" :
+                      o.Status == RestaurantQRSystem.Models.Enums.OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")">
+                    @(
+                        o.Status == RestaurantQRSystem.Models.Enums.OrderStatus.Completed ? "Tamamlandı" :
+                        o.Status == RestaurantQRSystem.Models.Enums.OrderStatus.Cancelled ? "İptal" : o.Status.ToString()
+                    )
+                </span>
+            </td>
+            <td>@o.TotalAmount.ToString("C2")</td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(o.CustomerNote))
+                {
+                    <span title="@o.CustomerNote" data-bs-toggle="tooltip">@o.CustomerNote.Substring(0, Math.Min(20, o.CustomerNote.Length))@(o.CustomerNote.Length > 20 ? "..." : "")</span>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+}s

@@ -1,0 +1,15 @@
+﻿@model RestaurantQRSystem.Models.Category
+@{
+    ViewData["Title"] = "Kategori Sil";
+    Layout = "_AdminLayout";
+}
+
+<h1>Kategoriyi Sil</h1>
+<div class="alert alert-danger">
+    <strong>@Model.Name</strong> adlı kategori silinecek. Devam etmek istediğinize emin misiniz?
+</div>
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

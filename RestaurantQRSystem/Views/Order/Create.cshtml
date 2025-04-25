@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Sipariş Oluştur";
+    Layout = null; // minimalist tasarım
+}
+
+@* tableId ve sepet bu sayfaya parametre/geçici veriyle taşınmalı *@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container py-4">
+        <h2 class="mb-3">Siparişinizi Onaylayın</h2>
+        <form id="orderForm" method="post" action="/Order/Create">
+            <input type="hidden" id="TableId" name="TableId" value="" />
+            <input type="hidden" id="CartJson" name="CartJson" value="" />
+
+            <div class="mb-3">
+                <label for="CustomerName" class="form-label">Ad (isteğe bağlı)</label>
+                <input type="text" class="form-control" id="CustomerName" name="CustomerName" />
+            </div>
+            <div class="mb-3">
+                <label for="CustomerNote" class="form-label">Notunuz (isteğe bağlı)</label>
+                <textarea class="form-control" id="CustomerNote" name="CustomerNote"></textarea>
+            </div>
+            <div id="cartSummary"></div>
+            <button type="submit" class="btn btn-success">Siparişi Gönder</button>
+            <a href="javascript:history.back()" class="btn btn-secondary">Geri</a>
+        </form>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sepeti yükle ve formu doldur
+        var cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        // Table bilgisini localstorage'dan ya da url'den alabilirsiniz
+        var tableId = new URLSearchParams(window.location.search).get('tableId') || localStorage.getItem('tableId') || '';
+
+        document.getElementById('TableId').value = tableId;
+        document.getElementById('CartJson').value = JSON.stringify(cart);
+
+        // Sepet özetini göster
+        let html = "<ul class='list-group mb-3'>";
+        let total = 0;
+        cart.forEach(function(item){
+            html += `<li class='list-group-item d-flex justify-content-between align-items-center'>
+                        <span>${item.name}<br><small class="text-muted">${item.price}₺ x ${item.quantity}</small></span>
+                        <span>${(item.price*item.quantity).toFixed(2)}₺</span>
+                    </li>`;
+            total += item.price*item.quantity;
+        });
+        html += "</ul><div class='text-end'>Toplam: <b>" + total.toFixed(2) + "₺</b></div>";
+        document.getElementById('cartSummary').innerHTML = html;
+
+        // Sipariş gönderildiğinde sepeti temizle
+        document.getElementById('orderForm').addEventListener('submit', function(){
+            localStorage.removeItem('cart');
+        });
+    </script>
+</body>
+</html>

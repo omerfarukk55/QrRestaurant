@@ -1,0 +1,14 @@
+﻿@model RestaurantQRSystem.Models.Table
+@{
+    ViewData["Title"] = "Masa Sil";
+    Layout = "_AdminLayout";
+}
+<h1>Masa Sil</h1>
+<div class="alert alert-danger">
+    <strong>@Model.Name</strong> adlı masa silinecek. Emin misiniz?
+</div>
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

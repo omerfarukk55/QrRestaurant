@@ -1,0 +1,108 @@
+﻿/* Admin panel stilleri */
+:root {
+    --sidebar-width: 250px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#wrapper {
+    display: flex;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: var(--sidebar-width);
+    margin-left: 0;
+    transition: margin 0.25s ease-out;
+}
+
+    #sidebar-wrapper .sidebar-heading {
+        padding: 0.875rem 1.25rem;
+        font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+        width: var(--sidebar-width);
+    }
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+.list-group-item {
+    border: none;
+    padding: 15px 30px;
+}
+
+    .list-group-item.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #fff;
+    }
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: calc(-1 * var(--sidebar-width));
+}
+
+@media (min-width: 768px) {
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Dashboard card stilleri */
+.dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+.dashboard-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bildirim dropdown stilleri */
+.notification-dropdown {
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.dropdown-header {
+    font-weight: bold;
+    color: #333;
+}
+
+.notification-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+    .notification-item:last-child {
+        border-bottom: none;
+    }
+
+    .notification-item.unread {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+.notification-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}

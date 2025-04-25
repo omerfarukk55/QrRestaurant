@@ -1,0 +1,25 @@
+﻿<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                <i class="fas fa-tachometer-alt me-1"></i>Admin Panel
+            </a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">
+                    <i class="fas fa-sign-out-alt me-1"></i>Çıkış
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Account" asp-action="Login">
+                <i class="fas fa-sign-in-alt me-1"></i>Giriş
+            </a>
+        </li>
+    }
+</ul>

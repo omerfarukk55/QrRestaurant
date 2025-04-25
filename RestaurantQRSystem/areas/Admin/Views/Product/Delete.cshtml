@@ -1,0 +1,28 @@
+﻿@model RestaurantQRSystem.Models.Product
+@{
+    ViewData["Title"] = "Ürün Sil";
+    Layout = "_AdminLayout";
+}
+
+<h1>Ürün Sil</h1>
+
+<div class="alert alert-danger">
+    <strong>@Model.Name</strong> adlı ürün silinecek. Devam etmek istediğinize emin misiniz?
+</div>
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label>Kategori: </label> @Model.Category?.Name
+    </div>
+    <div class="mb-3">
+        <label>Fiyat: </label> @Model.Price.ToString("C2")
+    </div>
+    <div class="mb-3">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" width="100" />
+        }
+    </div>
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

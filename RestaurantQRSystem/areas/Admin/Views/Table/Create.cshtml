@@ -1,0 +1,30 @@
+﻿@model RestaurantQRSystem.Models.Table
+@{
+    ViewData["Title"] = "Masa Ekle";
+    Layout = "_AdminLayout";
+}
+<h1>Yeni Masa Ekle</h1>
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="QrCode" class="form-label"></label>
+        <input asp-for="QrCode" class="form-control" />
+        <span asp-validation-for="QrCode" class="text-danger"></span>
+    </div>
+    <div class="mb-3 form-check">
+        <input asp-for="IsOccupied" class="form-check-input" />
+        <label asp-for="IsOccupied" class="form-check-label">Dolu</label>
+    </div>
+
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,48 @@
+﻿@model RestaurantQRSystem.Models.Order
+@using RestaurantQRSystem.Models.Enums
+@{
+    ViewData["Title"] = "Sipariş Detay";
+    Layout = "_AdminLayout";
+}
+<h2>Sipariş Detay</h2>
+<div class="mb-3">
+    <b>Masa:</b> @Model.Table?.Name <br />
+    <b>Tarih:</b> @Model.OrderDate.ToString("dd.MM.yyyy HH:mm") <br />
+    <b>Durum:</b> <span class="badge bg-info">@Model.Status</span>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ürün</th>
+            <th>Adet</th>
+            <th>Birim Fiyat</th>
+            <th>Toplam</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product?.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("C2")</td>
+                <td>@(item.UnitPrice * item.Quantity).ToString("C2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-end">
+    <b>Genel Toplam:</b> @Model.TotalAmount.ToString("C2")
+</div>
+<form asp-action="ChangeStatus" method="post" class="mt-3 d-inline-block">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="input-group">
+        <select class="form-select" name="status">
+            @foreach (var s in Enum.GetValues(typeof(OrderStatus)))
+            {
+                <option value="@s" selected="@(s.ToString() == Model.Status.ToString())">@s</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-success">Durumu Güncelle</button>
+    </div>
+</form>

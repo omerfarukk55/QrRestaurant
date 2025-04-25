@@ -1,0 +1,12 @@
+﻿using RestaurantQRSystem.Models;
+using System.Collections.Generic;
+
+namespace RestaurantQRSystem.ViewModels
+{
+    public class MenuViewModel
+    {
+        public int TableId { get; set; }
+        public string TableName { get; set; }
+        public List<Category> Categories { get; set; }
+    }
+}

@@ -1,0 +1,77 @@
+﻿@model RestaurantQRSystem.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout";
+}
+
+<h1>Yönetici Paneli</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Kategori</h5>
+                <p class="card-text display-4">@Model.TotalCategories</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Ürün</h5>
+                <p class="card-text display-4">@Model.TotalProducts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Masa</h5>
+                <p class="card-text display-4">@Model.TotalTables</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">Bugün Aldığın Sipariş</h5>
+                <p class="card-text display-4">@Model.TodayOrders</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title text-info">Yeni Siparişler</h5>
+                <p class="card-text display-4">@Model.NewOrders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title text-warning">Hazırlanıyor</h5>
+                <p class="card-text display-4">@Model.ProcessingOrders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title text-success">Tamamlanan</h5>
+                <p class="card-text display-4">@Model.CompletedOrders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title text-primary">Bugünkü Ciro</h5>
+                <p class="card-text display-4">@Model.TodayRevenue.ToString("C2")</p>
+            </div>
+        </div>
+    </div>
+</div>
