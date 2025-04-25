@@ -1,0 +1,75 @@
+﻿/* Auth sayfaları için özel stil */
+.auth-bg {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    min-height: 100vh;
+}
+
+.auth-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(to right, #4e73df, #224abe);
+}
+
+.input-group-text {
+    background-color: #f8f9fc;
+    border-right: none;
+}
+
+.input-group .form-control {
+    border-left: none;
+}
+
+    .input-group .form-control:focus {
+        box-shadow: none;
+        border-color: #d1d3e2;
+    }
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    transition: all 0.2s;
+}
+
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Validation styling */
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.alert-danger {
+    background-color: rgba(231, 74, 59, 0.1);
+    border-color: rgba(231, 74, 59, 0.2);
+    color: #e74a3b;
+}

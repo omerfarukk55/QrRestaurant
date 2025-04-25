@@ -1,0 +1,41 @@
+﻿@model IEnumerable<RestaurantQRSystem.Models.Table>
+@{
+    ViewData["Title"] = "Masalar";
+    Layout = "_AdminLayout";
+}
+
+<h1>Masa Yönetimi</h1>
+<a asp-action="Create" class="btn btn-primary mb-3">Yeni Masa Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Adı</th>
+            <th>QR Kodu</th>
+            <th>Dolu mu?</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>@t.Id</td>
+                <td>@t.Name</td>
+                <td>@t.QrCode</td>
+                <td>@(t.IsOccupied ? "Evet" : "Hayır")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@t.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@t.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <img src="@Url.Action("Qr", "Table", new { area="Admin", id=t.Id })" width="80" />
+                    <br />
+                    <a href="@Url.Action("QrPrint", "Table", new { area="Admin", id=t.Id })" class="btn btn-outline-secondary btn-sm mt-1" target="_blank">
+                        Yazdır
+                    </a>
+            </tr>
+        }
+    </tbody>
+</table>

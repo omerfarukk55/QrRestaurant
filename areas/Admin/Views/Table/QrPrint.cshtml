@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+    var table = ViewBag.Table as RestaurantQRSystem.Models.Table;
+    var qrImgUrl = Url.Action("Qr", "Table", new { area = "Admin", id = table.Id });
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Kod Yazdır - @table.Name</title>
+</head>
+<body style="text-align:center; margin:50px;">
+    <h2>@table.Name</h2>
+    <img src="@qrImgUrl" width="250" />
+    <div style="margin-top:20px;">
+        <strong>Masa QR (Menü Linki):</strong><br />
+        <code>@ViewBag.QrUrl</code>
+    </div>
+    <hr />
+    <button onclick="window.print()" style="margin-top:30px;">Yazdır</button>
+</body>
+</html>

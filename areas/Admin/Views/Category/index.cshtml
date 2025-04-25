@@ -1,0 +1,37 @@
+﻿@model IEnumerable<RestaurantQRSystem.Models.Category>
+@{
+    ViewData["Title"] = "Kategoriler";
+    Layout = "_AdminLayout";
+}
+
+<h1>Kategori Yönetimi</h1>
+<a asp-action="Create" class="btn btn-primary mb-3">Yeni Kategori Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Adı</th>
+            <th>Açıklama</th>
+            <th>Sıra</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.Name</td>
+                <td>@c.Description</td>
+                <td>@c.DisplayOrder</td>
+                <td>@(c.IsActive ? "Aktif" : "Pasif")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

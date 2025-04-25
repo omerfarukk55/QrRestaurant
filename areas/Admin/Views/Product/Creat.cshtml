@@ -1,0 +1,44 @@
+﻿@model RestaurantQRSystem.Models.Product
+@{
+    ViewData["Title"] = "Ürün Ekle";
+    Layout = "_AdminLayout";
+}
+
+<h1>Yeni Ürün Ekle</h1>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Kategori</label>
+        <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ürün Görseli</label>
+        <input type="file" name="imgFile" accept="image/*" class="form-control" />
+    </div>
+    <div class="mb-3 form-check">
+        <input asp-for="IsAvailable" class="form-check-input" />
+        <label asp-for="IsAvailable" class="form-check-label">Aktif</label>
+    </div>
+
+    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
