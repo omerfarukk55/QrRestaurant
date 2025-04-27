@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Sipariş Oluştur";
-    Layout = null; // minimalist tasarım
+    Layout = null;
 }
 
 @* tableId ve sepet bu sayfaya parametre/geçici veriyle taşınmalı *@
@@ -14,6 +14,7 @@
     <div class="container py-4">
         <h2 class="mb-3">Siparişinizi Onaylayın</h2>
         <form id="orderForm" method="post" action="/Order/Create">
+            @Html.AntiForgeryToken()
             <input type="hidden" id="TableId" name="TableId" value="" />
             <input type="hidden" id="CartJson" name="CartJson" value="" />
 
@@ -37,10 +38,16 @@
         var cart = JSON.parse(localStorage.getItem('cart') || '[]');
         // Table bilgisini localstorage'dan ya da url'den alabilirsiniz
         var tableId = new URLSearchParams(window.location.search).get('tableId') || localStorage.getItem('tableId') || '';
-
         document.getElementById('TableId').value = tableId;
         document.getElementById('CartJson').value = JSON.stringify(cart);
-        console.log("bu adıma geldi "+ JSON.stringify(cart));
+       
+        console.log("bu adıma geldi "+ JSON.stringify(cart)+tableId);
+         console.log("Form verisi:", {
+        TableId: document.getElementById('TableId').value,
+        CartJson: document.getElementById('CartJson').value,
+        CustomerName: document.getElementById('CustomerName').value,
+        CustomerNote: document.getElementById('CustomerNote').value
+        });
         // Sepet özetini göster
         let html = "<ul class='list-group mb-3'>";
         let total = 0;
@@ -58,6 +65,8 @@
         document.getElementById('orderForm').addEventListener('submit', function(){
             localStorage.removeItem('cart');
         });
+        
+         
     </script>
 </body>
 </html>

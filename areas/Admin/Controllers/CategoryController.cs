@@ -69,10 +69,10 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Category model)
+        public async Task<IActionResult> Edit(int id, CategoryDto model)
         {
-            if (id != model.Id)
-                return NotFound();
+            //if (id != model.Id)
+              //  return NotFound();
 
             if (ModelState.IsValid)
             {

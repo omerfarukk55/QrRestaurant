@@ -34,6 +34,10 @@ namespace RestaurantQRSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int TableId, string CartJson, string CustomerName, string CustomerNote)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(); // Hataları göster
+            }
             // Gelen cart JSON Deserializasyonu
             var cartItems = JsonSerializer.Deserialize<List<CartItemDto>>(CartJson);
             if (cartItems == null || cartItems.Count == 0)

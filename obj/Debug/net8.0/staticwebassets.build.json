@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eeUH4Uu5c8oDT/VE7M/kivQWziHS+ae0bzREIe/zwp0=",
+  "Hash": "H1mSEJ1sJV30SUggG4gDWNxXUHw4oS4PeQWla6xYfN8=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -1543,8 +1543,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4hqe27kqa5",
-      "Integrity": "eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=",
+      "Fingerprint": "rtrq7iguzq",
+      "Integrity": "oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -5852,51 +5852,6 @@
       ]
     },
     {
-      "Route": "js/site.4hqe27kqa5.js",
-      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7617"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 15:25:15 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "4hqe27kqa5"
-        },
-        {
-          "Name": "label",
-          "Value": "js/site.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c="
-        }
-      ]
-    },
-    {
       "Route": "js/site.js",
       "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
       "Selectors": [],
@@ -5907,7 +5862,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7617"
+          "Value": "6687"
         },
         {
           "Name": "Content-Type",
@@ -5915,11 +5870,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=\""
+          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 15:25:15 GMT"
+          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5929,7 +5884,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c="
+          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.rtrq7iguzq.js",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6687"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rtrq7iguzq"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
         }
       ]
     },
