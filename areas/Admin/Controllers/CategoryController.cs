@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestaurantQRSystem.Controllers;
 using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Models;
+using RestaurantQRSystem.Models.DTOs;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,11 +34,24 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category model)
+        public async Task<IActionResult> Create(CategoryDto model)
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(model);
+                 var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {       
+                System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                }
+
+                var Category = new Category
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    DisplayOrder = model.DisplayOrder
+                };
+
+                await _context.Categories.AddAsync(Category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

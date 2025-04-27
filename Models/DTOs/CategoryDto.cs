@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 
-namespace RestaurantQRSystem.Models
+namespace RestaurantQRSystem.Models.DTOs
 {
-    public class Category
+    public class CategoryDto
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Kategori adı zorunludur.")]
         public string Name { get; set; }
 
@@ -16,7 +13,5 @@ namespace RestaurantQRSystem.Models
         public int DisplayOrder { get; set; }
 
         public bool IsActive { get; set; } = true;
-
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

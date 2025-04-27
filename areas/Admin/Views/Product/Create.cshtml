@@ -1,4 +1,4 @@
-﻿@model RestaurantQRSystem.Models.Product
+﻿@model RestaurantQRSystem.Models.DTOs.ProductDto
 @{
     ViewData["Title"] = "Ürün Ekle";
     Layout = "_AdminLayout";
@@ -29,7 +29,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Ürün Görseli</label>
-        <input type="file" name="imgFile" accept="image/*" class="form-control" />
+        <input type="file" name="imgFile" accept="images/*" class="form-control" />
     </div>
     <div class="mb-3 form-check">
         <input asp-for="IsAvailable" class="form-check-input" />

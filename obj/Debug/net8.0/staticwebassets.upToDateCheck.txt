@@ -67,3 +67,5 @@ wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\ses\havaliman_anons.mp3
+wwwroot\uploads\products\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg
+wwwroot\uploads\products\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg

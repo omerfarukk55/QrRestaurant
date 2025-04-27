@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System;
 using Microsoft.Extensions.Logging.Abstractions;
+using RestaurantQRSystem.Models.DTOs;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 namespace RestaurantQRSystem.Areas.Admin.Controllers
 {
@@ -43,10 +45,12 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product model, IFormFile imgFile)
+        public async Task<IActionResult> Create(ProductDto model, IFormFile imgFile)
         {
             if (ModelState.IsValid)
             {
+                string imageUrl = null;
+
                 if (imgFile != null && imgFile.Length > 0)
                 {
                     var fileName = Guid.NewGuid() + Path.GetExtension(imgFile.FileName);
@@ -57,13 +61,24 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
                     {
                         await imgFile.CopyToAsync(stream);
                     }
-                    model.ImageUrl = "/uploads/products/" + fileName;
+                    imageUrl = "/uploads/products/" + fileName;
                 }
 
-                _context.Products.Add(model);
+                var product = new Product
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Price = model.Price,
+                    IsAvailable = model.IsAvailable,
+                    CategoryId = model.CategoryId,
+                    ImageUrl = imageUrl  // Görsel yolunu ürün nesnesine atıyorum
+                };
+
+                await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.Categories = await _context.Categories.Where(c => c.IsActive).ToListAsync();
             return View(model);
         }
