@@ -1,0 +1,374 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\views\\order\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\views\\order\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\views\\order\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\views\\order\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\views\\order\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\views\\order\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\hubs\\orderhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\hubs\\orderhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\viewmodels\\orderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\views\\order\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\views\\order\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\services\\ordernotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\services\\ordernotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\views\\product\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\views\\product\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|c:\\users\\omerf\\source\\repos\\restaurantqrsystem\\restaurantqrsystem\\areas\\admin\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EA90E288-EBBB-4B69-97A7-786D38D4F01F}|RestaurantQRSystem\\RestaurantQRSystem.csproj|solutionrelative:restaurantqrsystem\\areas\\admin\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Program.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Program.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Program.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAADoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T20:16:34.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderHub.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Hubs\\OrderHub.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Hubs\\OrderHub.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Hubs\\OrderHub.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Hubs\\OrderHub.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAowBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T20:15:59.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Models\\Order.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Models\\Order.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAxwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T20:15:37.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "RestaurantQRSystem\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAIwKwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-27T19:52:57.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Success.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Success.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Views\\Order\\Success.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Success.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\Views\\Order\\Success.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-27T19:45:42.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Create.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Views\\Order\\Create.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Create.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\Views\\Order\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-27T19:41:16.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "cart.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\cart.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Views\\Order\\cart.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\cart.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\Views\\Order\\cart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-27T19:41:14.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Confirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Confirmation.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Views\\Order\\Confirmation.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Views\\Order\\Confirmation.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\Views\\Order\\Confirmation.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-27T19:41:12.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T19:38:40.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "OrderViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\ViewModels\\OrderViewModel.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\ViewModels\\OrderViewModel.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\ViewModels\\OrderViewModel.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\ViewModels\\OrderViewModel.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T19:38:18.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrderNotificationService.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Services\\OrderNotificationService.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Services\\OrderNotificationService.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Services\\OrderNotificationService.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Services\\OrderNotificationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T19:34:07.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T19:27:11.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T19:27:03.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Index.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T06:51:27.299Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Edit.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Edit.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Edit.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T06:51:03.263Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Delete.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Delete.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Views\\Product\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T06:50:59.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Index.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Index.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Index.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T06:50:44.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Details.cshtml",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Details.cshtml",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Details.cshtml",
+              "RelativeToolTip": "RestaurantQRSystem\\areas\\Admin\\Views\\Order\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-26T06:50:38.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T18:50:11.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\MenuController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Controllers\\MenuController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\MenuController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Controllers\\MenuController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T18:49:48.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "RestaurantQRSystem\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "RestaurantQRSystem\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T18:49:40.742Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,59 +1,101 @@
-﻿// Sepeti LocalStorage'da sakla
+﻿// Sepeti LocalStorage'dan alma
 function getCart() {
-    return JSON.parse(localStorage.getItem('cart')) || [];
+    try {
+        const storedCart = localStorage.getItem('cart');
+        const cart = storedCart ? JSON.parse(storedCart) : [];
+        return Array.isArray(cart) ? cart : [];
+    } catch (e) {
+        console.error("Sepet verisi bozuk:", e);
+        return []; // Hata durumunda yeni bir sepet oluştur
+    }
 }
 
+// Sepeti LocalStorage'a kaydetme
 function saveCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+// Sepete ürün ekleme
 function addToCart(productId, productName, productPrice) {
-    let cart = getCart();
-    let item = cart.find(x => x.id === productId);
-    if (item) {
-        item.quantity++;
-    } else {
-        cart.push({
-            id: productId,
-            name: productName,
-            price: productPrice,
-            quantity: 1
-        });
+    try {
+        // Geçerlilik kontrolü
+        if (!productId || !productName || productPrice === undefined || productPrice === null) {
+            console.error("Eksik ürün bilgisi: ID, ad ve fiyat gereklidir.");
+            return false;
+        }
+
+        let cart = getCart();
+        const existingProductIndex = cart.findIndex(item => String(item.id) === String(productId));
+
+        if (existingProductIndex > -1) {
+            // Var olan ürünün miktarını artır
+            cart[existingProductIndex].quantity += 1;
+        } else {
+            // Ürünü sepete ekle
+            cart.push({
+                id: productId,
+                name: productName,
+                price: parseFloat(productPrice), // Sayı olduğundan emin olalım
+                quantity: 1
+            });
+        }
+
+        // Sepeti kaydet
+        saveCart(cart);
+
+        // Arayüzü güncelle
+        updateCartBadge();
+
+        // Bildirim göster
+        showNotification(`${productName} sepete eklendi.`, 'success');
+        return true;
+    } catch (error) {
+        console.error("Sepete ekleme işlemi başarısız:", error);
+        showNotification("Ürün sepete eklenemedi. Lütfen tekrar deneyin.", "error");
+        return false;
     }
-    saveCart(cart);
-    updateCartBadge();
-    showCartToast(productName + " sepete eklendi!");
 }
 
+// Sepetten ürün çıkarma
 function removeFromCart(productId) {
-    let cart = getCart().filter(x => x.id !== productId);
+    let cart = getCart().filter(x => String(x.id) !== String(productId));
     saveCart(cart);
     updateCartBadge();
     updateCartSummary();
 }
 
-// Karttaki ürün miktarını artır/azalt (opsiyonel)
+// Karttaki ürün miktarını artır/azalt
 function changeCartQuantity(productId, delta) {
     let cart = getCart();
-    let item = cart.find(x => x.id === productId);
+    let item = cart.find(x => String(x.id) === String(productId));
     if (!item) return;
+
     item.quantity += delta;
+
     if (item.quantity <= 0) {
-        cart = cart.filter(x => x.id !== productId);
+        cart = cart.filter(x => String(x.id) !== String(productId));
     }
+
     saveCart(cart);
+    updateCartBadge();
+    updateCartSummary();
+}
+
+// Sepeti temizleme
+function clearCart() {
+    localStorage.removeItem('cart');
     updateCartBadge();
     updateCartSummary();
 }
 
 // Sepetteki eleman sayısını güncelle
 function updateCartBadge() {
-    let cart = getCart();
-    let totalCount = cart.reduce((acc, x) => acc + x.quantity, 0);
-    let badge = document.querySelector('.cart-badge');
+    const cart = getCart();
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    const badge = document.querySelector('.cart-badge');
     if (badge) {
-        badge.textContent = totalCount;
-        badge.style.display = totalCount > 0 ? 'inline-block' : 'none';
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'block' : 'none';
     }
 }
 
@@ -78,6 +120,7 @@ function updateCartSummary() {
         ).join('') +
         "</ul>" +
         `<div class='text-end'>Toplam: <b>${cart.reduce((acc, x) => acc + x.price * x.quantity, 0).toFixed(2)}₺</b></div>`;
+
     let cartSummary = document.getElementById('cartSummary');
     if (cartSummary) cartSummary.innerHTML = summary;
 }
@@ -89,128 +132,56 @@ function showCart() {
     modal.show();
 }
 
-// Toast mesajı göster (kısa onay)
-function showCartToast(msg) {
+// Bildirim gösterme (birleştirilmiş fonksiyon)
+function showNotification(message, type = 'success') {
     if (window.bootstrap && document.body) {
-        var toastDiv = document.createElement('div');
-        toastDiv.className = 'toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3';
-        toastDiv.setAttribute('role', 'alert');
-        toastDiv.innerHTML = `
-            <div class='d-flex'>
-                <div class='toast-body'>${msg}</div>
-                <button type='button' class='btn-close btn-close-white me-2 m-auto' data-bs-dismiss='toast' aria-label='Kapat'></button>
+        const notification = document.createElement('div');
+        notification.className = `toast align-items-center text-white bg-${type} border-0`;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'assertive');
+        notification.setAttribute('aria-atomic', 'true');
+        notification.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         `;
-        document.body.appendChild(toastDiv);
-        var toast = new bootstrap.Toast(toastDiv, { delay: 1500 });
+
+        let toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            document.body.appendChild(toastContainer);
+        }
+
+        toastContainer.appendChild(notification);
+        const toast = new bootstrap.Toast(notification, { delay: 3000 });
         toast.show();
-        toastDiv.addEventListener('hidden.bs.toast', () => toastDiv.remove());
+
+        notification.addEventListener('hidden.bs.toast', () => notification.remove());
     } else {
-        alert(msg);
+        alert(message);
     }
 }
 
-// Sayfa yüklendiğinde cart badge güncelle
+// Sayfa yüklendiğinde sepet işlemlerini başlat
 document.addEventListener('DOMContentLoaded', function () {
-    updateCartBadge();
-    // Sepete ekle butonları için event
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function () {
-            let id = this.getAttribute('data-product-id');
-            let name = this.getAttribute('data-product-name');
-            let price = parseFloat(this.getAttribute('data-product-price'));
-            addToCart(id, name, price);
-        });
-    });
-});
-function clearCart() {
-    localStorage.removeItem('cart');
-    updateCartBadge();
-    updateCartSummary();
-}
-// Genel site JavaScript kodları
-document.addEventListener('DOMContentLoaded', function () {
-    // Sepet işlemleri
     initializeCart();
 });
 
 // Sepet başlatma
 function initializeCart() {
     updateCartBadge();
-    // Sepete ekleme butonları için event listener document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
-        const productId = this.getAttribute('data-product-id');
-        const productName = this.getAttribute('data-product-name');
-        const productPrice = parseFloat(this.getAttribute('data-product-price'));
 
-        addToCart(productId, productName, productPrice);
+    // Sepete ekleme butonları için event listener
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const productId = this.getAttribute('data-product-id');
+            const productName = this.getAttribute('data-product-name');
+            const productPrice = parseFloat(this.getAttribute('data-product-price'));
+
+            addToCart(productId, productName, productPrice);
+        });
     });
-}
-
-// Sepete ürün ekleme
-function addToCart(productId, productName, productPrice) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    // Ürün sepette var mı kontrol et 
-    const existingProductIndex = cart.findIndex(item => item.id === productId);
-    if (existingProductIndex > -1) {
-        cart[existingProductIndex].quantity += 1;
-    }
-
-    else {
-        // Ürünü sepete ekle 
-        cart.push({
-        id: productId,
-        name: productName,
-        price: productPrice,
-        quantity: 1
-    });
-}
-
-// Sepeti güncelle
-localStorage.setItem('cart', JSON.stringify(cart));
-updateCartBadge();
-
-// Bildirim göster
-showNotification(`${productName} sepete eklendi.`);
-}
-
-// Sepet badge'ini güncelleme
-function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    const badge = document.querySelector('.cart-badge');
-    if (badge) {
-        badge.textContent = totalItems;
-        badge.style.display = totalItems > 0 ? 'block' : 'none';
-    }
-
-}
-
-// Bildirim gösterme
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'toast align-items-center text-white bg-success border-0';
-    notification.setAttribute('role', 'alert');
-    notification.setAttribute('aria-live', 'assertive');
-    notification.setAttribute('aria-atomic', 'true');
-    notification.innerHTML = ` <div class="d-flex"> <div class="toast-body">${message}
-</div >
-<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" > </button >
-</div >
-`;
-    const toastContainer = document.querySelector('.toast-container');
-    if (!toastContainer) {
-        const container = document.createElement('div');
-        container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
-        document.body.appendChild(container);
-        container.appendChild(notification);
-    }
-
-    else {
-        toastContainer.appendChild(notification);
-    }
-
-    const toast = new bootstrap.Toast(notification);
-    toast.show();
 }

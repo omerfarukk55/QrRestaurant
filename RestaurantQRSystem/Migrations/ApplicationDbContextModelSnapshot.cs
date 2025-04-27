@@ -316,6 +316,7 @@ namespace RestaurantQRSystem.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
@@ -327,6 +328,7 @@ namespace RestaurantQRSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
@@ -451,7 +453,7 @@ namespace RestaurantQRSystem.Migrations
                     b.HasOne("RestaurantQRSystem.Models.Table", "Table")
                         .WithMany()
                         .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Table");
@@ -468,7 +470,7 @@ namespace RestaurantQRSystem.Migrations
                     b.HasOne("RestaurantQRSystem.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -481,7 +483,7 @@ namespace RestaurantQRSystem.Migrations
                     b.HasOne("RestaurantQRSystem.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");

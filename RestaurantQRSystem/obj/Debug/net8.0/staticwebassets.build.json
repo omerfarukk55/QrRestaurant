@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "47S2BaynoIIhEj3u3GnJa8cUHYP3QLTkWuJMvvMmlxM=",
+  "Hash": "H1mSEJ1sJV30SUggG4gDWNxXUHw4oS4PeQWla6xYfN8=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -1543,8 +1543,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4hqe27kqa5",
-      "Integrity": "eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=",
+      "Fingerprint": "rtrq7iguzq",
+      "Integrity": "oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -2766,6 +2766,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ses\\havaliman_anons.mp3"
+    },
+    {
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg",
+      "SourceId": "RestaurantQRSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
+      "BasePath": "_content/RestaurantQRSystem",
+      "RelativePath": "uploads/products/241a1474-6be6-4269-a9e6-7fc02c15af57#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bphy65952w",
+      "Integrity": "H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg",
+      "SourceId": "RestaurantQRSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
+      "BasePath": "_content/RestaurantQRSystem",
+      "RelativePath": "uploads/products/f241ca17-e5fb-45b2-81b2-230a24a6f960#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bwe4isjk2k",
+      "Integrity": "lWkIJ+3meCrv0tdksUxv1KaKBVaG9Mc4wWY0kjInhqA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg"
     }
   ],
   "Endpoints": [
@@ -5810,51 +5852,6 @@
       ]
     },
     {
-      "Route": "js/site.4hqe27kqa5.js",
-      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7617"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 15:25:15 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "4hqe27kqa5"
-        },
-        {
-          "Name": "label",
-          "Value": "js/site.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c="
-        }
-      ]
-    },
-    {
       "Route": "js/site.js",
       "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
       "Selectors": [],
@@ -5865,7 +5862,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7617"
+          "Value": "6687"
         },
         {
           "Name": "Content-Type",
@@ -5873,11 +5870,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c=\""
+          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 15:25:15 GMT"
+          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5887,7 +5884,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-eAS6BW4Lhs+Zr4lx/MUCVC4cad+fScZrpzqKhlyyN5c="
+          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.rtrq7iguzq.js",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6687"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rtrq7iguzq"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
         }
       ]
     },
@@ -10808,6 +10850,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/241a1474-6be6-4269-a9e6-7fc02c15af57.bphy65952w.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 14:44:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bphy65952w"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/products/241a1474-6be6-4269-a9e6-7fc02c15af57.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/241a1474-6be6-4269-a9e6-7fc02c15af57.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484433"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 14:44:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/f241ca17-e5fb-45b2-81b2-230a24a6f960.bwe4isjk2k.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "495279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lWkIJ+3meCrv0tdksUxv1KaKBVaG9Mc4wWY0kjInhqA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 14:46:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bwe4isjk2k"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/products/f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lWkIJ+3meCrv0tdksUxv1KaKBVaG9Mc4wWY0kjInhqA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "495279"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lWkIJ+3meCrv0tdksUxv1KaKBVaG9Mc4wWY0kjInhqA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 27 Apr 2025 14:46:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lWkIJ+3meCrv0tdksUxv1KaKBVaG9Mc4wWY0kjInhqA="
         }
       ]
     }

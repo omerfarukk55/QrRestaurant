@@ -6,7 +6,26 @@
 
 <h1>Yönetici Paneli</h1>
 <hr />
+<!-- Masalar Durum Alanı -->
 
+
+<div class="mb-4">
+    <h4>Masalar</h4>
+    <div class="d-flex flex-wrap gap-2">
+        @foreach (var table in Model.TableList ?? new List<RestaurantQRSystem.ViewModels.TableStatusViewModel>())
+        {
+            <div class="card text-white mb-2" style="min-width: 120px; max-width: 140px; background-color:@(table.IsOccupied ? "#dc3545" : "#28a745");">
+                <div class="card-body p-2 text-center">
+                    <span class="fw-bold">@table.Name</span><br />
+                    <span class="badge bg-light text-dark">@(table.IsOccupied ? "Dolu" : "Boş")</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<!-- Masalar Durum Alanı Sonu -->
 <div class="row">
     <div class="col-md-3">
         <div class="card mb-4 shadow-sm">
@@ -75,3 +94,4 @@
         </div>
     </div>
 </div>
+
