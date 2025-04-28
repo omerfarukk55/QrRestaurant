@@ -16,6 +16,8 @@ namespace RestaurantQRSystem.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

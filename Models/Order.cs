@@ -18,6 +18,6 @@ namespace RestaurantQRSystem.Models
         public int TableId { get; set; }
         public virtual Table Table { get; set; }
 
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

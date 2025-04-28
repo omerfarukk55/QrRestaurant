@@ -27,6 +27,7 @@ namespace RestaurantQRSystem
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<OrderNotificationService>();
 
             services.AddDefaultIdentity<IdentityUser>(options =>
             {

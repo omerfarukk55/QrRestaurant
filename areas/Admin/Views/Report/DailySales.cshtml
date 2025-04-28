@@ -1,0 +1,192 @@
+﻿@using RestaurantQRSystem.ViewModels
+@model MonthlyReportViewModel
+@{
+    ViewData["Title"] = "Günlük Satışlar";
+    Layout = "_AdminLayout";
+    
+    var monthNames = new[] { "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" };
+    var currentYear = DateTime.Now.Year;
+    var years = Enumerable.Range(currentYear - 5, 6).ToList(); // Son 5 yıl + bu yıl
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Günlük Satışlar</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Raporlar</a></li>
+        <li class="breadcrumb-item active">Günlük Satışlar</li>
+    </ol>
+
+    <!-- Ay/Yıl Seçimi -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label">Ay</label>
+                    <select name="month" class="form-select">
+                        @for (int i = 0; i < 12; i++)
+                        {
+                            <option value="@(i + 1)" selected="@(Model.Month == i + 1)">@monthNames[i]</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">Yıl</label>
+                    <select name="year" class="form-select">
+                        @foreach (var year in years)
+                        {
+                            <option value="@year" selected="@(Model.Year == year)">@year</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Göster</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Özet Bilgileri -->
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <h4 class="mb-0">@Model.TotalSales.ToString("C2")</h4>
+                    <div>@monthNames[Model.Month - 1] @Model.Year Toplam Satış</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <h4 class="mb-0">@Model.TotalOrders</h4>
+                    <div>@monthNames[Model.Month - 1] @Model.Year Toplam Sipariş</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grafik -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-line me-1"></i>
+            @monthNames[Model.Month - 1] @Model.Year Günlük Satış Grafiği
+        </div>
+        <div class="card-body">
+            <canvas id="dailySalesChart" width="100%" height="30"></canvas>
+        </div>
+    </div>
+
+    <!-- Detaylı Tablo -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            @monthNames[Model.Month - 1] @Model.Year Günlük Satış Detayları
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th class="text-center">Sipariş Sayısı</th>
+                            <th class="text-end">Satış Tutarı</th>
+                            <th class="text-center">İptal Sayısı</th>
+                            <th class="text-end">İptal Tutarı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var day in Model.DailySales)
+                        {
+                            <tr>
+                                <td>@day.Date.ToString("dd.MM.yyyy ddd")</td>
+                                <td class="text-center">@day.OrderCount</td>
+                                <td class="text-end">@day.TotalSales.ToString("C2")</td>
+                                <td class="text-center">@day.CancelledCount</td>
+                                <td class="text-end">@day.CancelledAmount.ToString("C2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Toplam</th>
+                            <th class="text-center">@Model.TotalOrders</th>
+                            <th class="text-end">@Model.TotalSales.ToString("C2")</th>
+                            <th class="text-center">@Model.DailySales.Sum(d => d.CancelledCount)</th>
+                            <th class="text-end">@Model.DailySales.Sum(d => d.CancelledAmount).ToString("C2")</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function() {
+            var dailyCtx = document.getElementById('dailySalesChart').getContext('2d');
+            
+            // Grafik verileri
+            var dates = [@Html.Raw(string.Join(",", Model.DailySales.Select(d => $"'{d.Date.ToString("dd.MM")}'")))]
+            var sales = [@string.Join(",", Model.DailySales.Select(d => d.TotalSales))];
+            var counts = [@string.Join(",", Model.DailySales.Select(d => d.OrderCount))]
+
+            var dailyChart = new Chart(dailyCtx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'Günlük Satış (₺)',
+                            data: sales,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Sipariş Sayısı',
+                            data: counts,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Satış Tutarı (₺)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            title: {
+                                display: true,
+                                text: 'Sipariş Sayısı'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

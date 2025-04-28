@@ -99,7 +99,47 @@
                 <button type="button" onclick="clearCart()" class="btn btn-outline-danger">Sepeti Temizle</button>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                    <a href="/Views/Order/Create" class="btn btn-success">Siparişi Tamamla</a>
+                    <a href="/Order/Create" class="btn btn-success" id="completeOrderBtn">Siparişi Tamamla</a>
+                    <script>
+                        // Sayfa yüklendiğinde table ID'yi localStorage'a kaydet
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const tableId = @table.Id; // Masa ID'sini Razor syntax'ı ile al
+
+                            if (tableId) {
+                                localStorage.setItem('tableId', tableId);
+                                console.log('TableId localStorage\'a kaydedildi:', tableId);
+                            } else {
+                                console.error('TableId bulunamadı!');
+                            }
+                        });
+                    </script>
+                    <script>
+                        document.getElementById('completeOrderBtn').addEventListener('click', function(e) {
+                            e.preventDefault(); // Default davranışı engelle
+
+                            const tableId = localStorage.getItem('tableId');
+
+                            if (!tableId) {
+                                alert('Masa bilgisi bulunamadı! Lütfen QR kodu tekrar okutun.');
+                                return false;
+                            }
+
+                            // Cart kontrolü
+                            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                            if (cart.length === 0) {
+                                alert('Sepetiniz boş! Lütfen ürün ekleyin.');
+                                return false;
+                            }
+
+                            // Debug için URL'yi konsola yazdır
+                            const orderUrl = `/Order/Create?tableId=${tableId}`;
+                            console.log('Siparişi tamamla URL:', orderUrl);
+
+                            // Yönlendirme yap
+                            window.location.href = orderUrl;
+                        });
+                    </script>
+                    3. MenuController'da
                 </div>
             </div>
         </div>

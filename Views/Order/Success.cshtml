@@ -1,8 +1,76 @@
-﻿@{
-    Layout = null;
+﻿@model RestaurantQRSystem.Models.Order
+@{
+    ViewData["Title"] = "Sipariş Alındı";
+    Layout = "_Layout"; // veya null; kullanacağınız layout'a göre
 }
-<div class="container py-5 text-center">
-    <h2>Siparişiniz Alındı!</h2>
-    <p>Siparişiniz başarıyla restoran sistemine iletildi. Kısa süre içinde masanıza servis yapılacaktır.</p>
-    <a href="/Menu/Scan/@ViewBag.TableQrCode" class="btn btn-primary mt-3">Menüye Dön</a>
+
+<div class="container py-4">
+    <div class="card shadow text-center">
+        <div class="card-body">
+            <div class="mb-4">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+            </div>
+            
+            <h2 class="card-title mb-3">Siparişiniz Alındı!</h2>
+            <p class="card-text mb-4">Sipariş numaranız: <strong>@Model.Id</strong></p>
+            
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <div class="row">
+                                <div class="col-6 text-start">
+                                    <strong>Masa:</strong> @Model.Table.Name
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong>Tarih:</strong> @Model.OrderDate.ToString("dd.MM.yyyy HH:mm")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-3">Sipariş Detayları</h5>
+                            
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ürün</th>
+                                        <th class="text-center">Adet</th>
+                                        <th class="text-end">Fiyat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.OrderItems)
+                                    {
+                                        <tr>
+                                            <td>@item.Product.Name</td>
+                                            <td class="text-center">@item.Quantity</td>
+                                            <td class="text-end">@((item.UnitPrice * item.Quantity).ToString("0.00"))₺</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2" class="text-end">Toplam:</th>
+                                        <th class="text-end">@Model.TotalAmount.ToString("0.00")₺</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            
+                            @if (!string.IsNullOrEmpty(Model.CustomerNote))
+                            {
+                                <div class="alert alert-info mt-3">
+                                    <strong>Not:</strong> @Model.CustomerNote
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 col-md-8 mx-auto">
+                <a href="/Menu/Scan/masa5?tableId=@Model.TableId" class="btn btn-primary">Menüye Dön</a>
+                
+            </div>
+        </div>
+    </div>
 </div>

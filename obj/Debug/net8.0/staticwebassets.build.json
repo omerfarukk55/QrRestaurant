@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1N9Y6Awzgz1xg3MwOxA0TyN0/QUywFZ1sMxmAwPS89g=",
+  "Hash": "7MmjpEQG1/7ThWD9d2dIyd77PQIQVFWIEn+jylG2jzI=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -1543,8 +1543,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "rtrq7iguzq",
-      "Integrity": "oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=",
+      "Fingerprint": "iqkz0o06u4",
+      "Integrity": "RswDtwpWHNzZh+1ACRi+iZMMi0GqMCnlTK1XWaVpQzA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -5915,6 +5915,51 @@
       ]
     },
     {
+      "Route": "js/site.iqkz0o06u4.js",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7128"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RswDtwpWHNzZh+1ACRi+iZMMi0GqMCnlTK1XWaVpQzA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 14:20:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "iqkz0o06u4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RswDtwpWHNzZh+1ACRi+iZMMi0GqMCnlTK1XWaVpQzA="
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
       "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
       "Selectors": [],
@@ -5925,7 +5970,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6687"
+          "Value": "7128"
         },
         {
           "Name": "Content-Type",
@@ -5933,11 +5978,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
+          "Value": "\"RswDtwpWHNzZh+1ACRi+iZMMi0GqMCnlTK1XWaVpQzA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
+          "Value": "Mon, 28 Apr 2025 14:20:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5947,52 +5992,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
-        }
-      ]
-    },
-    {
-      "Route": "js/site.rtrq7iguzq.js",
-      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\js\\site.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "6687"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 20:06:13 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "rtrq7iguzq"
-        },
-        {
-          "Name": "label",
-          "Value": "js/site.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-oYECdN/AVXHbasSyfy5sXV5FIvGxSUqKO4lCOodWOw0="
+          "Value": "sha256-RswDtwpWHNzZh+1ACRi+iZMMi0GqMCnlTK1XWaVpQzA="
         }
       ]
     },
@@ -10693,7 +10693,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 19:20:42 GMT"
+          "Value": "Mon, 28 Apr 2025 18:13:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10730,7 +10730,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 19:20:42 GMT"
+          "Value": "Mon, 28 Apr 2025 18:13:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10775,7 +10775,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 19:20:42 GMT"
+          "Value": "Mon, 28 Apr 2025 18:13:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10820,7 +10820,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 19:20:42 GMT"
+          "Value": "Mon, 28 Apr 2025 18:13:02 GMT"
         },
         {
           "Name": "Cache-Control",

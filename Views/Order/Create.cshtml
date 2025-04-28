@@ -1,171 +1,176 @@
-﻿@{
+﻿@model RestaurantQRSystem.ViewModels.OrderViewModel
+@{
     ViewData["Title"] = "Sipariş Oluştur";
-    Layout = null;
+    Layout = "_layout"; // veya null; kullanacağınız layout'a göre
 }
 
-    <div class="container py-4">
-        <div class="card shadow mb-4">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h2 class="h4 mb-0">Siparişinizi Onaylayın</h2>
-                <span class="badge bg-light text-dark fs-6">Masa: @ViewData["TableNumber"]</span>
-            </div>
-            <div class="card-body">
-                @if (!ViewData.ModelState.IsValid)
-                {
-                    <div class="alert alert-danger">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                    </div>
-                }
+<div class="container py-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="h5 mb-0">Siparişinizi Onaylayın</h2>
+            <span class="badge bg-light text-dark">Masa: @ViewData["Table"]</span>
+        </div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                <form id="orderForm" method="post" action="/Views/Order/Create">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" id="TableId" name="TableId" value="@ViewData["TableId"]" />
-                    <input type="hidden" id="CartJson" name="CartJson" value="" />
+            <form id="orderForm" method="post" asp-action="Create" asp-controller="Order">
+                <input type="hidden" asp-for="TableId" value="@ViewData["TableId"]" />
+                <input type="hidden" asp-for="CartJson" id="CartJson" />
 
-                    <div class="mb-3">
-                        <label for="CustomerName" class="form-label">Ad (isteğe bağlı)</label>
-                        <input type="text" class="form-control" id="CustomerName" name="CustomerName" />
+                <div class="mb-3">
+                    <label asp-for="CustomerName" class="form-label">Adınız (isteğe bağlı)</label>
+                    <input asp-for="CustomerName" class="form-control" placeholder="Adınızı girin" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CustomerNote" class="form-label">Sipariş Notunuz (isteğe bağlı)</label>
+                    <textarea asp-for="CustomerNote" class="form-control" rows="2" placeholder="Özel isteklerinizi belirtin"></textarea>
+                </div>
+
+                <div id="orderSummaryContainer" class="mb-4">
+                    <h5 class="mb-3">Sipariş Özeti</h5>
+                    <div id="cartSummary" class="card p-3">
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Yükleniyor...</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="CustomerNote" class="form-label">Notunuz (isteğe bağlı)</label>
-                        <textarea class="form-control" id="CustomerNote" name="CustomerNote" rows="2"></textarea>
-                    </div>
-                    <div id="cartSummary" class="mb-4"></div>
-                    <div id="errorMessage" class="alert alert-danger d-none"></div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" id="submitBtn" class="btn btn-success btn-lg">Siparişi Gönder</button>
-                        <a href="javascript:history.back()" class="btn btn-secondary">Geri</a>
-                    </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" id="submitBtn" class="btn btn-success btn-lg">Siparişi Gönder</button>
+                    <a href="javascript:history.back()" class="btn btn-outline-secondary">Geri</a>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Masa bilgilerini alıyoruz
-            const tableIdFromView = "@ViewData["TableId"]";
-            const tableNumberFromView = "@ViewData["TableNumber"]";
-            const tableNameFromView = "@ViewData["TableName"]";
+        $(document).ready(function() {
+            console.log("Order form initialized");
 
-            // URL veya localStorage'den alınan masa ID
-            let tableId = tableIdFromView ||
-                          new URLSearchParams(window.location.search).get('tableId') ||
-                          localStorage.getItem('tableId') ||
-                          '';
+            // Masa bilgilerini kontrol ediyoruz
+            const tableId = @Html.Raw(ViewData["TableId"]);
+            const tableName = "@ViewData["TableName"]";
+            
 
-            // localStorage'a tableId kaydedelim
-            if (tableId && !localStorage.getItem('tableId')) {
-                localStorage.setItem('tableId', tableId);
-            }
+            console.log("Table Info:", { tableId, tableName });
 
-            // Masa bilgisini form alanına ekliyoruz
-            document.getElementById('TableId').value = tableId;
-
-            // Masa bilgisi kontrolü
             if (!tableId) {
-                showError("Masa bilgisi bulunamadı! Lütfen QR kodu tekrar okutun.");
-                document.getElementById('submitBtn').disabled = true;
-            } else {
-                console.log("Masa ID: " + tableId + (tableNumberFromView ? ", Masa No: " + tableNumberFromView : ""));
+                alert("Masa bilgisi bulunamadı! Lütfen QR kodu tekrar okutun.2");
+                $("#submitBtn").prop("disabled", true);
+                return;
             }
 
-            // Sepeti yükle
+            // Sepeti localStorage'dan alıyoruz
             let cart = [];
             try {
                 cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                console.log("Cart loaded:", cart);
 
                 if (cart.length === 0) {
-                    showError("Sepetiniz boş! Lütfen önce ürün ekleyin.");
-                    document.getElementById('submitBtn').disabled = true;
-                } else {
-                    // Sepet içeriğini form alanına ekliyoruz
-                    document.getElementById('CartJson').value = JSON.stringify(cart);
-
-                    // Sepet özetini gösteriyoruz
-                    renderCartSummary(cart);
+                    $("#cartSummary").html(`
+                        <div class="alert alert-warning">
+                            Sepetinizde ürün bulunmuyor. <a href="/Menu?tableId=${tableId}">Menüye dönün</a> ve ürün ekleyin.
+                        </div>
+                    `);
+                    $("#submitBtn").prop("disabled", true);
+                    return;
                 }
+
+                // Cart içeriğini gösteriyoruz
+                renderCartSummary(cart);
+
+                // Hidden input'a cart JSON'ını yerleştiriyoruz
+                $("#CartJson").val(JSON.stringify(cart));
+
             } catch (error) {
-                console.error("Sepet yüklenirken hata:", error);
-                showError("Sepet verisi yüklenemedi: " + error.message);
-                document.getElementById('submitBtn').disabled = true;
+                console.error("Error loading cart:", error);
+                $("#cartSummary").html(`
+                    <div class="alert alert-danger">
+                        Sepet veriniz yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya tekrar deneyin.
+                    </div>
+                `);
+                $("#submitBtn").prop("disabled", true);
+                return;
             }
 
-            // Form gönderim olayı
-            document.getElementById('orderForm').addEventListener('submit', function(e) {
-                // Önce formu durdur
+            // Form gönderilirken son kontrolleri yapıyoruz
+            $("#orderForm").on("submit", function(e) {
+                // Form gönderimini geçici olarak durduruyoruz
                 e.preventDefault();
 
                 // Son kontroller
                 if (cart.length === 0) {
-                    showError("Sepetiniz boş!");
+                    alert("Sepetiniz boş! Lütfen ürün ekleyin.");
                     return false;
                 }
 
                 if (!tableId) {
-                    showError("Masa bilgisi eksik!");
+                    alert("Masa bilgisi eksik! Lütfen QR kodu tekrar okutun.");
                     return false;
                 }
 
-                // Form verilerini logla
-                console.log("Form verisi:", {
-                    TableId: document.getElementById('TableId').value,
-                    CartJson: document.getElementById('CartJson').value,
-                    CustomerName: document.getElementById('CustomerName').value,
-                    CustomerNote: document.getElementById('CustomerNote').value
+                // Form içeriğini log'luyoruz (debug için)
+                console.log("Submitting order with:", {
+                    TableId: $("#TableId").val(),
+                    CartJson: $("#CartJson").val(),
+                    CustomerName: $("#CustomerName").val(),
+                    CustomerNote: $("#CustomerNote").val()
                 });
 
-                // Sepeti temizle ve formu gönder
+                // Sepeti temizleyip formu gönderiyoruz
                 localStorage.removeItem('cart');
                 this.submit();
             });
         });
 
-        // Sepet özetini oluşturma
+        // Sepet özetini gösterme fonksiyonu
         function renderCartSummary(cart) {
-            let html = `
-                <div class="card mb-4">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">Sipariş Özeti</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class='list-group list-group-flush'>`;
+            let tableHtml = `
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Ürün</th>
+                                <th class="text-center">Adet</th>
+                                <th class="text-end">Fiyat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
 
             let total = 0;
-            cart.forEach(function(item) {
-                let itemTotal = item.price * item.quantity;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
                 total += itemTotal;
 
-                html += `
-                    <li class='list-group-item d-flex justify-content-between align-items-center'>
-                        <div>
-                            <strong>${item.name}</strong><br>
-                            <small class="text-muted">${item.price.toFixed(2)}₺ x ${item.quantity}</small>
-                        </div>
-                        <span class="text-nowrap">${itemTotal.toFixed(2)}₺</span>
-                    </li>`;
+                tableHtml += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td class="text-center">${item.quantity}</td>
+                        <td class="text-end">${itemTotal.toFixed(2)}₺</td>
+                    </tr>
+                `;
             });
 
-            html += `
-                        </ul>
-                    </div>
-                    <div class="card-footer text-end">
-                        <strong>Toplam: ${total.toFixed(2)}₺</strong>
-                    </div>
-                </div>`;
+            tableHtml += `
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2" class="text-end">Toplam:</th>
+                                <th class="text-end">${total.toFixed(2)}₺</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            `;
 
-            document.getElementById('cartSummary').innerHTML = html;
-        }
-
-        // Hata mesajı gösterme
-        function showError(message) {
-            const errorElement = document.getElementById('errorMessage');
-            errorElement.innerText = message;
-            errorElement.classList.remove('d-none');
-            setTimeout(() => {
-                errorElement.classList.add('d-none');
-            }, 8000); // 8 saniye sonra hata mesajı kaybolur
+            $("#cartSummary").html(tableHtml);
         }
     </script>
+}

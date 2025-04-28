@@ -38,9 +38,9 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
                 TotalCategories = await _context.Categories.CountAsync(),
                 TotalProducts = await _context.Products.CountAsync(),
                 TotalTables = await _context.Tables.CountAsync(),
-                NewOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.New),
-                ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Processing),
-                CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Completed),
+                NewOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Received),
+                ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Preparing),
+                CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Delivered),
                 TodayOrders = todayOrders.Count,
                 TodayRevenue = todayOrders.Sum(o => o.TotalAmount)
             };

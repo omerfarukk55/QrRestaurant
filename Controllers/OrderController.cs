@@ -5,7 +5,7 @@ using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Hubs;
 using RestaurantQRSystem.Models;
 using RestaurantQRSystem.Models.Enums;
-using RestaurantQRSystem.ViewModels; // ViewModel namespace'i kullanın
+using RestaurantQRSystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,24 +27,41 @@ namespace RestaurantQRSystem.Controllers
 
         // GET: /Order/Create
         [HttpGet]
-        public async Task<IActionResult> Create(int tableId)
+        public async Task<IActionResult> Create(int? tableId)
         {
-            // Masa bilgisini veritabanından alıyoruz
-            var table = await _context.Tables.FindAsync(tableId);
-            if (table == null)
+            try
             {
-                return View("Error", new ErrorViewModel { Message = "Masa bulunamadı. Lütfen QR kodu tekrar okutun." });
+                if (tableId == null)
+                {
+                    ViewBag.Error = "Masa ID bulunamadı. Lütfen QR kodu tekrar okutun.";
+                    return View("Error");
+                }
+
+                // Masa kontrolü
+                var table = await _context.Tables.FindAsync(tableId);
+                if (table == null)
+                {
+                    ViewBag.Error = $"Masa ID: {tableId} için masa bulunamadı.";
+                    return View("Error");
+                }
+
+                // Masa bilgilerini ViewData'ya aktar
+                ViewData["TableId"] = tableId;
+                ViewData["TableName"] = table.Name;
+
+                return View();
             }
-
-            // Masa bilgilerini ViewData ile view'a aktarıyoruz
-            ViewData["TableId"] = tableId;
-            ViewData["TableName"] = table.Name;
-
-            return View();
+            catch (Exception ex)
+            {
+                // Hatayı loglayın
+                Console.WriteLine($"Create action error: {ex.Message}");
+                ViewBag.Error = "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+                return View("Error");
+            }
         }
 
         // POST: /Order/Create
-        [HttpPost, ActionName("/Views/Order/Create")]
+        [HttpPost]
         public async Task<IActionResult> Create(OrderViewModel model)
         {
             try
@@ -100,6 +117,7 @@ namespace RestaurantQRSystem.Controllers
                     // ID string olarak geliyorsa int'e çeviriyoruz
                     if (!int.TryParse(item.id, out int productId))
                     {
+                        // Hatalı ID formatını loglayabilirsiniz
                         continue;
                     }
 
@@ -107,6 +125,7 @@ namespace RestaurantQRSystem.Controllers
                     var product = await _context.Products.FindAsync(productId);
                     if (product == null)
                     {
+                        // Ürün bulunamadı hatası verilebilir
                         continue;
                     }
 
@@ -137,13 +156,13 @@ namespace RestaurantQRSystem.Controllers
             }
             catch (Exception ex)
             {
+                // Hatayı loglayabilirsiniz
                 ModelState.AddModelError("", "Sipariş işlenirken bir hata oluştu: " + ex.Message);
                 return View(model);
             }
         }
 
         // GET: /Order/Success/5
-        
         public async Task<IActionResult> Success(int id)
         {
             var order = await _context.Orders
@@ -179,6 +198,7 @@ namespace RestaurantQRSystem.Controllers
                         {
                             OrderId = order.Id,
                             TableId = order.TableId,
+                            
                             TableName = order.Table.Name,
                             CustomerName = order.CustomerName ?? "Misafir",
                             TotalAmount = order.TotalAmount,
@@ -189,12 +209,13 @@ namespace RestaurantQRSystem.Controllers
             }
             catch (Exception ex)
             {
-                // Hatayı sessizce geçiyoruz, bildirim gönderme hatası sipariş işlemini etkilememeli
+                // Hatayı loglayabilirsiniz
+                // Bildirim gönderme hatası sipariş sürecini etkilememelidir
             }
         }
     }
 
-    // DTO sınıfları (ayrı bir dosyada da olabilir)
+    // DTO sınıfları
     public class CartItem
     {
         public string id { get; set; }

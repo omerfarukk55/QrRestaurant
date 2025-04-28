@@ -7,6 +7,8 @@ C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\RestaurantQRSystem.runtimeconfig.json
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\RestaurantQRSystem.dll
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\RestaurantQRSystem.pdb
+C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\Humanizer.dll
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -134,6 +136,7 @@ C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.RazorAssemblyInfo.cache
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.RazorAssemblyInfo.cs
+C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.sourcelink.json
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\scopedcss\bundle\RestaurantQRSystem.styles.css
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\scopedcss\projectbundle\RestaurantQRSystem.bundle.scp.css
@@ -153,4 +156,3 @@ C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.pdb
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.genruntimeconfig.cache
 C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\ref\RestaurantQRSystem.dll
-C:\Users\omerf\source\repos\RestaurantQRSystem\RestaurantQRSystem\obj\Debug\net8.0\RestaurantQRSystem.sourcelink.json

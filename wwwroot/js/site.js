@@ -123,6 +123,16 @@ function updateCartSummary() {
 
     let cartSummary = document.getElementById('cartSummary');
     if (cartSummary) cartSummary.innerHTML = summary;
+    document.getElementById('completeOrderBtn').addEventListener('click', function () {
+        const tableId = localStorage.getItem('tableId');
+        if (!tableId) {
+            alert('Masa bilgisi bulunamadı! QR kodu tekrar okutun.');
+            return;
+        }
+
+        console.log('Siparişi tamamlama URL:', `/Order/Create?tableId=${tableId}`);
+        window.location.href = `/Order/Create?tableId=${tableId}`;
+    });
 }
 
 // Sepet Modalını göster

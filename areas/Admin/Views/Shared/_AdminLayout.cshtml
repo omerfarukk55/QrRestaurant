@@ -19,19 +19,47 @@
             <div class="collapse navbar-collapse" id="adminNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin/Category">Kategoriler</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                            <i class="fas fa-tags me-1"></i> Kategoriler
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin/Product">Ürünler</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">
+                            <i class="fas fa-utensils me-1"></i> Ürünler
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin/Order">Siparişler</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                            <i class="fas fa-clipboard-list me-1"></i> Siparişler
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin/Table">Masalar</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Table" asp-action="Index">
+                            <i class="fas fa-chair me-1"></i> Masalar
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/Report">Raporlar</a>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-chart-line me-1"></i> Detaylı Raporlar
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Report" asp-action="Index">
+                                    <i class="fas fa-chart-bar me-1"></i> Satış Raporu
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Report" asp-action="DailySales">
+                                    <i class="fas fa-calendar-alt me-1"></i> Günlük Satışlar
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Report" asp-action="Expenses">
+                                    <i class="fas fa-money-bill-wave me-1"></i> Gider Yönetimi
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

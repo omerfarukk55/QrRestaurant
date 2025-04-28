@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Models;
+using RestaurantQRSystem.Services;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddSignalR();
+builder.Services.AddScoped<OrderNotificationService>();
 // Identity yap�land�rmas�
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -40,6 +42,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 // MVC ve Razor Pages
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -61,7 +66,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.MapControllerRoute(
+    name: "orderCreate",
+    pattern: "Order/Create",
+    defaults: new { controller = "Order", action = "Create" });
 app.UseAuthentication();
 app.UseAuthorization();
 
