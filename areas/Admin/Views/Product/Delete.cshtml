@@ -9,7 +9,7 @@
 <div class="alert alert-danger">
     <strong>@Model.Name</strong> adlı ürün silinecek. Devam etmek istediğinize emin misiniz?
 </div>
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label>Kategori: </label> @Model.Category?.Name

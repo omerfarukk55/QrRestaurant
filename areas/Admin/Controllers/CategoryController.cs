@@ -72,11 +72,15 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id, CategoryDto model)
         {
             //if (id != model.Id)
-              //  return NotFound();
-
+            //  return NotFound();
+            var category = await _context.Categories.FindAsync(id);
             if (ModelState.IsValid)
             {
-                _context.Update(model);
+                category.Name = model.Name;
+                category.Description = model.Description;
+                category.DisplayOrder = model.DisplayOrder;
+                category.IsActive = model.IsActive;
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -6,6 +6,7 @@
         Processing = 2,
         Ready = 3,
         Completed = 4,
-        Cancelled = 5
+        Cancelled = 5,
+        Received = 6
     }
 }

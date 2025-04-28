@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RestaurantQRSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af82cbd4ca1128e4f0499705c2ce1c921466200c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9c88bf2ebfa0445da4ab7c61aea17c8b1c7571d")]
 [assembly: System.Reflection.AssemblyProductAttribute("RestaurantQRSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RestaurantQRSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Hubs;
 using RestaurantQRSystem.Models;
+using RestaurantQRSystem.Models.Enums;
+using RestaurantQRSystem.ViewModels; // ViewModel namespace'i kullanın
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +16,8 @@ namespace RestaurantQRSystem.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IHubContext<OrderHub> _hubContext;
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<OrderHub> _hubContext;
 
         public OrderController(ApplicationDbContext context, IHubContext<OrderHub> hubContext)
         {
@@ -23,66 +25,179 @@ namespace RestaurantQRSystem.Controllers
             _hubContext = hubContext;
         }
 
+        // GET: /Order/Create
         [HttpGet]
-        public IActionResult Create(int? tableId)
+        public async Task<IActionResult> Create(int tableId)
         {
-            ViewBag.TableId = tableId;
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int TableId, string CartJson, string CustomerName, string CustomerNote)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(); // Hataları göster
-            }
-            // Gelen cart JSON Deserializasyonu
-            var cartItems = JsonSerializer.Deserialize<List<CartItemDto>>(CartJson);
-            if (cartItems == null || cartItems.Count == 0)
-                return BadRequest("Sepet boş!");
-
-            var table = await _context.Tables.FindAsync(TableId);
+            // Masa bilgisini veritabanından alıyoruz
+            var table = await _context.Tables.FindAsync(tableId);
             if (table == null)
-                return BadRequest("Masa bulunamadı.");
-
-            decimal total = cartItems.Sum(x => x.price * x.quantity);
-
-            var order = new Order
             {
-                TableId = TableId,
-                OrderDate = DateTime.Now,
-                Status = (Models.Enums.OrderStatus)1,
-                TotalAmount = total,
-                CustomerName = CustomerName,
-                CustomerNote = CustomerNote,
-                OrderItems = cartItems.Select(x => new OrderItem
-                {
-                    ProductId = x.id,
-                    Quantity = x.quantity,
-                    UnitPrice = x.price
-                }).ToList()
-            };
+                return View("Error", new ErrorViewModel { Message = "Masa bulunamadı. Lütfen QR kodu tekrar okutun." });
+            }
 
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            // Masa bilgilerini ViewData ile view'a aktarıyoruz
+            ViewData["TableId"] = tableId;
+            ViewData["TableName"] = table.Name;
 
-            return RedirectToAction("Success");
-        }
-
-        public IActionResult Success()
-        {
             return View();
         }
 
-        // Sipariş geçmişiniz vs. eklemek için burada ek fonksiyonlar oluşturabilirsiniz.
+        // POST: /Order/Create
+        [HttpPost, ActionName("/Views/Order/Create")]
+        public async Task<IActionResult> Create(OrderViewModel model)
+        {
+            try
+            {
+                // Masa kontrolü
+                var table = await _context.Tables.FindAsync(model.TableId);
+                if (table == null)
+                {
+                    ModelState.AddModelError("", "Masa bulunamadı.");
+                    return View(model);
+                }
+
+                // Sepet içeriğini deserialize ediyoruz
+                List<CartItem> cartItems;
+                try
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    cartItems = JsonSerializer.Deserialize<List<CartItem>>(model.CartJson, options);
+
+                    if (cartItems == null || !cartItems.Any())
+                    {
+                        ModelState.AddModelError("", "Sepetiniz boş.");
+                        return View(model);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Sepet verisi işlenemedi: " + ex.Message);
+                    return View(model);
+                }
+
+                // Sipariş tutarını hesaplıyoruz
+                decimal totalAmount = cartItems.Sum(item => item.price * item.quantity);
+
+                // Yeni sipariş oluşturuyoruz
+                var order = new Order
+                {
+                    TableId = model.TableId,
+                    OrderDate = DateTime.Now,
+                    Status = OrderStatus.Received,
+                    TotalAmount = totalAmount,
+                    CustomerName = model.CustomerName,
+                    CustomerNote = model.CustomerNote
+                };
+
+                // Sipariş kalemlerini ekliyoruz
+                foreach (var item in cartItems)
+                {
+                    // ID string olarak geliyorsa int'e çeviriyoruz
+                    if (!int.TryParse(item.id, out int productId))
+                    {
+                        continue;
+                    }
+
+                    // Ürünü veritabanından kontrol ediyoruz
+                    var product = await _context.Products.FindAsync(productId);
+                    if (product == null)
+                    {
+                        continue;
+                    }
+
+                    order.OrderItems.Add(new OrderItem
+                    {
+                        ProductId = productId,
+                        Quantity = item.quantity,
+                        UnitPrice = item.price
+                    });
+                }
+
+                // Siparişte öğe kalmadıysa hata dönüyoruz
+                if (!order.OrderItems.Any())
+                {
+                    ModelState.AddModelError("", "Geçerli ürün bulunamadı.");
+                    return View(model);
+                }
+
+                // Siparişi veritabanına kaydediyoruz
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+
+                // Admin'e bildirim gönderiyoruz
+                await NotifyOrderToAdmin(order.Id);
+
+                // Başarılı sayfasına yönlendiriyoruz
+                return RedirectToAction(nameof(Success), new { id = order.Id });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Sipariş işlenirken bir hata oluştu: " + ex.Message);
+                return View(model);
+            }
+        }
+
+        // GET: /Order/Success/5
+        
+        public async Task<IActionResult> Success(int id)
+        {
+            var order = await _context.Orders
+                .Include(o => o.Table)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
+        // Admin'e bildirim gönderme
+        private async Task NotifyOrderToAdmin(int orderId)
+        {
+            try
+            {
+                // Sipariş ve masa bilgilerini alıyoruz
+                var order = await _context.Orders
+                    .Include(o => o.Table)
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync(o => o.Id == orderId);
+
+                if (order != null)
+                {
+                    // OrderHub üzerinden admin'e bildirim gönderiyoruz
+                    await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNewOrder",
+                        new
+                        {
+                            OrderId = order.Id,
+                            TableId = order.TableId,
+                            TableName = order.Table.Name,
+                            CustomerName = order.CustomerName ?? "Misafir",
+                            TotalAmount = order.TotalAmount,
+                            ItemCount = order.OrderItems.Sum(i => i.Quantity),
+                            OrderDate = order.OrderDate
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hatayı sessizce geçiyoruz, bildirim gönderme hatası sipariş işlemini etkilememeli
+            }
+        }
     }
 
-    // DTO
-    public class CartItemDto
+    // DTO sınıfları (ayrı bir dosyada da olabilir)
+    public class CartItem
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string name { get; set; }
         public decimal price { get; set; }
         public int quantity { get; set; }

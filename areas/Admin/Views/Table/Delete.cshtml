@@ -7,7 +7,7 @@
 <div class="alert alert-danger">
     <strong>@Model.Name</strong> adlı masa silinecek. Emin misiniz?
 </div>
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete" method="post"> 
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Sil</button>
     <a asp-action="Index" class="btn btn-secondary">İptal</a>

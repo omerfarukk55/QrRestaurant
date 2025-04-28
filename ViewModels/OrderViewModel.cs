@@ -12,9 +12,11 @@ namespace RestaurantQRSystem.ViewModels
         public string TableName { get; set; }
         public DateTime OrderDate { get; set; }
         public OrderStatus Status { get; set; }
+        public string CustomerName { get; set; }
         public string CustomerNote { get; set; }
         public decimal TotalAmount { get; set; }
         public List<OrderItemViewModel> Items { get; set; }
+        public Stream CartJson { get; internal set; }
     }
 
     public class OrderItemViewModel
