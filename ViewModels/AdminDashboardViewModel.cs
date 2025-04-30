@@ -9,14 +9,9 @@
         public int ProcessingOrders { get; set; }
         public int CompletedOrders { get; set; }
         public int TodayOrders { get; set; }
-        public decimal TodayRevenue { get; set; }
+        public double TodayRevenue { get; set; }
         public List<TableStatusViewModel> TableList { get; set; }
     }
 
-    public class TableStatusViewModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsOccupied { get; set; }
-    }
+    
 }

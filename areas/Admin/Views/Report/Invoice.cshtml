@@ -7,7 +7,7 @@
 <div class="container-fluid px-4">
     <h1 class="mt-4">Fatura Detayları</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+        
         <li class="breadcrumb-item"><a asp-action="Index">Raporlar</a></li>
         <li class="breadcrumb-item active">Fatura #@Model.Id</li>
     </ol>
@@ -30,7 +30,7 @@
         <div class="card-body" id="invoiceContent">
             <div class="row mb-4">
                 <div class="col-12 text-center mb-4">
-                    <h3>RESTORAN ADI</h3>
+                    <h3>HAN-SAR Balık Restaurantı</h3>
                     <p>Adres Bilgileri, Telefon, Vergi No vs.</p>
                 </div>
                 
@@ -116,7 +116,7 @@
                                 <p class="mb-0">Bizi tercih ettiğiniz için teşekkür ederiz.</p>
                             </div>
                             <div class="text-end">
-                                <img src="~/images/qr-code.png" alt="QR Code" style="max-width: 100px;" />
+                               
                             </div>
                         </div>
                     </div>
@@ -150,9 +150,7 @@
                     </body>
                     </html>
                 `;
-
+                }
                 window.print();
-                document.body.innerHTML = originalContents;
-            }
         </script>
     }

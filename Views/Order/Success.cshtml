@@ -1,7 +1,10 @@
-﻿@model RestaurantQRSystem.Models.Order
+﻿﻿
+
+@model RestaurantQRSystem.Models.Order
+
 @{
     ViewData["Title"] = "Sipariş Alındı";
-    Layout = "_Layout"; // veya null; kullanacağınız layout'a göre
+    Layout = "~/Views/Shared/_Layout.cshtml"; // veya null; kullanacağınız layout'a göre
 }
 
 <div class="container py-4">
@@ -68,7 +71,7 @@
             </div>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-                <a href="/Menu/Scan/masa5?tableId=@Model.TableId" class="btn btn-primary">Menüye Dön</a>
+                <a href="/Menu/Scan/@Model.Table.Name?tableId=@Model.TableId" class="btn btn-primary">Menüye Dön</a>
                 
             </div>
         </div>

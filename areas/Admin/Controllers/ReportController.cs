@@ -120,20 +120,24 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
             var startDate = new DateTime(year, month, 1);
             var endDate = startDate.AddMonths(1);
 
-            // Günlük satışları getir
-            var dailySales = await _context.Orders
+            // İlk olarak tüm sipariş verilerini getir (SQLite Sum sorunu için)
+            var orders = await _context.Orders
                 .Where(o => o.OrderDate >= startDate && o.OrderDate < endDate)
+                .ToListAsync();
+
+            // Günlük satışları bellekte hesapla
+            var dailySales = orders
                 .GroupBy(o => o.OrderDate.Date)
                 .Select(g => new DailySalesViewModel
                 {
                     Date = g.Key,
                     OrderCount = g.Count(),
-                    TotalSales = g.Sum(o => o.TotalAmount),
+                    TotalSales = (double)g.Sum(o => o.TotalAmount),
                     CancelledCount = g.Count(o => o.Status == OrderStatus.Cancelled),
-                    CancelledAmount = g.Where(o => o.Status == OrderStatus.Cancelled).Sum(o => o.TotalAmount)
+                    CancelledAmount = (double)g.Where(o => o.Status == OrderStatus.Cancelled).Sum(o => o.TotalAmount)
                 })
                 .OrderBy(d => d.Date)
-                .ToListAsync();
+                .ToList();
 
             var viewModel = new MonthlyReportViewModel
             {
@@ -198,7 +202,7 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
             {
                 OrderId = order.Id,
                 InvoiceDate = DateTime.Now,
-                Amount = order.TotalAmount,
+                Amount = (double)order.TotalAmount,
                 IsPaid = true,
                 PaymentMethod = "Nakit", // Varsayılan değer
                 CustomerName = order.CustomerName ?? "Misafir"

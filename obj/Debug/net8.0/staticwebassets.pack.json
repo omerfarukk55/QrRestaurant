@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RestaurantQRSystem.bundle.scp.css",
-      "PackagePath": "staticwebassets\\RestaurantQRSystem.q3zq7wq6mu.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\css\\admin.css",
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
@@ -289,8 +285,28 @@
       "PackagePath": "staticwebassets\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg"
     },
     {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\a96267c2-5963-4d33-9ed3-7102dcef776d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a96267c2-5963-4d33-9ed3-7102dcef776d.png"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\b7f91382-8124-408a-ba99-ad6537d64759.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\b7f91382-8124-408a-ba99-ad6537d64759.jpg"
+    },
+    {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\bfa88ea6-c641-4b5a-95c2-ae8fd429185a.png",
       "PackagePath": "staticwebassets\\uploads\\products\\bfa88ea6-c641-4b5a-95c2-ae8fd429185a.png"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\c4166778-506e-4b5a-b9b0-311b549f0618.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\c4166778-506e-4b5a-b9b0-311b549f0618.jpg"
     },
     {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\e06081e4-5aae-47fe-8fa3-e8cf956d5795.jpg",
@@ -299,6 +315,10 @@
     {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg",
       "PackagePath": "staticwebassets\\uploads\\products\\f241ca17-e5fb-45b2-81b2-230a24a6f960.jpg"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\f2ab76b8-b47d-4e11-989b-1434038f7459.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\f2ab76b8-b47d-4e11-989b-1434038f7459.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RestaurantQRSystem.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

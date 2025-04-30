@@ -5,6 +5,7 @@ using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Hubs;
 using RestaurantQRSystem.Models;
 using RestaurantQRSystem.Models.Enums;
+using RestaurantQRSystem.Services;
 using RestaurantQRSystem.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -149,7 +150,8 @@ namespace RestaurantQRSystem.Controllers
                 await _context.SaveChangesAsync();
 
                 // Admin'e bildirim gönderiyoruz
-                await NotifyOrderToAdmin(order.Id);
+                var notificationService = HttpContext.RequestServices.GetRequiredService<OrderNotificationService>();
+                await notificationService.SendNewOrderNotificationAsync(order.Id);
 
                 // Başarılı sayfasına yönlendiriyoruz
                 return RedirectToAction(nameof(Success), new { id = order.Id });
@@ -198,7 +200,7 @@ namespace RestaurantQRSystem.Controllers
                         {
                             OrderId = order.Id,
                             TableId = order.TableId,
-                            
+
                             TableName = order.Table.Name,
                             CustomerName = order.CustomerName ?? "Misafir",
                             TotalAmount = order.TotalAmount,

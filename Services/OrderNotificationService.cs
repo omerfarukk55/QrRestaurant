@@ -45,15 +45,18 @@ namespace RestaurantQRSystem.Services
                 // Bildirim detaylarını hazırlıyoruz
                 var notification = new
                 {
-                    OrderId = order.Id,
-                    TableId = order.TableId,
-                    TableName = order.Table.Name,
-                    CustomerName = order.CustomerName ?? "Misafir",
-                    TotalAmount = order.TotalAmount,
-                    ItemCount = order.OrderItems.Sum(i => i.Quantity),
-                    OrderDate = order.OrderDate,
-                    FormattedDate = order.OrderDate.ToString("HH:mm")
+                    orderId = order.Id,
+                    tableId = order.TableId,
+                    tableName = order.Table.Name,
+                    customerName = order.CustomerName ?? "Misafir",
+                    totalAmount = order.TotalAmount,
+                    itemCount = order.OrderItems.Sum(i => i.Quantity),
+                    orderDate = order.OrderDate,
+                    formattedDate = order.OrderDate.ToString("HH:mm")
                 };
+
+                // Debug için loglama
+                _logger.LogInformation($"Sending order notification: {System.Text.Json.JsonSerializer.Serialize(notification)}");
 
                 // SignalR üzerinden admin grubuna bildirim gönderiyoruz
                 await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNewOrder", notification);

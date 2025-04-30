@@ -33,15 +33,10 @@ namespace RestaurantQRSystem.Controllers
                 ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Preparing),
                 CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Ready),
                 TodayOrders = await _context.Orders.CountAsync(o => o.OrderDate.Date == today),
-                TodayRevenue = await _context.Orders
+                TodayRevenue = (double)(await _context.Orders
                                    .Where(o => o.OrderDate.Date == today && o.Status != OrderStatus.Cancelled)
-                                   .SumAsync(o => (decimal?)o.TotalAmount) ?? 0,
-                TableList = await _context.Tables.Select(t => new TableStatusViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    IsOccupied = t.IsOccupied
-                }).ToListAsync()
+                                   .SumAsync(o => (decimal?)o.TotalAmount) ?? 0),
+                
             };
 
             return View(viewModel);

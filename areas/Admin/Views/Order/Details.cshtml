@@ -193,7 +193,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="printContent()">Print</button>
+                <button type="button" class="btn btn-primary" onclick="window.printContent()">Print</button>
             </div>
         </div>
     </div>
@@ -225,7 +225,13 @@
                 $("#statusForm").submit();
             });
         });
-
+        
+         window.printContent = function() {
+        const printContents = document.getElementById("printArea")?.innerHTML;
+        if (!printContents) {
+            console.error("printArea bulunamadı!");
+            return;
+        }
         function printContent() {
             const printContents = document.getElementById("printArea").innerHTML;
             const originalContents = document.body.innerHTML;
@@ -249,9 +255,10 @@
                 </body>
                 </html>
             `;
-            window.print();
-            document.body.innerHTML = originalContents;
-            location.reload();
-        }
+            }
+            
+    </script>
+    <script>
+       
     </script>
 }

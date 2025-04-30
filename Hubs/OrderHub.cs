@@ -40,5 +40,18 @@ namespace RestaurantQRSystem.Hubs
             _logger.LogInformation($"Client disconnected: {Context.ConnectionId}");
             await base.OnDisconnectedAsync(exception);
         }
+        public async Task NotifyNewOrder(int orderId, string tableName, decimal totalAmount)
+        {
+            var notification = new
+            {
+                orderId,
+                tableName,
+                totalAmount,
+                formattedDate = DateTime.Now.ToString("HH:mm")
+            };
+
+            await Clients.Group("Admins").SendAsync("ReceiveNewOrder", notification);
+            _logger.LogInformation($"New order notification sent: OrderId={orderId}, Table={tableName}, Amount={totalAmount}");
+        }
     }
 }

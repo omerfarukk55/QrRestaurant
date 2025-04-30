@@ -151,6 +151,8 @@
 
                 const originalContents = document.body.innerHTML;
 
+                window.print();
+
                 document.body.innerHTML = `
                     <html>
                     <head>
@@ -170,11 +172,6 @@
                     </body>
                     </html>
                 `;
-
-                window.print();
-                document.body.innerHTML = originalContents;
-                location.reload();
-            };
-        });
+           
     </script>
 }

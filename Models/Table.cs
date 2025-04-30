@@ -4,8 +4,9 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string QrCode { get; set; }
         public bool IsActive { get; set; }
-        public bool IsOccupied { get; set; } = false;
+        public string QrCode { get; set; }
+        public bool IsOccupied { get; set; } 
+        public DateTime? OccupiedSince { get; set; }
     }
 }

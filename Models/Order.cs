@@ -19,5 +19,10 @@ namespace RestaurantQRSystem.Models
         public virtual Table Table { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
+        public DateTime? PaymentDate { get; set; }
+        public string? PaymentMethod { get; set; }
+        public decimal? PaidAmount { get; set; }
+        public string? PaymentNotes { get; set; }
     }
 }
