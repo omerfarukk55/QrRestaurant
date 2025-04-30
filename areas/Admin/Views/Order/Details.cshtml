@@ -226,17 +226,13 @@
             });
         });
         
-         window.printContent = function() {
-        const printContents = document.getElementById("printArea")?.innerHTML;
-        if (!printContents) {
-            console.error("printArea bulunamadı!");
-            return;
-        }
-        function printContent() {
-            const printContents = document.getElementById("printArea").innerHTML;
-            const originalContents = document.body.innerHTML;
+         function printContent(){
+        const printContents = document.getElementById("printArea").innerHTML;
 
-            document.body.innerHTML = `
+        // Yeni pencere oluştur
+        const printWindow = window.open('', '_blank', 'width=800,height=600');
+       
+            printWindow.document.write(`
                 <html>
                 <head>
                     <title>Sipariş #@Model.Id</title>
@@ -254,11 +250,16 @@
                     ${printContents}
                 </body>
                 </html>
-            `;
-            }
-            
-    </script>
-    <script>
-       
+            `);
+            printwindowonclose();
+        }
+        function printwindowonclose(){printWindow.document.close();
+            printWindow.onload = function() {
+            printWindow.focus();
+            printWindow.print();
+            // Yazdırma işleminden sonra pencereyi kapatma seçeneği (opsiyonel)
+             printWindow.close();
+        };
+        }
     </script>
 }

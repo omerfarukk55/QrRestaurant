@@ -1,0 +1,73 @@
+﻿@model RestaurantQRSystem.ViewModels.TableDetailsViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <h5 id="modalTableName">@Model.Name</h5>
+        <p>
+            Durum:
+            @if (Model.IsOccupied && Model.OrderItems.Any())
+            {
+                <span id="modalTableStatus" class="badge bg-danger">Dolu</span>
+            }
+            else
+            {
+                <span id="modalTableStatus" class="badge bg-success">Boş</span>
+            }
+        </p>
+
+        @if (Model.CurrentOrderId.HasValue && Model.OrderItems.Any())
+        {
+            <p id="modalOrderInfo">Sipariş No: <span id="modalOrderId">#@Model.CurrentOrderId</span></p>
+        }
+        else
+        {
+            <p id="modalOrderInfo" style="display:none;">Sipariş No: <span id="modalOrderId"></span></p>
+        }
+    </div>
+
+    <div class="col-md-6">
+        @if (Model.IsOccupied && Model.OrderItems.Any())
+        {
+            <div id="orderItemsContainer">
+                <h6>Sipariş Detayları</h6>
+                <div id="orderItemsList" class="mb-3">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th class="text-center">Adet</th>
+                                    <th class="text-end">Fiyat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td>@item.ProductName</td>
+                                        <td class="text-center">@item.Quantity</td>
+                                        <td class="text-end">@item.TotalPrice.ToString("C2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <h5>Toplam: <span id="modalTotalAmount" class="text-primary fw-bold">@Model.TotalAmount.ToString("C2")</span></h5>
+            </div>
+
+            <form id="completeOrderForm" asp-area="Admin" asp-controller="Table" asp-action="CompleteAndClear" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="TableId" value="@Model.Id">
+                <input type="hidden" name="OrderId" value="@Model.CurrentOrderId">
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Bu masada aktif sipariş bulunmuyor.
+            </div>
+        }
+    </div>
+</div>

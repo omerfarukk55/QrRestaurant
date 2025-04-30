@@ -28,6 +28,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 // Cookie ayarlar
 builder.Services.ConfigureApplicationCookie(options =>
@@ -59,6 +67,7 @@ else
     app.UseStatusCodePagesWithReExecute("/Home/Status", "?code={0}");
     app.UseHsts();
 }
+app.UseCors("AllowAll");
 
 app.MapHub<RestaurantQRSystem.Hubs.OrderHub>("/orderHub");
 

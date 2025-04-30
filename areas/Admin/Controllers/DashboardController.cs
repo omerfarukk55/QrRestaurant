@@ -91,22 +91,6 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
                 tableList.Add(tableViewModel);
             }
-
-            // En azından bir masa yoksa, manuel olarak bir masa ekleyelim (test için)
-            if (tableList.Count == 0)
-            {
-                // Geçici test masası ekle
-                tableList.Add(new TableStatusViewModel
-                {
-                    Id = 1,
-                    Name = "Masa 1",
-                    IsOccupied = false,
-                    OccupiedSince = null,
-                    CurrentOrderId = null,
-                    TotalAmount = 0
-                });
-            }
-
             // Birleştirilmiş ViewModel oluştur
             var viewModel = new DashboardViewModel
             {
