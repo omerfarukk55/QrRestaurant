@@ -7,6 +7,6 @@ namespace RestaurantQRSystem.ViewModels
         public AdminDashboardViewModel AdminStats { get; set; }
         public List<Order> RecentOrders { get; set; }
         public List<Order> ActiveOrders { get; set; }
-        public List<TableStatusViewModel> TableList { get; set; }
+        public List<TableDetailsViewModel> TableList { get; set; }
     }
 }

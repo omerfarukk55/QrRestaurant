@@ -1,11 +1,12 @@
-﻿@model List<RestaurantQRSystem.ViewModels.TableStatusViewModel>
+﻿@model List<RestaurantQRSystem.ViewModels.TableDetailsViewModel>
 
 <div class="row">
     @foreach (var table in Model)
     {
-        string cardClass = table.IsOccupied
-        ? "bg-danger text-white"
-        : "bg-success text-white";
+        // TableDetailsViewModel'daki aynı kontrol mantığı kullanılıyor
+        bool isReallyOccupied = table.IsOccupied && table.OrderItems.Any();
+
+        string cardClass = isReallyOccupied ? "bg-danger text-white" : "bg-success text-white";
 
         <div class="col-md-3 col-sm-6 mb-4">
             <div class="card @cardClass table-card"
@@ -15,7 +16,7 @@
                     <h5 class="card-title">@table.Name</h5>
 
                     <div class="mb-2">
-                        @if (table.IsOccupied)
+                        @if (isReallyOccupied)
                         {
                             <span class="badge bg-warning text-dark">Dolu</span>
                             @if (table.CurrentOrderId.HasValue)
@@ -29,7 +30,7 @@
                         }
                     </div>
 
-                    @if (table.IsOccupied)
+                    @if (isReallyOccupied)
                     {
                         @if (table.TotalAmount > 0)
                         {
