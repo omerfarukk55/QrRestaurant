@@ -89,21 +89,46 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         {
             var today = DateTime.Today;
 
-            // Bugünkü siparişleri getir
+            // Bugünün TÜM siparişlerini getir (iptal edilenler hariç)
             var todayOrders = await _context.Orders
                 .Where(o => o.OrderDate.Date == today && o.Status != OrderStatus.Cancelled)
                 .ToListAsync();
+
+            // Duruma göre siparişleri ayır
+            var newOrders = await _context.Orders
+                .CountAsync(o => (o.Status == OrderStatus.Received) &&
+                                 o.OrderDate.Date == today);
+
+            var processingOrders = await _context.Orders
+                .CountAsync(o => (o.Status == OrderStatus.Preparing) &&
+                                 o.OrderDate.Date == today);
+
+            // TAMAMLANAN ve ÖDENMİŞ siparişleri dahil et!
+            var completedOrders = await _context.Orders
+                .CountAsync(o => (o.Status == OrderStatus.Ready ||
+                                 o.Status == OrderStatus.Delivered ||
+                                 o.Status == OrderStatus.Paid) &&
+                                 o.OrderDate.Date == today);
+
+            // Bugünkü ciro - TÜM siparişler (iptal edilenler hariç)
+            var todayRevenue = todayOrders.Sum(o => o.TotalAmount);
+
+            // Debug için istatistikleri yazdır
+            System.Diagnostics.Debug.WriteLine($"Bugün Yeni: {newOrders}");
+            System.Diagnostics.Debug.WriteLine($"Bugün Hazırlanıyor: {processingOrders}");
+            System.Diagnostics.Debug.WriteLine($"Bugün Tamamlanan/Ödenen: {completedOrders}");
+            System.Diagnostics.Debug.WriteLine($"Bugün Gelir: {todayRevenue}");
 
             return new AdminDashboardViewModel
             {
                 TotalCategories = await _context.Categories.CountAsync(),
                 TotalProducts = await _context.Products.CountAsync(),
                 TotalTables = await _context.Tables.CountAsync(),
-                NewOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Received),
-                ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Preparing),
-                CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Ready),
+                NewOrders = newOrders,
+                ProcessingOrders = processingOrders,
+                CompletedOrders = completedOrders,  // Ödenen siparişleri de içerir
                 TodayOrders = todayOrders.Count,
-                TodayRevenue = (double)todayOrders.Sum(o => o.TotalAmount)
+                TodayRevenue = (double)todayRevenue
             };
         }
 
