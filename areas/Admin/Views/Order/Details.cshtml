@@ -193,11 +193,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="window.printContent()">Print</button>
+                <button type="button" class="btn btn-primary" onclick="printContent()">Print</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Gizli Yazdırma iframe'i -->
+<iframe id="printFrame" name="printFrame" style="display:none;"></iframe>
 
 @section Scripts {
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
@@ -226,40 +229,12 @@
             });
         });
         
-         function printContent(){
-        const printContents = document.getElementById("printArea").innerHTML;
-
-        // Yeni pencere oluştur
-        const printWindow = window.open('', '_blank', 'width=800,height=600');
-       
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Sipariş #@Model.Id</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; font-size: 12px; }
-                        .text-center { text-align: center; }
-                        .text-end { text-align: right; }
-                        table { width: 100%; border-collapse: collapse; }
-                        th, td { padding: 5px; }
-                        th { border-bottom: 1px solid #ddd; }
-                        .table-sm th, .table-sm td { padding: 3px; }
-                    </style>
-                </head>
-                <body>
-                    ${printContents}
-                </body>
-                </html>
-            `);
-            printwindowonclose();
-        }
-        function printwindowonclose(){printWindow.document.close();
-            printWindow.onload = function() {
-            printWindow.focus();
-            printWindow.print();
-            // Yazdırma işleminden sonra pencereyi kapatma seçeneği (opsiyonel)
-             printWindow.close();
-        };
+         function printContent() {
+            const orderId = @Model.Id;
+            const printUrl = `/Admin/Order/PrintReceipt/${orderId}`;
+            
+            const iframe = document.getElementById('printFrame');
+            iframe.src = printUrl; // iframe'in kaynağını yeni view'e ayarla
         }
     </script>
 }

@@ -20,13 +20,13 @@
                 <input type="hidden" asp-for="CartJson" id="CartJson" />
 
                 <div class="mb-3">
-                    <label asp-for="CustomerName" class="form-label">Adınız (isteğe bağlı)</label>
-                    <input asp-for="CustomerName" class="form-control" placeholder="Adınızı girin" />
+                    <label asp-for="CustomerName" class="form-label"  >Adınız (zorunlu)</label>
+                    <input asp-for="CustomerName" class="form-control" placeholder="Adınızı girin" required />
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="CustomerNote" class="form-label">Sipariş Notunuz (isteğe bağlı)</label>
-                    <textarea asp-for="CustomerNote" class="form-control" rows="2" placeholder="Özel isteklerinizi belirtin"></textarea>
+                    <label asp-for="CustomerNote" class="form-label">Sipariş Notunuz (zorunlu)</label>
+                    <textarea asp-for="CustomerNote" class="form-control" rows="2" placeholder="Özel isteklerinizi belirtin" required></textarea>
                 </div>
 
                 <div id="orderSummaryContainer" class="mb-4">

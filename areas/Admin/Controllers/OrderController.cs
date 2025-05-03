@@ -40,6 +40,24 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
             return View(order);
         }
 
+        // GET: Admin/Order/PrintReceipt/5
+        [HttpGet]
+        public async Task<IActionResult> PrintReceipt(int id)
+        {
+            var order = await _context.Orders
+                .Include(o => o.Table)
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Bu View için layout kullanılmayacak
+            return View("PrintReceipt", order);
+        }
+
         // Sipariş Durumu Güncelle (Kısa method, POST olacak)
         [HttpPost]
         public async Task<IActionResult> UpdateStatus(int id, OrderStatus status)

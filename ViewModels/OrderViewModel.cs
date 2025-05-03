@@ -10,8 +10,10 @@ namespace RestaurantQRSystem.ViewModels
         [Required(ErrorMessage = "Sepet bilgisi gereklidir.")]
         public string CartJson { get; set; }
 
+        [Required(ErrorMessage = "Lütfen adınızı giriniz.")]
         public string CustomerName { get; set; }
 
+        [Required(ErrorMessage = "Lütfen notunuzu giriniz.")]
         public string CustomerNote { get; set; }
     }
 }
