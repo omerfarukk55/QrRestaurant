@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using RestaurantQRSystem.Models.Enums;
 using System;
 using System.Threading.Tasks;
 
@@ -53,5 +54,14 @@ namespace RestaurantQRSystem.Hubs
             await Clients.Group("Admins").SendAsync("ReceiveNewOrder", notification);
             _logger.LogInformation($"New order notification sent: OrderId={orderId}, Table={tableName}, Amount={totalAmount}");
         }
+        public async Task OrderStatusUpdated(int orderId, int tableId, OrderStatus status)
+        {
+            await Clients.All.SendAsync("OrderStatusUpdated", orderId, tableId, status);
+        }
+        public async Task UpdateTableStatus(int tableId)
+        {
+            await Clients.All.SendAsync("TableStatusUpdated", tableId);
+        }
+
     }
 }

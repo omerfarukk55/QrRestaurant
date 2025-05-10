@@ -99,7 +99,7 @@ namespace RestaurantQRSystem.Controllers
                 }
 
                 // Sipariş tutarını hesaplıyoruz
-                decimal totalAmount = cartItems.Sum(item => item.price * item.quantity);
+                int totalAmount = cartItems.Sum(item => item.price * item.quantity);
 
                 // Yeni sipariş oluşturuyoruz
                 var order = new Order
@@ -222,7 +222,7 @@ namespace RestaurantQRSystem.Controllers
     {
         public string id { get; set; }
         public string name { get; set; }
-        public decimal price { get; set; }
+        public int price { get; set; }
         public int quantity { get; set; }
     }
 }

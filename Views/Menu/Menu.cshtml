@@ -188,14 +188,14 @@
         }
 
         <!-- Sabit Alt Bar -->
-        <div class="fixed-bottom fixed-bottom-bar d-flex flex-md-row-reverse align-items-center me-5">
+        <div class="fixed-bottom fixed-bottom-bar d-flex flex-md-row-reverse align-items-center ">
             
-            <button class="btn btn-success btn-lg" onclick="showCart()"> @* Boyutu büyüttük (btn-lg) ve rengi değiştirdik *@
+            <button class="btn btn-success btn-lg me-5" onclick="showCart()"> @* Boyutu büyüttük (btn-lg) ve rengi değiştirdik *@
                 <span class="cart-display">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-badge badge bg-danger rounded-pill">0</span> @* rounded-pill *@
                 </span>
-                <span class="ms-2">Sepeti Gör</span> @* Metni güncelledik *@
+                <span >Sepeti Gör</span> @* Metni güncelledik *@
             </button>
         </div>
     </div>
@@ -214,10 +214,6 @@
                      <div id="cartSummary">
                         <!-- Sepet içeriği dinamik olarak buraya gelecek -->
                         <p class="text-center text-muted">Sepetiniz şu an boş.</p>
-                     </div>
-                     <hr />
-                     <div class="text-end fw-bold fs-5" id="modalCartTotal">
-                         Toplam: 0,00 TL
                      </div>
                 </div>
                 <div class="modal-footer justify-content-between"> @* Butonları ayırdık *@

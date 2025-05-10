@@ -24,17 +24,94 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Masa durumlarını güncelle
-            await UpdateTableStatuses();
-
-            // Dashboard için gerekli verileri tek seferde hazırla
-            var viewModel = new DashboardViewModel
+            try
             {
-                AdminStats = await GetAdminStats(),
-                TableList = await GetTableDetailsList()
-            };
+                // SIFIRDAN veri yükleme yaklaşımı kullanalım
+                // Önce tüm masaları yükleyelim (siparişler olmadan)
+                var tables = await _context.Tables.ToListAsync();
 
-            return View(viewModel);
+                // Her masa için ayrı ayrı aktif siparişleri yükleyelim
+                var tableViewModels = new List<TableDetailsViewModel>();
+
+                foreach (var table in tables)
+                {
+                    // Her masa için aktif siparişleri direkt olarak sorgulayalım
+                    var activeOrders = await _context.Orders
+                        .Include(o => o.OrderItems)
+                            .ThenInclude(oi => oi.Product)
+                        .Where(o => o.TableId == table.Id &&
+                                  (o.Status == OrderStatus.Received ||
+                                   o.Status == OrderStatus.Preparing ||
+                                   o.Status == OrderStatus.Ready ||
+                                   o.Status == OrderStatus.Delivered))
+                        .ToListAsync();
+
+                    // Debug bilgisi
+                    System.Diagnostics.Debug.WriteLine($"Masa {table.Id} için {activeOrders.Count} aktif sipariş bulundu");
+
+                    // Her masa için ViewModel oluşturalım
+                    var tableViewModel = new TableDetailsViewModel
+                    {
+                        Id = table.Id,
+                        Name = table.Name,
+                        Status = table.Status,
+                        IsOccupied = table.IsOccupied,
+                        OccupiedSince = table.OccupiedSince,
+                        // Aktif siparişleri doğrudan ekleyelim
+                        Orders = activeOrders.Select(o => new OrderViewModel
+                        {
+                            Id = o.Id,
+                            TableId = o.TableId,
+                            CustomerName = o.CustomerName,
+                            CustomerNote = o.CustomerNote,
+                            Status = o.Status,
+                            OrderDate = o.OrderDate,
+                            TotalAmount = (int)o.TotalAmount,
+                            OrderItems = o.OrderItems.Select(oi => new OrderItemViewModel
+                            {
+                                ProductId = oi.ProductId,
+                                ProductName = oi.Product?.Name ?? "Ürün Bulunamadı",
+                                Quantity = (int)oi.Quantity,
+                                UnitPrice = oi.UnitPrice,
+                                TotalPrice = oi.Quantity * oi.UnitPrice
+                            }).ToList()
+                        }).ToList()
+                    };
+
+                    // Toplam tutarı hesaplayalım
+                    tableViewModel.TotalAmount = tableViewModel.Orders.Sum(o => o.TotalAmount);
+
+                    // ViewModel'i listeye ekleyelim
+                    tableViewModels.Add(tableViewModel);
+                }
+
+                // Diğer istatistikleri yükleyelim
+                var model = new AdminDashboardViewModel
+                {
+                    TotalCategories = await _context.Categories.CountAsync(),
+                    TotalProducts = await _context.Products.CountAsync(),
+                    TotalTables = tables.Count,
+                    NewOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Received),
+                    ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Preparing),
+                    CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Completed || o.Status == OrderStatus.Paid),
+                    TodayOrders = await _context.Orders.CountAsync(o => o.OrderDate.Date == DateTime.Today),
+                    TodayRevenue = (double)await _context.Orders
+                        .Where(o => o.OrderDate.Date == DateTime.Today && (o.Status == OrderStatus.Completed || o.Status == OrderStatus.Paid))
+                        .Select(o => o.TotalAmount)
+                        .SumAsync(a => (double)a),
+
+                    // Hazır TableViewModel listesini kullan
+                    TableList = tableViewModels
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                // Hata logla
+                System.Diagnostics.Debug.WriteLine($"Dashboard Index Hatası: {ex.Message}\n{ex.StackTrace}");
+                throw;
+            }
         }
 
         // Tüm masaların durumlarını sipariş verilerine göre güncelle
@@ -133,58 +210,82 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         }
 
         // TableDetailsViewModel listesi oluştur (masalar için)
-        private async Task<List<TableDetailsViewModel>> GetTableDetailsList()
+        public async Task<IActionResult> TableDetails(int id)
         {
-            var tables = await _context.Tables.OrderBy(t => t.Name).ToListAsync();
-            var result = new List<TableDetailsViewModel>();
-
-            foreach (var table in tables)
-            {
-                // Masa modeli oluştur
-                var tableModel = new TableDetailsViewModel
-                {
-                    Id = table.Id,
-                    Name = table.Name,
-                    IsOccupied = table.IsOccupied,
-                    OccupiedSince = table.OccupiedSince,
-                    OrderItems = new List<OrderItemViewModel>()
-                };
-
-                // Aktif siparişi kontrol et
-                var order = await _context.Orders
-                    .Include(o => o.OrderItems)
+            var table = await _context.Tables
+                .Include(t => t.Orders.Where(o => o.Status != OrderStatus.Completed && o.Status != OrderStatus.Cancelled && o.Status != OrderStatus.Paid))
+                    .ThenInclude(o => o.OrderItems)
                         .ThenInclude(oi => oi.Product)
-                    .Where(o => o.TableId == table.Id &&
-                              (o.Status == OrderStatus.Received ||
-                               o.Status == OrderStatus.Preparing ||
-                               o.Status == OrderStatus.Ready ||
-                               o.Status == OrderStatus.Delivered))
-                    .OrderByDescending(o => o.OrderDate)
-                    .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(t => t.Id == id);
 
-                if (order != null)
+            if (table == null)
+                return NotFound();
+
+            var model = TableDetailsViewModel.FromTable(table);
+
+            return PartialView("~/Areas/Admin/Views/Shared/_TableDetailPartial.cshtml", model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetTablesList()
+        {
+            try
+            {
+                // Tüm masaları getir
+                var tables = await _context.Tables.ToListAsync();
+
+                // Her masa için TableDetailsViewModel oluştur
+                var tableViewModels = new List<TableDetailsViewModel>();
+
+                foreach (var table in tables)
                 {
-                    tableModel.CurrentOrderId = order.Id;
+                    // Aynı mantıkla aktif siparişleri getir
+                    var activeOrders = await _context.Orders
+                        .Include(o => o.OrderItems)
+                            .ThenInclude(oi => oi.Product)
+                        .Where(o => o.TableId == table.Id &&
+                                  (o.Status == OrderStatus.Received ||
+                                   o.Status == OrderStatus.Preparing ||
+                                   o.Status == OrderStatus.Ready ||
+                                   o.Status == OrderStatus.Delivered))
+                        .ToListAsync();
 
-                    // Sipariş ürünlerini ekle
-                    foreach (var item in order.OrderItems)
+                    var tableViewModel = new TableDetailsViewModel
                     {
-                        tableModel.OrderItems.Add(new OrderItemViewModel
+                        Id = table.Id,
+                        Name = table.Name,
+                        Status = table.Status,
+                        IsOccupied = activeOrders.Any(),
+                        Orders = activeOrders.Select(o => new OrderViewModel
                         {
-                            ProductName = item.Product.Name,
-                            Quantity = item.Quantity,
-                            UnitPrice = item.UnitPrice,
-                            TotalPrice = item.Quantity * item.UnitPrice
-                        });
+                            Id = o.Id,
+                            TableId = o.TableId,
+                            CustomerName = o.CustomerName,
+                            CustomerNote = o.CustomerNote,
+                            Status = o.Status,
+                            OrderDate = o.OrderDate,
+                            TotalAmount = (int)o.TotalAmount,
+                            OrderItems = o.OrderItems.Select(oi => new OrderItemViewModel
+                            {
+                                ProductId = oi.ProductId,
+                                ProductName = oi.Product?.Name ?? "Ürün Bulunamadı",
+                                Quantity = (int)oi.Quantity,
+                                UnitPrice = oi.UnitPrice,
+                                TotalPrice = oi.Quantity * oi.UnitPrice
+                            }).ToList()
+                        }).ToList()
+                    };
 
-                        tableModel.TotalAmount += item.Quantity * item.UnitPrice;
-                    }
+                    tableViewModels.Add(tableViewModel);
                 }
 
-                result.Add(tableModel);
+                return PartialView("_TablesPartial", tableViewModels);
             }
-
-            return result;
+            catch (Exception ex)
+            {
+                // Hata logla
+                System.Diagnostics.Debug.WriteLine($"GetTablesList Error: {ex.Message}");
+                return PartialView("_ErrorPartial", "Masa listesi alınamadı: " + ex.Message);
+            }
         }
     }
 }

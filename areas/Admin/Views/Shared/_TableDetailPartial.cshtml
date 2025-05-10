@@ -1,73 +1,186 @@
-﻿@model RestaurantQRSystem.ViewModels.TableDetailsViewModel
+﻿@using RestaurantQRSystem.Models.Enums
+@model RestaurantQRSystem.ViewModels.TableDetailsViewModel
 
-<div class="row">
-    <div class="col-md-6">
-        <h5 id="modalTableName">@Model.Name</h5>
-        <p>
-            Durum:
-            @if (Model.IsOccupied && Model.OrderItems.Any())
-            {
-                <span id="modalTableStatus" class="badge bg-danger">Dolu</span>
-            }
-            else
-            {
-                <span id="modalTableStatus" class="badge bg-success">Boş</span>
-            }
-        </p>
-
-        @if (Model.CurrentOrderId.HasValue && Model.OrderItems.Any())
-        {
-            <p id="modalOrderInfo">Sipariş No: <span id="modalOrderId">#@Model.CurrentOrderId</span></p>
-        }
-        else
-        {
-            <p id="modalOrderInfo" style="display:none;">Sipariş No: <span id="modalOrderId"></span></p>
-        }
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Masa @Model.Name</h5>
+                <span class="badge bg-@(Model.Status == TableStatus.Available ? "success" : "primary") py-2 px-3">
+                    @Model.Status.ToString()
+                </span>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-6">
-        @if (Model.IsOccupied && Model.OrderItems.Any())
-        {
-            <div id="orderItemsContainer">
-                <h6>Sipariş Detayları</h6>
-                <div id="orderItemsList" class="mb-3">
-                    <div class="table-responsive">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Ürün</th>
-                                    <th class="text-center">Adet</th>
-                                    <th class="text-end">Fiyat</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.OrderItems)
+    @if (Model.Orders.Any())
+    {
+        <div class="accordion" id="accordionOrders">
+            @foreach (var order in Model.Orders)
+            {
+                <div class="accordion-item mb-3">
+                    <h2 class="accordion-header" id="heading-@order.Id">
+                        <button class="accordion-button @(order == Model.Orders.First() ? "" : "collapsed")"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse-@order.Id"
+                                aria-expanded="@(order == Model.Orders.First() ? "true" : "false")"
+                                aria-controls="collapse-@order.Id">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <div>
+                                    Sipariş #@order.Id -
+                                    <small class="text-muted">
+                                        @order.OrderDate.ToString("dd/MM/yyyy HH:mm")
+                                    </small>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <span class="badge bg-@(order.Status == OrderStatus.Received ? "primary" :
+                                                        order.Status == OrderStatus.Preparing ? "warning" :
+                                                        order.Status == OrderStatus.Ready ? "success" : "secondary") me-2">
+                                        @order.Status.ToString()
+                                    </span>
+                                    <span class="badge bg-info">@order.TotalAmount.ToString("0.00") ₺</span>
+                                </div>
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="collapse-@order.Id" class="accordion-collapse collapse @(order == Model.Orders.First() ? "show" : "")"
+                         aria-labelledby="heading-@order.Id"
+                         data-bs-parent="#accordionOrders">
+                        <div class="accordion-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p><strong>Müşteri:</strong> @(string.IsNullOrEmpty(order.CustomerName) ? "Misafir" : order.CustomerName)</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Tarih:</strong> @order.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+                                </div>
+                                @if (!string.IsNullOrEmpty(order.CustomerNote))
                                 {
-                                    <tr>
-                                        <td>@item.ProductName</td>
-                                        <td class="text-center">@item.Quantity</td>
-                                        <td class="text-end">@item.TotalPrice.ToString("C2")</td>
-                                    </tr>
+                                    <div class="col-12">
+                                        <div class="alert alert-info py-2">
+                                            <strong>Not:</strong> @order.CustomerNote
+                                        </div>
+                                    </div>
                                 }
-                            </tbody>
-                        </table>
+                            </div>
+
+                            <div class="table-responsive mb-3">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Ürün</th>
+                                            <th class="text-center">Adet</th>
+                                            <th class="text-center">Birim Fiyat</th>
+                                            <th class="text-end">Toplam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in order.OrderItems)
+                                        {
+                                            <tr>
+                                                <td>@item.ProductName</td>
+                                                <td class="text-center">@item.Quantity</td>
+                                                <td class="text-center">@item.UnitPrice.ToString("0.00") ₺</td>
+                                                <td class="text-end">@((item.UnitPrice * item.Quantity).ToString("0.00")) ₺</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" class="text-end">Toplam:</th>
+                                            <th class="text-end">@order.TotalAmount.ToString("0.00") ₺</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <form method="post" action="@Url.Action("CompleteAndClear", "Table", new { area = "Admin" })">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="TableId" value="@Model.Id" />
+                                        <input type="hidden" name="OrderId" value="@order.Id" />
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Ödeme Yöntemi</label>
+                                            <select name="PaymentMethod" class="form-select">
+                                                <option value="Nakit">Nakit</option>
+                                                <option value="Kredi Kartı">Kredi Kartı</option>
+                                                <option value="Banka Kartı">Banka Kartı</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Ödenen Tutar</label>
+                                            <input type="number" step="0.01" class="form-control" name="PaidAmount" value="@order.TotalAmount" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Notlar</label>
+                                            <textarea class="form-control" name="Notes" rows="2"></textarea>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-check-circle me-1"></i> Ödendi Olarak İşaretle
+                                            </button>
+
+                                            <a href="@Url.Action("Print", "Order", new { id = order.Id, area = "Admin" })"
+                                               class="btn btn-primary" target="_blank">
+                                                <i class="fas fa-print me-1"></i> Yazdır
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr>
-                <h5>Toplam: <span id="modalTotalAmount" class="text-primary fw-bold">@Model.TotalAmount.ToString("C2")</span></h5>
-            </div>
+            }
+        </div>
 
-            <form id="completeOrderForm" asp-area="Admin" asp-controller="Table" asp-action="CompleteAndClear" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="TableId" value="@Model.Id">
-                <input type="hidden" name="OrderId" value="@Model.CurrentOrderId">
-            </form>
-        }
-        else
-        {
-            <div class="alert alert-info">
-                Bu masada aktif sipariş bulunmuyor.
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Masa Toplamı</h5>
             </div>
-        }
-    </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Toplam Sipariş:</strong> @Model.Orders.Count</p>
+                        <p><strong>Toplam Ürün:</strong> @Model.Orders.Sum(o => o.OrderItems.Sum(oi => oi.Quantity))</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p><strong>Toplam Tutar:</strong> @Model.Orders.Sum(o => o.TotalAmount).ToString("0.00") ₺</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form method="post" action="@Url.Action("CompleteAndClear", "Table", new { area = "Admin" })">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="tableId" value="@Model.Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Ödeme Yöntemi</label>
+                        <select name="paymentMethod" class="form-select">
+                            <option value="Nakit">Nakit</option>
+                            <option value="Kredi Kartı">Kredi Kartı</option>
+                            <option value="Banka Kartı">Banka Kartı</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100" onclick="return confirm('Bu masadaki tüm siparişleri ödendi olarak işaretlemek ve masayı boşaltmak istediğinize emin misiniz?')">
+                        <i class="fas fa-check-circle me-1"></i> Tüm Siparişleri Tamamla ve Masayı Kapat
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            Bu masada aktif sipariş bulunmamaktadır.
+        </div>
+    }
 </div>

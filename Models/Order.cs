@@ -11,7 +11,7 @@ namespace RestaurantQRSystem.Models
         public int Id { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public OrderStatus Status { get; set; }
-        public decimal TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
         public string CustomerName { get; set; }
         public string CustomerNote { get; set; }
 

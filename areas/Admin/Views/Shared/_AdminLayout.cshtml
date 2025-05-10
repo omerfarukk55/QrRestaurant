@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    
 </head>
 <body>
     <!-- Navbar başlangıcı -->
@@ -206,7 +207,7 @@
 
             // Ekranda geçici bildirim göster
             const notification = document.createElement('div');
-            notification.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+            notification.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-0 m-3';
             notification.style.zIndex = '9999';
             notification.innerHTML = `
                 <h5>Yeni Sipariş</h5>
@@ -246,8 +247,44 @@
             connection.on("ReceiveNewOrder", function(order) {
                 console.log("Yeni sipariş alındı:", order);
                 showNewOrderNotification(order);
+                 refreshTablesSection();
             });
+                function refreshTablesSection() {
+            const tablesContainer = document.getElementById('tables-container');
 
+            // Yükleniyor göstergesi
+            tablesContainer.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Masalar yükleniyor...</span>
+                    </div>
+                </div>
+            `;
+
+            // AJAX ile masa listesini getir
+            fetch('/Admin/Dashboard/GetTablesList')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Masa listesi alınamadı');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // Masa bölümünü güncelle
+                    tablesContainer.innerHTML = html;
+
+                    // Masa detay linklerini tekrar bağla
+                    attachTableDetailEvents();
+                })
+                
+        }
+             connection.on("TableStatusUpdated", function(tableId) {
+                console.log(`Masa ${tableId} durumu güncellendi`);
+                // Sayfayı yenile
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            });
             // Sipariş durumu değişikliğini dinle
             connection.on("OrderStatusUpdated", function(orderId, status) {
                 console.log(`Sipariş #${orderId} durumu güncellendi: ${status}`);
@@ -256,6 +293,7 @@
                 if (currentOrderId && parseInt(currentOrderId) === orderId) {
                     location.reload();
                 }
+
             });
         });
     </script>

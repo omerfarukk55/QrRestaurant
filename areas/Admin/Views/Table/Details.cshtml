@@ -39,7 +39,7 @@
 
 <hr />
 
-@if (Model.IsOccupied && Model.OrderItems.Any())
+@if (Model.IsOccupied && Model.OrderItems != null && Model.OrderItems.Any())
 {
     <div class="card">
         <div class="card-header bg-primary text-white">
@@ -77,8 +77,8 @@
             </div>
 
             <form asp-action="CompleteAndClear" method="post" class="mt-4">
-                <input type="hidden" asp-for="Id" name="TableId" />
-                <input type="hidden" asp-for="CurrentOrderId" name="OrderId" />
+                <input type="hidden" name="TableId" value="@Model.Id" />
+                <input type="hidden" name="OrderId" value="@Model.CurrentOrderId" />
 
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success btn-lg"

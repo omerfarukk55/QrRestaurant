@@ -1,4 +1,5 @@
-﻿@model RestaurantQRSystem.ViewModels.DashboardViewModel
+﻿@model RestaurantQRSystem.ViewModels.AdminDashboardViewModel
+
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "_AdminLayout";
@@ -6,9 +7,10 @@
 
 <h1>Yönetici Paneli</h1>
 <hr />
-
+<div id="tables-container">
 <!-- Masalar Durum Alanı -->
 @await Html.PartialAsync("_TablesPartial", Model.TableList)
+ </div>
 @Html.AntiForgeryToken()
 
 <!-- Table Detail Modal -->
@@ -109,73 +111,53 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Masa kartlarına tıklandığında
-        document.querySelectorAll('.table-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const tableId = this.getAttribute('data-table-id');
-                openTableModal(tableId);
-            });
-        });
-
-        // Sipariş tamamlama butonu işlemi (modalda)
-        document.getElementById('btnCompleteOrder').addEventListener('click', function() {
-            // Form oluşturulduysa submit işlemi yapılır
-            const form = document.getElementById('completeOrderForm');
-            if (form && !this.classList.contains('disabled')) {
-                    form.submit();
-            }
-        });
-    });
-
-    function openTableModal(tableId) {
-        // Modal nesnesini oluştur
+        // Masa detay modalı referansı
         const modalElement = document.getElementById('tableDetailModal');
-        const modal = new bootstrap.Modal(modalElement);
 
-        // Modal body'i ve tamamlama butonunu seç
-        const modalBody = modalElement.querySelector('.modal-body');
-        const completeOrderBtn = document.getElementById('btnCompleteOrder');
+        // Modal açılmadan önce tetiklenir
+        modalElement.addEventListener('show.bs.modal', function(event) {
+            // Tıklanan butondan table-id bilgisini al (data-bs-* ile geçirilmiş olmalı)
+             const button = event.relatedTarget;
+             const tableId = button.getAttribute('data-table-id') || button.href.split('/').pop();
+            const url = `/Admin/Table/GetTableDetailPartial/${tableId}`;
+            // Modal body'i seç
+            const modalBody = this.querySelector('.modal-body');
 
-        // Yükleniyor göster
-        modalBody.innerHTML = `
-            <div class="text-center p-5">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Yükleniyor...</span>
-                </div>
-            </div>
-        `;
-
-        // Tamamlama butonunu devre dışı bırak (veriler gelmeden)
-        completeOrderBtn.classList.add('disabled');
-
-        // Modalı göster
-        modal.show();
-
-        // Masa detaylarını getir
-        fetch(`/Admin/Table/GetTableDetailPartial/${tableId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Masa bilgileri alınamadı');
-                }
-                return response.text();
-            })
-            .then(html => {
-                // Modal içeriğini güncelle
-                modalBody.innerHTML = html;
-
-                // Form varsa butonu aktifleştir
-                const form = document.getElementById('completeOrderForm');
-                if (form) {
-                    completeOrderBtn.classList.remove('disabled');
-                }
-            })
-            .catch(error => {
-                console.error('Hata:', error);
-                modalBody.innerHTML = `
-                    <div class="alert alert-danger">
-                        <i class="fas fa-exclamation-circle"></i> Masa bilgileri yüklenirken bir hata oluştu.
+            // Yükleniyor göster
+            modalBody.innerHTML = `
+                <div class="text-center p-5">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
                     </div>
-                `;
-            });
-    }
+                </div>
+            `;
+
+            // Masa detaylarını getir
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Masa bilgileri alınamadı');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // Modal içeriğini güncelle
+                    modalBody.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                    modalBody.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle me-2"></i> Masa bilgileri yüklenirken bir hata oluştu.
+                        </div>
+                    `;
+                });
+        });
+
+        // Global tamamlama butonunu kaldıralım çünkü her sipariş için ayrı işlem düğmeleri var
+        const completeOrderBtn = document.getElementById('btnCompleteOrder');
+        if (completeOrderBtn) {
+            completeOrderBtn.style.display = 'none'; // veya tamamen kaldırılabilir
+        }
+    });
 </script>

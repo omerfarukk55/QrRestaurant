@@ -4,10 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Models;
 using QRCoder;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using RestaurantQRSystem.Models.Enums;
 using RestaurantQRSystem.ViewModels;
 
@@ -120,60 +116,52 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
 
 
         // GET: Admin/Table/Details/5
-        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            try
-            {
-                var table = await _context.Tables.FindAsync(id);
-                if (table == null)
-                {
-                    TempData["Error"] = "Masa bulunamadı.";
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-                }
-
-                // Aktif siparişi bul
-                var order = await _context.Orders
-                    .Include(o => o.OrderItems)
+            var table = await _context.Tables
+                .Include(t => t.Orders.Where(o => o.Status != OrderStatus.Completed &&
+                                                  o.Status != OrderStatus.Cancelled &&
+                                                  o.Status != OrderStatus.Paid))
+                    .ThenInclude(o => o.OrderItems)
                         .ThenInclude(oi => oi.Product)
-                    .Where(o => o.TableId == id && o.Status != OrderStatus.Paid && o.Status != OrderStatus.Cancelled)
-                    .OrderByDescending(o => o.OrderDate)
-                    .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(t => t.Id == id);
 
-                var model = new TableDetailsViewModel
-                {
-                    Id = table.Id,
-                    Name = table.Name,
-                    IsOccupied = table.IsOccupied,
-                    OccupiedSince = table.OccupiedSince,
-                    CurrentOrderId = order?.Id
-                };
+            if (table == null)
+                return NotFound();
 
-                if (order != null)
-                {
-                    // Sipariş içeriğini doldur
-                    foreach (var item in order.OrderItems)
-                    {
-                        model.OrderItems.Add(new OrderItemViewModel
-                        {
-                            ProductName = item.Product.Name,
-                            Quantity = (int)item.Quantity,
-                            UnitPrice = item.UnitPrice,
-                            TotalPrice = item.Quantity * item.UnitPrice
-                        });
-                        model.TotalAmount += item.Quantity * item.UnitPrice;
-                    }
-                }
-
-                return View(model);
-            }
-            catch (Exception ex)
+            var model = new TableDetailsViewModel
             {
-                // Hata logla
-                Console.WriteLine($"Error in Details: {ex}");
-                TempData["Error"] = $"Masa detayları görüntülenirken hata oluştu: {ex.Message}";
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                Id = table.Id,
+                Name = table.Name,
+                IsOccupied = table.IsOccupied,
+                OccupiedSince = (DateTime?)table.OccupiedSince,
+                OrderItems = new List<TableOrderItemViewModel>(),
+                TotalAmount = 0
+            };
+
+            // Aktif sipariş var mı?
+            var activeOrder = table.Orders.FirstOrDefault();
+            if (activeOrder != null)
+            {
+                model.CurrentOrderId = activeOrder.Id;
+
+                // Sipariş öğelerini ekle
+                foreach (var item in activeOrder.OrderItems)
+                {
+                    model.OrderItems.Add(new TableOrderItemViewModel
+                    {
+                        ProductId = item.ProductId,
+                        ProductName = item.Product.Name,
+                        Quantity = (int)item.Quantity,
+                        UnitPrice = item.UnitPrice,
+                        TotalPrice = item.Quantity * item.UnitPrice
+                    });
+
+                    model.TotalAmount += item.Quantity * item.UnitPrice;
+                }
             }
+
+            return View(model);
         }
 
         // POST: Admin/Table/ReleaseTable/5
@@ -299,120 +287,186 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
             ViewBag.QrUrl = url;
             return View();
         }
+        // TableController.cs
         [HttpGet]
         public async Task<IActionResult> GetTableDetailPartial(int id)
         {
             try
             {
+                // Log kaydı ekle
+                System.Diagnostics.Debug.WriteLine($"GetTableDetailPartial çağrıldı: Table ID={id}");
+
                 var table = await _context.Tables.FindAsync(id);
                 if (table == null)
                 {
-                    return PartialView("_ErrorPartial", "Masa bulunamadı.");
+                    System.Diagnostics.Debug.WriteLine($"Masa bulunamadı: ID={id}");
+                    return PartialView("_ErrorPartial", "Masa bulunamadı");
                 }
 
-                // Aktif siparişi daha kapsamlı bir şekilde kontrol et
-                var order = await _context.Orders
+                // Masa için aktif siparişleri direkt sorgula
+                var activeOrders = await _context.Orders
                     .Include(o => o.OrderItems)
                         .ThenInclude(oi => oi.Product)
                     .Where(o => o.TableId == id &&
-                              (o.Status == OrderStatus.Received ||
-                               o.Status == OrderStatus.Preparing ||
-                               o.Status == OrderStatus.Ready ||
-                               o.Status == OrderStatus.Delivered))
-                    .OrderByDescending(o => o.OrderDate)
-                    .FirstOrDefaultAsync();
+                               (o.Status == OrderStatus.Received ||
+                                o.Status == OrderStatus.Preparing ||
+                                o.Status == OrderStatus.Ready ||
+                                o.Status == OrderStatus.Delivered))
+                    .ToListAsync();
 
-                // ÖNEMLİ: Masa durumunu ve sipariş durumunu tam olarak kontrolümüze almak için
-                bool hasActiveOrder = order != null && order.OrderItems.Any();
+                System.Diagnostics.Debug.WriteLine($"Masa ID={id} için {activeOrders.Count} aktif sipariş bulundu");
 
-                // Masa durumunu logla (debugging için)
-                System.Diagnostics.Debug.WriteLine($"Masa #{id} DB'de IsOccupied={table.IsOccupied}, Gerçek durum: HasOrder={hasActiveOrder}");
-
-                // View modeli oluştur - Burada masa durumuna bakılmaksızın gerçek sipariş varlığını kullan!
+                // Model oluştur
                 var model = new TableDetailsViewModel
                 {
                     Id = table.Id,
                     Name = table.Name,
-                    IsOccupied = hasActiveOrder,  // Sipariş varlığına göre masa durumu belirleniyor
-                    OccupiedSince = table.OccupiedSince,
-                    CurrentOrderId = order?.Id,
-                    OrderItems = new List<OrderItemViewModel>()
+                    Status = table.Status,
+                    Orders = activeOrders.Select(o => new OrderViewModel
+                    {
+                        Id = o.Id,
+                        TableId = o.TableId,
+                        CustomerName = o.CustomerName,
+                        CustomerNote = o.CustomerNote,
+                        OrderDate = o.OrderDate,
+                        Status = o.Status,
+                        TotalAmount = (int)o.TotalAmount,
+                        OrderItems = o.OrderItems.Select(oi => new OrderItemViewModel
+                        {
+                            ProductId = oi.ProductId,
+                            ProductName = oi.Product.Name,
+                            Quantity = (int)oi.Quantity,
+                            UnitPrice = oi.UnitPrice,
+                            TotalPrice = oi.UnitPrice * oi.Quantity
+                        }).ToList()
+                    }).ToList()
                 };
 
-                // Sipariş detaylarını ekle
-                if (hasActiveOrder)
-                {
-                    foreach (var item in order.OrderItems)
-                    {
-                        model.OrderItems.Add(new OrderItemViewModel
-                        {
-                            ProductName = item.Product.Name,
-                            Quantity = item.Quantity,
-                            UnitPrice = item.UnitPrice,
-                            TotalPrice = item.Quantity * item.UnitPrice
-                        });
-                        model.TotalAmount += item.Quantity * item.UnitPrice;
-                    }
-                }
+                System.Diagnostics.Debug.WriteLine($"Model oluşturuldu: Orders={model.Orders.Count}");
 
                 return PartialView("_TableDetailPartial", model);
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"HATA: {ex.Message}\n{ex.StackTrace}");
                 return PartialView("_ErrorPartial", $"Hata oluştu: {ex.Message}");
             }
         }
 
-        // Siparişi tamamla ve masayı boşalt
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CompleteAndClear(CompleteOrderViewModel model)
+        public async Task<IActionResult> CompleteAndClear(int tableId, string paymentMethod = "Nakit")
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Geçersiz form bilgisi.";
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-            }
-
             try
             {
-                // Masa ve siparişi kontrol et
-                var table = await _context.Tables.FindAsync(model.TableId);
+                // 1. Masayı kontrol et
+                var table = await _context.Tables.FindAsync(tableId);
                 if (table == null)
                 {
                     TempData["Error"] = "Masa bulunamadı.";
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
 
-                var order = await _context.Orders.FindAsync(model.OrderId);
-                if (order == null || order.TableId != model.TableId)
+                // 2. Masadaki tüm aktif siparişleri getir
+                var activeOrders = await _context.Orders
+                    .Where(o => o.TableId == tableId &&
+                          (o.Status == OrderStatus.Received ||
+                           o.Status == OrderStatus.Preparing ||
+                           o.Status == OrderStatus.Ready ||
+                           o.Status == OrderStatus.Delivered))
+                    .ToListAsync();
+
+                if (!activeOrders.Any())
                 {
-                    TempData["Error"] = "Sipariş bulunamadı veya bu masaya ait değil.";
+                    TempData["Warning"] = "Masada işlenecek aktif sipariş bulunamadı.";
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
 
-                // Siparişi ödendi olarak işaretle
-                order.Status = OrderStatus.Paid;
-                order.PaymentDate = DateTime.Now;
+                // 3. Aktif sipariş sayısını log kaydet (debug için)
+                System.Diagnostics.Debug.WriteLine($"Masa {tableId} için {activeOrders.Count} aktif sipariş tamamlanacak");
 
-                // Masayı boşalt
+                // 4. Her siparişi ödendi olarak işaretle
+                foreach (var order in activeOrders)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Sipariş #{order.Id} ödendi olarak işaretleniyor");
+
+                    order.Status = OrderStatus.Paid;
+                    order.PaymentStatus = PaymentStatus.Completed;
+                    order.PaymentDate = DateTime.Now;
+                    order.PaymentMethod = paymentMethod;
+                    order.PaidAmount = order.TotalAmount;
+
+                    _context.Update(order);
+                }
+
+                // 5. Masa durumunu güncelle (Status özelliği salt okunur ise IsOccupied'ı kullan)
                 table.IsOccupied = false;
                 table.OccupiedSince = null;
+                _context.Update(table);
 
+                // 6. Değişiklikleri kaydet
                 await _context.SaveChangesAsync();
 
-                TempData["Success"] = "Sipariş tamamlandı ve masa boşaltıldı.";
+                // 7. SignalR ile güncellemeleri bildir (opsiyonel)
+                // await _hubContext.Clients.All.SendAsync("TableStatusChanged", tableId);
+
+                TempData["Success"] = $"Masa başarıyla boşaltıldı, {activeOrders.Count} sipariş ödendi olarak işaretlendi.";
             }
             catch (Exception ex)
             {
                 TempData["Error"] = $"İşlem sırasında hata oluştu: {ex.Message}";
-                // Hata logla
                 System.Diagnostics.Debug.WriteLine($"CompleteAndClear Error: {ex}");
             }
 
             return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ClearTable(int tableId)
+        {
+            try
+            {
+                var table = await _context.Tables
+                    .Include(t => t.Orders.Where(o => o.Status != OrderStatus.Completed && o.Status != OrderStatus.Cancelled && o.Status != OrderStatus.Paid))
+                    .FirstOrDefaultAsync(t => t.Id == tableId);
 
+                if (table == null)
+                {
+                    TempData["Error"] = "Masa bulunamadı.";
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
 
+                // Tüm aktif siparişleri tamamlandı olarak işaretle
+                foreach (var order in table.Orders)
+                {
+                    order.Status = OrderStatus.Paid;
+                    order.PaymentStatus = PaymentStatus.Completed;
+                    order.PaymentDate = DateTime.Now;
+                    order.PaymentMethod = "Nakit";
+                    order.PaidAmount = order.TotalAmount;
+                }
+
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Masa başarıyla boşaltıldı, tüm siparişler tamamlandı.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"İşlem sırasında hata oluştu: {ex.Message}";
+                // Hata logla
+                System.Diagnostics.Debug.WriteLine($"ClearTable Error: {ex}");
+            }
+
+            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+        }
+
+    }
+    public class CompleteOrderViewModel
+    {
+        public int TableId { get; set; }
+        public int OrderId { get; set; }
+        public string PaymentMethod { get; set; }
+        public decimal? PaidAmount { get; set; }
+        public string? Notes { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using RestaurantQRSystem.Data;
 namespace RestaurantQRSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250429175206_initialcreate")]
+    [Migration("20250509141923_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -343,12 +343,17 @@ namespace RestaurantQRSystem.Migrations
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TableId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TableId");
+
+                    b.HasIndex("TableId1");
 
                     b.ToTable("Orders");
                 });
@@ -578,6 +583,10 @@ namespace RestaurantQRSystem.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("RestaurantQRSystem.Models.Table", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("TableId1");
+
                     b.Navigation("Table");
                 });
 
@@ -630,6 +639,11 @@ namespace RestaurantQRSystem.Migrations
             modelBuilder.Entity("RestaurantQRSystem.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("RestaurantQRSystem.Models.Table", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

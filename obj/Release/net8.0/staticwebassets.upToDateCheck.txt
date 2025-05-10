@@ -70,6 +70,7 @@ wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\ses\havaliman_anons.mp3
 wwwroot\uploads\products\0df27f98-4507-4444-a447-f4ce21542031.jpg
 wwwroot\uploads\products\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg
+wwwroot\uploads\products\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg
 wwwroot\uploads\products\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg
 wwwroot\uploads\products\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg
 wwwroot\uploads\products\a96267c2-5963-4d33-9ed3-7102dcef776d.png

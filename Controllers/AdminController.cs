@@ -33,9 +33,9 @@ namespace RestaurantQRSystem.Controllers
                 ProcessingOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Preparing),
                 CompletedOrders = await _context.Orders.CountAsync(o => o.Status == OrderStatus.Ready),
                 TodayOrders = await _context.Orders.CountAsync(o => o.OrderDate.Date == today),
-                TodayRevenue = (double)(await _context.Orders
+                TodayRevenue = (await _context.Orders
                                    .Where(o => o.OrderDate.Date == today && o.Status != OrderStatus.Cancelled)
-                                   .SumAsync(o => (decimal?)o.TotalAmount) ?? 0),
+                                   .SumAsync(o => (int?)o.TotalAmount) ?? 0),
                 
             };
 

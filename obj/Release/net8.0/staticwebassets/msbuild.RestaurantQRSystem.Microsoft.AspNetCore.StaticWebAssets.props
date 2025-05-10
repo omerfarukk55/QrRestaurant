@@ -1296,6 +1296,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>RestaurantQRSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RestaurantQRSystem</BasePath>
+      <RelativePath>uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>balcq41kvv</Fingerprint>
+      <Integrity>w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>RestaurantQRSystem</SourceId>

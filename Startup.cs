@@ -101,6 +101,7 @@ namespace RestaurantQRSystem
                 endpoints.MapHub<OrderHub>("/orderHub");
             });
 
+
         }
     }
 }

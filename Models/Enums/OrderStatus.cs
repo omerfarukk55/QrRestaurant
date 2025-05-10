@@ -48,6 +48,7 @@ namespace RestaurantQRSystem.Models.Enums
         /// Ödeme tamamlandı
         /// </summary>
         [Display(Name = "Ödendi")]
-        Paid = 7
+        Paid = 7,
+        Completed = 8
     }
 }

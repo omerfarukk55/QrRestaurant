@@ -864,6 +864,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"484433"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 27 Apr 2025 14:44:52 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.balcq41kvv.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"balcq41kvv"},{"Name":"integrity","Value":"sha256-w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ="},{"Name":"label","Value":"_content/RestaurantQRSystem/uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5541"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 09 May 2025 15:42:36 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"5541"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=\u0022"},{"Name":"Last-Modified","Value":"Fri, 09 May 2025 15:42:36 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/uploads/products/623e79c8-4c4c-461f-8c88-3924959a9ded.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

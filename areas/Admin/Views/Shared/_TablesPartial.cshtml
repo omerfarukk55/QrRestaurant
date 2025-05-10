@@ -1,56 +1,82 @@
-﻿@model List<RestaurantQRSystem.ViewModels.TableDetailsViewModel>
+﻿@using RestaurantQRSystem.Models.Enums
+@model List<RestaurantQRSystem.ViewModels.TableDetailsViewModel>
 
+<!-- Mevcut View kodu devam eder -->
 <div class="row">
     @foreach (var table in Model)
     {
-        // TableDetailsViewModel'daki aynı kontrol mantığı kullanılıyor
-        bool isReallyOccupied = table.IsOccupied && table.OrderItems.Any();
+        var activeOrders = table.Orders;
 
-        string cardClass = isReallyOccupied ? "bg-danger text-white" : "bg-success text-white";
+        <div class="col-md-3 mb-4">
+            <div class="card @(table.Status == TableStatus.Available ? "bg-success" : "bg-primary") text-white">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Masa @table.Name</h5>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card @cardClass table-card"
-                 data-table-id="@table.Id"
-                 style="cursor: pointer;">
-                <div class="card-body">
-                    <h5 class="card-title">@table.Name</h5>
-
-                    <div class="mb-2">
-                        @if (isReallyOccupied)
-                        {
-                            <span class="badge bg-warning text-dark">Dolu</span>
-                            @if (table.CurrentOrderId.HasValue)
-                            {
-                                <span class="badge bg-info ms-1">Sipariş #@table.CurrentOrderId</span>
-                            }
-                        }
-                        else
-                        {
-                            <span class="badge bg-light text-dark">Boş</span>
-                        }
-                    </div>
-
-                    @if (isReallyOccupied)
+                    @if (activeOrders != null && activeOrders.Any())
                     {
-                        @if (table.TotalAmount > 0)
-                        {
-                            <p class="card-text mb-1">
-                                Toplam: @table.TotalAmount.ToString("C2")
-                            </p>
-                        }
-                        @if (table.OccupiedSince.HasValue)
-                        {
-                            <small class="text-white-50">
-                                @table.OccupiedSince.Value.ToString("HH:mm")
-                            </small>
-                        }
+                        <span class="badge bg-danger rounded-pill">@activeOrders.Count Sipariş</span>
+                    }
+                </div>
+                <div class="card-body bg-white text-dark">
+                    @if (activeOrders != null && activeOrders.Any())
+                    {
+                        <div class="mb-3">
+                            <strong>Aktif Siparişler:</strong>
+                            <ul class="list-group mt-2">
+                                @foreach (var order in activeOrders)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            Sipariş #@order.Id
+                                            <small class="d-block text-muted">
+                                                @(string.IsNullOrEmpty(order.CustomerName) ? "Misafir" : order.CustomerName)
+                                            </small>
+                                        </div>
+                                        <span class="badge bg-@(order.Status == OrderStatus.Received ? "primary" :
+                                                           order.Status == OrderStatus.Preparing ? "warning" :
+                                                           order.Status == OrderStatus.Ready ? "success" : "secondary")">
+                                            @order.Status.ToString()
+                                        </span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                        <div>
+                            <strong>Toplam Ürün:</strong> @activeOrders.Sum(o => o.OrderItems.Sum(oi => oi.Quantity))
+                        </div>
+                        <div>
+                            <strong>Toplam Tutar:</strong> @activeOrders.Sum(o => o.TotalAmount).ToString("0.00") ₺
+                        </div>
                     }
                     else
                     {
-                        <p class="card-text mb-0">QR ile Sipariş</p>
+                        <p class="text-center mb-0">Bu masada aktif sipariş yok.</p>
                     }
+                </div>
+                <div class="card-footer bg-white border-top">
+                    <a href="@Url.Action("GetTableDetailPartial", "Table", new { id = table.Id, area = "Admin" })"
+                       class="btn btn-sm btn-primary w-100"
+                       data-bs-toggle="modal"
+                       data-table-id="@table.Id"
+                       data-bs-target="#tableDetailModal">
+                        Detaylar
+                    </a>
                 </div>
             </div>
         </div>
     }
 </div>
+
+<!-- JavaScript ile debug bilgisi -->
+<script>
+    // Sayfa yüklendiğinde masa bilgilerini konsola yazdır
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Toplam Masa Sayısı:", @Model.Count);
+        
+        @foreach (var table in Model)
+        {
+            <text>console.log("Masa @table.Id (@table.Name): Sipariş Sayısı = @table.Orders.Count");</text>
+        }
+    });
+</script>

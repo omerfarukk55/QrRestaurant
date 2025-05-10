@@ -54,13 +54,14 @@ namespace RestaurantQRSystem.Services
                     orderDate = order.OrderDate,
                     formattedDate = order.OrderDate.ToString("HH:mm")
                 };
-
+                
                 // Debug için loglama
                 _logger.LogInformation($"Sending order notification: {System.Text.Json.JsonSerializer.Serialize(notification)}");
 
                 // SignalR üzerinden admin grubuna bildirim gönderiyoruz
                 await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNewOrder", notification);
                 _logger.LogInformation($"Order notification sent for Order #{orderId} to Admin group");
+
             }
             catch (Exception ex)
             {

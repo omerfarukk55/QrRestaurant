@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BLMeMG3bOhBbDxQAYN9MOto4SnmbbbqNywZsp/TJTow=",
+  "Hash": "9cbprDy7p/nLdaeTIvOytn79YOLks4dpNhV6jUaGQIo=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -2787,6 +2787,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\241a1474-6be6-4269-a9e6-7fc02c15af57.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg",
+      "SourceId": "RestaurantQRSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
+      "BasePath": "_content/RestaurantQRSystem",
+      "RelativePath": "uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "balcq41kvv",
+      "Integrity": "w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg"
     },
     {
       "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg",
@@ -11100,6 +11121,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-H1iIE08sqiUWZXTeLej1J613j1p9ROtFAHo6vsa5sq4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.balcq41kvv.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 May 2025 15:42:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "balcq41kvv"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\2dd7b19a-45d3-4ab8-8a09-787c222c0e17.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5541"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 09 May 2025 15:42:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-w/DUB0pNLrN/f9J01mP9fhz5Ho959A65mLzb8aGtsBQ="
         }
       ]
     },

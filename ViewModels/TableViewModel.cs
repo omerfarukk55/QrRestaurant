@@ -8,6 +8,7 @@
         public DateTime? OccupiedSince { get; set; }
         public int? CurrentOrderId { get; set; }
         public decimal TotalAmount { get; set; }
-
+        public object ActiveOrders { get; internal set; }
+        public object Status { get; internal set; }
     }
 }

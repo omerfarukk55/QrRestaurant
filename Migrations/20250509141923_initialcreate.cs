@@ -265,7 +265,8 @@ namespace RestaurantQRSystem.Migrations
                     PaymentDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     PaymentMethod = table.Column<string>(type: "TEXT", nullable: true),
                     PaidAmount = table.Column<decimal>(type: "TEXT", nullable: true),
-                    PaymentNotes = table.Column<string>(type: "TEXT", nullable: true)
+                    PaymentNotes = table.Column<string>(type: "TEXT", nullable: true),
+                    TableId1 = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -276,6 +277,11 @@ namespace RestaurantQRSystem.Migrations
                         principalTable: "Tables",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Tables_TableId1",
+                        column: x => x.TableId1,
+                        principalTable: "Tables",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -410,6 +416,11 @@ namespace RestaurantQRSystem.Migrations
                 name: "IX_Orders_TableId",
                 table: "Orders",
                 column: "TableId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_TableId1",
+                table: "Orders",
+                column: "TableId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_OrderId",
