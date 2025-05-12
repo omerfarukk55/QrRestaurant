@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿@{
     ViewData["Title"] = "Menü";
     Layout = null;
     var table = ViewBag.Table as RestaurantQRSystem.Models.Table;
@@ -11,127 +11,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hansar Balık Evi</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            background-color: #f8f9fa; /* Daha açık bir arka plan */
-            padding-bottom: 80px; /* Fixed bottom bar için boşluk */
-        }
-
-        .restaurant-header {
-            text-align: center;
-            padding: 2rem 0;
-            background-color: #ffffff; /* Beyaz arka plan */
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-            .restaurant-header h1 {
-                color: #343a40;
-                font-weight: bold;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#64748b',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#3b82f6',
+                    }
+                }
             }
-             .restaurant-header h2 {
-                color: #6c757d;
-             }
-
-
-        .category-title {
-            border-bottom: 3px solid #0d6efd; /* Bootstrap primary rengi */
-            padding-bottom: 0.5rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600; /* Biraz daha kalın */
-            color: #212529;
-
-            background-color: #e9ecef; /* Hafif gri arka plan */
-            padding: 0.75rem 1.25rem; /* Üst/alt ve sağ/sol padding */
-            text-align: center; /* Metni ortala */
-            border-radius: 0.375rem; /* Hafif yuvarlak köşeler */
-            border-top: 1px solid #dee2e6;
-            border-left: 1px solid #dee2e6;
-            border-right: 1px solid #dee2e6;
-            /* border-bottom kalabilir veya kaldırılabilir, tercihe bağlı */
         }
-
-        .menu-item .card {
-            border: none; /* Kenarlıkları kaldır */
-            transition: transform .2s ease-in-out, box-shadow .2s ease-in-out; /* Yumuşak geçiş */
-            overflow: hidden; /* Taşan resimleri gizle */
-        }
-
-        .menu-item .card:hover {
-             transform: translateY(-5px); /* Hafif yukarı kalkma efekti */
-             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
-        }
-
-
-        .menu-item img {
-            width: 100%;
-            height: 180px; /* Sabit yükseklik */
-            object-fit: cover; /* Resmin orantısını koruyarak doldur */
-        }
-
-        .add-to-cart {
-            min-width: 130px; /* Buton genişliği */
-            font-weight: 500;
-        }
-
-        .fixed-bottom-bar {
-             background-color: rgba(255, 255, 255, 0.95); /* Hafif şeffaf beyaz */
-             backdrop-filter: blur(5px); /* Arka planı bulanıklaştır (destekleyen tarayıcılarda) */
-             border-top: 1px solid #dee2e6;
-             padding: 0.75rem 1rem;
-             z-index: 1030; /* Bootstrap'in z-index'lerinden yüksek */
-        }
-
-        .cart-display {
-            display: flex;
-            align-items: center;
-            justify-content:center;
-            gap: 0.5rem; /* İkon ve metin arası boşluk */
-        }
-
-        .cart-badge {
-            font-size: 0.75em;
-            padding: 0.3em 0.5em;
-        }
-
-         /* Modal için ek stiller */
-        .modal-content {
-            border-radius: 0.5rem;
-        }
-        .modal-header {
-            border-bottom: 1px solid #dee2e6;
-        }
-        .modal-footer {
-             border-top: 1px solid #dee2e6;
-        }
-
-        #cartSummary .list-group-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #cartSummary .item-controls button {
-            margin-left: 0.5rem;
-        }
-
-
-    </style>
+    </script>
 </head>
-<body>
-    <div class="restaurant-header">
-         <!-- Buraya isterseniz bir logo <img> etiketi ekleyebilirsiniz -->
-         <h1>Hansar Balık Evi</h1>
-         <h2>@table.Name Menüsü</h2>
-    </div>
+<body class="bg-gray-50 pb-24">
+    <!-- Restaurant Header -->
+    <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white text-center py-8 px-4 shadow-lg mb-6">
+        <div className="flex justify-center mb-3">
+            <Anchor className="h-12 w-12" />
+        </div>
+        <h1 class=" text-3xl font-bold tracking-wide mb-2">Hansar Balık Evi</h1>
+        <h2 class="inline-block bg-white text-blue-800 px-4 py-2 rounded-full font-medium mt-2 shadow-sm transform transition-transform hover:scale-105">@table.Name Menüsü</h2>
+    </header>
 
-    <div class="container">
+    <div class="container mx-auto px-4">
         @if (categories == null || !categories.Any())
         {
-            <div class="alert alert-warning text-center" role="alert">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded my-5 text-center" role="alert">
                 Menüde gösterilecek kategori veya ürün bulunamadı.
             </div>
         }
@@ -139,103 +53,109 @@
         {
             @foreach (var cat in categories)
             {
-                <div class="category-title fs-4">@cat.Name</div>
-                <div class="row g-4"> @* Kartlar arası boşluğu artır (g-4) *@
+                <div class="relative mb-6">
+                    <div class="text-xl font-semibold text-blue-800 bg-white py-3 px-6 rounded-lg shadow-sm border-l-4 border-blue-500 text-center mb-6">
+                        @cat.Name
+                    </div>
+
                     @if (cat.Products == null || cat.Products.Count == 0)
                     {
-                        <div class="col-12">
-                             <p class="text-muted">Bu kategoride ürün bulunmamaktadır.</p>
-                        </div>
+                        <p class="text-gray-500 text-center italic">Bu kategoride ürün bulunmamaktadır.</p>
                     }
                     else
                     {
-                        @foreach (var p in cat.Products)
-                        {
-                            <div class="col-12 col-md-6 col-lg-4 menu-item d-flex"> @* d-flex ekledik *@
-                                <div class="card flex-fill shadow-sm"> @* shadow-sm ve flex-fill ekledik *@
-                                    @if (!string.IsNullOrEmpty(p.ImageUrl))
-                                    {
-                                        <img src="@p.ImageUrl" class="card-img-top" alt="@p.Name" />
-                                    }
-                                    else
-                                    {
-                                         <img src="~/images/placeholder.png" class="card-img-top" alt="Görsel Yok" /> @* Yer tutucu resim *@
-                                    }
-                                    <div class="card-body d-flex flex-column"> @* İçeriği dikeyde yaymak için *@
-                                        <h5 class="card-title">@p.Name</h5>
-                                        <div class="mb-2 text-primary fw-bold fs-5">@p.Price.ToString("C2")</div>
-                                        @if (!string.IsNullOrEmpty(p.Description))
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            @foreach (var p in cat.Products)
+                            {
+                                <div class="menu-item h-full">
+                                    <div class="bg-white h-full rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                                        @if (!string.IsNullOrEmpty(p.ImageUrl))
                                         {
-                                            <p class="card-text small text-muted flex-grow-1">@p.Description</p> @* Açıklamayı esnet *@
+                                            <div class="relative h-48 overflow-hidden bg-gray-200">
+                                                <img src="@p.ImageUrl" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt="@p.Name" />
+                                            </div>
                                         }
                                         else
                                         {
-                                             <div class="flex-grow-1"></div> @* Açıklama yoksa boşluğu doldur *@
+                                            <div class="h-48 bg-gray-200 flex items-center justify-center">
+                                                <span class="text-gray-400 text-lg">Görsel Yok</span>
+                                            </div>
                                         }
-                                        <button class="btn btn-outline-primary add-to-cart mt-auto" @* Butonu alta yasla ve rengi değiştir *@
-                                                data-product-id="@p.Id"
-                                                data-product-name="@p.Name"
-                                                data-product-price="@p.Price">
-                                            <i class="fas fa-cart-plus me-2"></i>Sepete Ekle @* İkon ve boşluk ekledik *@
-                                        </button>
+                                        <div class="p-5 flex flex-col h-[calc(100%-12rem)]">
+                                            <h3 class="text-lg font-semibold text-gray-800 mb-1">@p.Name</h3>
+                                            <div class="text-blue-600 font-bold text-xl mb-3">@p.Price.ToString("C2")</div>
+                                            @if (!string.IsNullOrEmpty(p.Description))
+                                            {
+                                                <p class="text-gray-600 text-sm mb-4 flex-grow">@p.Description</p>
+                                            }
+                                            else
+                                            {
+                                                <div class="flex-grow"></div>
+                                            }
+                                            <button class="add-to-cart bg-white text-primary border border-primary hover:bg-primary hover:text-white transition-colors duration-300 font-medium py-2 px-4 rounded-lg flex items-center justify-center"
+                                                    data-product-id="@p.Id"
+                                                    data-product-name="@p.Name"
+                                                    data-product-price="@p.Price">
+                                                <i class="fas fa-cart-plus mr-2"></i>Sepete Ekle
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     }
                 </div>
             }
         }
 
-        <!-- Sabit Alt Bar -->
-        <div class="fixed-bottom fixed-bottom-bar d-flex flex-md-row-reverse align-items-center ">
-            
-            <button class="btn btn-success btn-lg me-5" onclick="showCart()"> @* Boyutu büyüttük (btn-lg) ve rengi değiştirdik *@
-                <span class="cart-display">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-badge badge bg-danger rounded-pill">0</span> @* rounded-pill *@
-                </span>
-                <span >Sepeti Gör</span> @* Metni güncelledik *@
-            </button>
+        <!-- Fixed Bottom Bar -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-95 backdrop-blur border-t border-gray-200 py-3 px-6 z-50">
+            <div class="container mx-auto flex justify-between items-center">
+                <div></div> <!-- Sol boşluk için -->
+                <button class="bg-success hover:bg-green-600 text-white py-3 px-6 rounded-lg shadow-md transition-all duration-300 flex items-center space-x-3" onclick="showCart()">
+                    <div class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="cart-badge absolute -top-2 -right-2 bg-danger text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </div>
+                    <span class="font-medium">Sepeti Gör</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Sepet Modalı -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg"> @* modal-dialog-centered ve modal-lg *@
-            <div class="modal-content">
-                <div class="modal-header bg-light"> @* Başlığa hafif arkaplan *@
-                    <h5 class="modal-title" id="cartModalLabel">
-                         <i class="fas fa-shopping-cart me-2"></i>Sepetiniz (@table.Name)
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 bg-gray-50 rounded-t-xl">
+                <h5 class="text-xl font-semibold text-gray-800 flex items-center">
+                    <i class="fas fa-shopping-cart mr-2 text-primary"></i>Sepetiniz (@table.Name)
+                </h5>
+                <button type="button" class="text-gray-500 hover:text-gray-700" onclick="document.getElementById('cartModal').classList.add('hidden')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-grow" id="cartModalBody">
+                <div id="cartSummary" class="divide-y divide-gray-200">
+                    <!-- Sepet içeriği dinamik olarak buraya gelecek -->
+                    <p class="text-center text-gray-500 py-8">Sepetiniz şu an boş.</p>
                 </div>
-                <div class="modal-body p-4" id="cartModalBody"> @* Padding ekledik ve ID değiştirdik *@
-                     <div id="cartSummary">
-                        <!-- Sepet içeriği dinamik olarak buraya gelecek -->
-                        <p class="text-center text-muted">Sepetiniz şu an boş.</p>
-                     </div>
-                </div>
-                <div class="modal-footer justify-content-between"> @* Butonları ayırdık *@
-                     <div>
-                         <button type="button" onclick="clearCart()" class="btn btn-outline-danger">
-                             <i class="fas fa-trash-alt me-1"></i> Sepeti Temizle
-                         </button>
-                     </div>
-                     <div>
-                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                         <button class="btn btn-success" id="completeOrderBtn">
-                              <i class="fas fa-check-circle me-1"></i> Siparişi Tamamla
-                         </button>
-                    </div>
-                    @* Scriptler modal dışında kalmalı *@
+            </div>
+            <div class="border-t border-gray-200 p-4 bg-gray-50 rounded-b-xl flex justify-between">
+                <button type="button" onclick="clearCart()" class="text-danger border border-danger px-4 py-2 rounded-lg hover:bg-danger hover:text-white transition-colors duration-300">
+                    <i class="fas fa-trash-alt mr-1"></i> Sepeti Temizle
+                </button>
+                <div class="space-x-3">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition-colors duration-300" onclick="document.getElementById('cartModal').classList.add('hidden')">Kapat</button>
+                    <button id="completeOrderBtn" class="bg-success hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-check-circle mr-1"></i> Siparişi Tamamla
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-     <script>
-        // Masa ID'sini localStorage'a kaydetme script'i burada kalsın
+    <script>
+        // localStorage işlemleri
         document.addEventListener("DOMContentLoaded", function() {
             const tableId = @table.Id;
             if (tableId) {
@@ -245,12 +165,29 @@
                 console.error('TableId bulunamadı!');
             }
 
-            // Sepet ve toplam tutarını güncelleme fonksiyonlarını çağır
+            // Sepet ve toplam tutarını güncelleme
             updateCartBadge();
             updateCartTotalDisplay();
+
+            // Sepete Ekle butonları için event listener
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    const productName = this.getAttribute('data-product-name');
+                    const productPrice = parseFloat(this.getAttribute('data-product-price'));
+
+                    addToCart(productId, productName, productPrice);
+
+                    // Ekleme animasyonu
+                    this.classList.add('bg-green-500', 'text-white');
+                    setTimeout(() => {
+                        this.classList.remove('bg-green-500', 'text-white');
+                    }, 500);
+                });
+            });
         });
 
-        // Siparişi tamamlama butonu script'i burada kalsın
+        // Siparişi tamamlama butonu
         document.getElementById('completeOrderBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const tableId = localStorage.getItem('tableId');
@@ -267,12 +204,116 @@
             console.log('Siparişi tamamla URL:', orderUrl);
             window.location.href = orderUrl;
         });
+
+        // Sepeti göster
+        function showCart() {
+            document.getElementById('cartModal').classList.remove('hidden');
+            updateCartDisplay();
+        }
+
+        // Bu fonksiyonları site.js'den buraya taşıdım (örnek implementasyon)
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-badge').textContent = totalItems;
+        }
+
+        function updateCartTotalDisplay() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            // Total display implementation
+        }
+
+        function updateCartDisplay() {
+            const cartSummary = document.getElementById('cartSummary');
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            if (cart.length === 0) {
+                cartSummary.innerHTML = '<p class="text-center text-gray-500 py-8">Sepetiniz şu an boş.</p>';
+                return;
+            }
+
+            let html = '<ul class="divide-y divide-gray-200">';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                html += `
+                <li class="py-4 flex justify-between">
+                    <div>
+                        <h3 class="font-medium">${item.name}</h3>
+                        <p class="text-sm text-gray-500">${item.price.toFixed(2)} TL x ${item.quantity}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-medium mr-4">${itemTotal.toFixed(2)} TL</span>
+                        <div class="flex items-center border rounded-lg overflow-hidden">
+                            <button class="px-2 py-1 bg-gray-100 hover:bg-gray-200" onclick="decrementItem('${item.id}')">-</button>
+                            <span class="px-3">${item.quantity}</span>
+                            <button class="px-2 py-1 bg-gray-100 hover:bg-gray-200" onclick="incrementItem('${item.id}')">+</button>
+                        </div>
+                    </div>
+                </li>`;
+            });
+
+            html += `</ul>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-lg">Toplam:</span>
+                        <span class="font-bold text-xl text-primary">${total.toFixed(2)} TL</span>
+                    </div>
+                </div>`;
+
+            cartSummary.innerHTML = html;
+        }
+
+        function addToCart(id, name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function clearCart() {
+            if (confirm('Sepeti temizlemek istediğinize emin misiniz?')) {
+                localStorage.setItem('cart', '[]');
+                updateCartDisplay();
+                updateCartBadge();
+            }
+        }
+
+        function incrementItem(id) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const item = cart.find(item => item.id === id);
+            if (item) item.quantity++;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+            updateCartBadge();
+        }
+
+        function decrementItem(id) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const itemIndex = cart.findIndex(item => item.id === id);
+
+            if (itemIndex > -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity--;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+                updateCartBadge();
+            }
+        }
     </script>
-
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @* Font Awesome için script eklemeye genellikle gerek yok, CSS yeterli. Eğer özel kit kullanıyorsanız ekleyebilirsiniz.*@
-    <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script> 
-    <script src="~/js/site.js" asp-append-version="true"></script> @* site.js'yi en sona taşıdık ve version ekledik *@
-
 </body>
 </html>

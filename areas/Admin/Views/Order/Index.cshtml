@@ -65,10 +65,9 @@
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
     <script>
         $(document).ready(function() {
-            // DataTable
-            $('#ordersTable').DataTable({
-                order: [[2, 'desc']] // Tarihe göre sırala
-            });
+                   $('#ordersTable').DataTable({
+            order: [[0, 'desc']] // Sipariş numarasına göre tersten sırala (en yeni siparişler üstte)
+        });
 
             // SignalR bağlantısı
             const connection = new signalR.HubConnectionBuilder()

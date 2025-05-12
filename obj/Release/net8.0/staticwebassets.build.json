@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9cbprDy7p/nLdaeTIvOytn79YOLks4dpNhV6jUaGQIo=",
+  "Hash": "ftRPsVsoD7qU2zf3pQuDsB3cs1Omaq4nOBGF8EUJsOE=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -2726,12 +2726,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman_anons.mp3",
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman.mp3",
       "SourceId": "RestaurantQRSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
       "BasePath": "_content/RestaurantQRSystem",
-      "RelativePath": "ses/havaliman_anons#[.{fingerprint}]?.mp3",
+      "RelativePath": "ses/havaliman#[.{fingerprint}]?.mp3",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2740,11 +2740,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "x9xkeo4rmt",
-      "Integrity": "i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI=",
+      "Fingerprint": "jy57huyswz",
+      "Integrity": "Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\ses\\havaliman_anons.mp3"
+      "OriginalItemSpec": "wwwroot\\ses\\havaliman.mp3"
     },
     {
       "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\0df27f98-4507-4444-a447-f4ce21542031.jpg",
@@ -10879,8 +10879,8 @@
       ]
     },
     {
-      "Route": "ses/havaliman_anons.mp3",
-      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman_anons.mp3",
+      "Route": "ses/havaliman.jy57huyswz.mp3",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman.mp3",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -10889,7 +10889,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "189946"
+          "Value": "129024"
         },
         {
           "Name": "Content-Type",
@@ -10897,48 +10897,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI=\""
+          "Value": "\"Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 14:49:24 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI="
-        }
-      ]
-    },
-    {
-      "Route": "ses/havaliman_anons.x9xkeo4rmt.mp3",
-      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman_anons.mp3",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "189946"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "audio/mpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 25 Apr 2025 14:49:24 GMT"
+          "Value": "Mon, 12 May 2025 18:09:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10948,15 +10911,52 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x9xkeo4rmt"
+          "Value": "jy57huyswz"
         },
         {
           "Name": "label",
-          "Value": "ses/havaliman_anons.mp3"
+          "Value": "ses/havaliman.mp3"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI="
+          "Value": "sha256-Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI="
+        }
+      ]
+    },
+    {
+      "Route": "ses/havaliman.mp3",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\ses\\havaliman.mp3",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "129024"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "audio/mpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 12 May 2025 18:09:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI="
         }
       ]
     },

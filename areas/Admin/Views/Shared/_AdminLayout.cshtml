@@ -175,7 +175,7 @@
 
         // Sesli bildirim çal
         function playNotificationSound() {
-            const audio = new Audio('/ses/havaliman_anons.mp3');
+            const audio = new Audio('/ses/havaliman.mp3');
             audio.play().catch(error => console.warn('Ses çalınamadı:', error));
         }
 
@@ -276,7 +276,6 @@
                     // Masa detay linklerini tekrar bağla
                     attachTableDetailEvents();
                 })
-                
         }
              connection.on("TableStatusUpdated", function(tableId) {
                 console.log(`Masa ${tableId} durumu güncellendi`);

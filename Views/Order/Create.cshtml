@@ -1,48 +1,102 @@
-﻿﻿
-@model RestaurantQRSystem.ViewModels.OrderViewModel;
+﻿@model RestaurantQRSystem.ViewModels.OrderViewModel;
 
 @{
     ViewData["Title"] = "Sipariş Oluştur";
     Layout = "_Layout"; // veya null; kullanacağınız layout'a göre
 }
 
-<div class="container py-4">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h2 class="h5 mb-0">Siparişinizi Onaylayın</h2>
-            <span class="badge bg-light text-dark">Masa: @ViewData["Table"]</span>
-        </div>
-        <div class="card-body">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<!-- Tailwind CSS cdn ekleme (eğer layout'ta yoksa) -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-            <form id="orderForm" method="post" asp-action="Create" asp-controller="Order">
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+        <!-- Header Bölümü -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-4 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-white">Siparişinizi Onaylayın</h2>
+            <div class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2" />
+                    </svg>
+                    Masa: @ViewData["Table"]
+                </span>
+            </div>
+        </div>
+
+        <!-- Form Bölümü -->
+        <div class="p-6">
+            <div id="validationSummary" class="hidden bg-red-50 text-red-600 p-4 rounded-md mb-6 border-l-4 border-red-500"></div>
+
+            <form id="orderForm" method="post" asp-action="Create" asp-controller="Order" class="space-y-6">
                 <input type="hidden" asp-for="TableId" value="@ViewData["TableId"]" />
                 <input type="hidden" asp-for="CartJson" id="CartJson" />
 
-                <div class="mb-3">
-                    <label asp-for="CustomerName" class="form-label"  >Adınız (zorunlu)</label>
-                    <input asp-for="CustomerName" class="form-control" placeholder="Adınızı girin" required />
+                <!-- Müşteri Adı -->
+                <div>
+                    <label asp-for="CustomerName" class="block text-sm font-medium text-gray-700 mb-1">
+                        Adınız <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input asp-for="CustomerName" 
+                               class="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                               placeholder="Adınızı girin" 
+                               required />
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="CustomerNote" class="form-label">Sipariş Notunuz (zorunlu)</label>
-                    <textarea asp-for="CustomerNote" class="form-control" rows="2" placeholder="Özel isteklerinizi belirtin" required></textarea>
+                <!-- Sipariş Notu -->
+                <div>
+                    <label asp-for="CustomerNote" class="block text-sm font-medium text-gray-700 mb-1">
+                        Sipariş Notunuz <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <div class="absolute top-3 left-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <textarea asp-for="CustomerNote" 
+                                  class="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                  rows="3" 
+                                  placeholder="Özel isteklerinizi belirtin (pişirme derecesi, alerjiler vb.)" 
+                                  required></textarea>
+                    </div>
                 </div>
 
-                <div id="orderSummaryContainer" class="mb-4">
-                    <h5 class="mb-3">Sipariş Özeti</h5>
-                    <div id="cartSummary" class="card p-3">
-                        <div class="text-center py-4">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Yükleniyor...</span>
-                            </div>
+                <!-- Sipariş Özeti -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                        </svg>
+                        Sipariş Özeti
+                    </h3>
+                    <div id="cartSummary" class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <div class="flex justify-center items-center py-8">
+                            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="d-grid gap-2">
-                    <button type="submit" id="submitBtn" class="btn btn-success btn-lg">Siparişi Gönder</button>
-                    <a href="javascript:history.back()" class="btn btn-outline-secondary">Geri</a>
+                <!-- Butonlar -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                    <button type="submit" id="submitBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 shadow-md flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        Siparişi Gönder
+                    </button>
+                    <a href="javascript:history.back()" class="flex-1 sm:flex-none sm:w-40 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-6 rounded-lg font-medium transition-all duration-200 text-center flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Geri
+                    </a>
                 </div>
             </form>
         </div>
@@ -51,19 +105,32 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function() {
+        document.addEventListener("DOMContentLoaded", function() {
             console.log("Order form initialized");
+
+            // Validation summary gösterme fonksiyonu
+            function showError(message) {
+                const validationSummary = document.getElementById('validationSummary');
+                validationSummary.innerHTML = `
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        ${message}
+                    </div>
+                `;
+                validationSummary.classList.remove('hidden');
+            }
 
             // Masa bilgilerini kontrol ediyoruz
             const tableId = @Html.Raw(ViewData["TableId"]);
             const tableName = "@ViewData["TableName"]";
             
-
             console.log("Table Info:", { tableId, tableName });
 
             if (!tableId) {
-                alert("Masa bilgisi bulunamadı! Lütfen QR kodu tekrar okutun.2");
-                $("#submitBtn").prop("disabled", true);
+                showError("Masa bilgisi bulunamadı! Lütfen QR kodu tekrar okutun.");
+                document.getElementById("submitBtn").disabled = true;
                 return;
             }
 
@@ -74,12 +141,27 @@
                 console.log("Cart loaded:", cart);
 
                 if (cart.length === 0) {
-                    $("#cartSummary").html(`
-                        <div class="alert alert-warning">
-                            Sepetinizde ürün bulunmuyor. <a href="/Menu?tableId=${tableId}">Menüye dönün</a> ve ürün ekleyin.
+                    document.getElementById("cartSummary").innerHTML = `
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 text-yellow-700">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm">
+                                        Sepetinizde ürün bulunmuyor. 
+                                        <a href="/Menu?tableId=${tableId}" class="font-medium underline hover:text-yellow-600">
+                                            Menüye dönün
+                                        </a> 
+                                        ve ürün ekleyin.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    `);
-                    $("#submitBtn").prop("disabled", true);
+                    `;
+                    document.getElementById("submitBtn").disabled = true;
                     return;
                 }
 
@@ -87,62 +169,87 @@
                 renderCartSummary(cart);
 
                 // Hidden input'a cart JSON'ını yerleştiriyoruz
-                $("#CartJson").val(JSON.stringify(cart));
+                document.getElementById("CartJson").value = JSON.stringify(cart);
 
             } catch (error) {
                 console.error("Error loading cart:", error);
-                $("#cartSummary").html(`
-                    <div class="alert alert-danger">
-                        Sepet veriniz yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya tekrar deneyin.
+                document.getElementById("cartSummary").innerHTML = `
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 text-red-700">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm">
+                                    Sepet veriniz yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya tekrar deneyin.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                `);
-                $("#submitBtn").prop("disabled", true);
+                `;
+                document.getElementById("submitBtn").disabled = true;
                 return;
             }
 
             // Form gönderilirken son kontrolleri yapıyoruz
-            $("#orderForm").on("submit", function(e) {
+            document.getElementById("orderForm").addEventListener("submit", function(e) {
                 // Form gönderimini geçici olarak durduruyoruz
                 e.preventDefault();
 
                 // Son kontroller
                 if (cart.length === 0) {
-                    alert("Sepetiniz boş! Lütfen ürün ekleyin.");
+                    showError("Sepetiniz boş! Lütfen ürün ekleyin.");
                     return false;
                 }
 
                 if (!tableId) {
-                    alert("Masa bilgisi eksik! Lütfen QR kodu tekrar okutun.");
+                    showError("Masa bilgisi eksik! Lütfen QR kodu tekrar okutun.");
                     return false;
                 }
 
                 // Form içeriğini log'luyoruz (debug için)
                 console.log("Submitting order with:", {
-                    TableId: $("#TableId").val(),
-                    CartJson: $("#CartJson").val(),
-                    CustomerName: $("#CustomerName").val(),
-                    CustomerNote: $("#CustomerNote").val()
+                    TableId: document.getElementById("TableId").value,
+                    CartJson: document.getElementById("CartJson").value,
+                    CustomerName: document.getElementById("CustomerName").value,
+                    CustomerNote: document.getElementById("CustomerNote").value
                 });
 
                 // Sepeti temizleyip formu gönderiyoruz
                 localStorage.removeItem('cart');
-                this.submit();
+                
+                // Gönderim animasyonu
+                               // Gönderim animasyonu
+                const submitBtn = document.getElementById("submitBtn");
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sipariş Gönderiliyor...
+                `;
+                submitBtn.disabled = true;
+
+                // Form submit
+                setTimeout(() => this.submit(), 600);
             });
         });
 
         // Sepet özetini gösterme fonksiyonu
         function renderCartSummary(cart) {
             let tableHtml = `
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-100 text-xs uppercase text-gray-700">
                             <tr>
-                                <th>Ürün</th>
-                                <th class="text-center">Adet</th>
-                                <th class="text-end">Fiyat</th>
+                                <th class="px-4 py-3 text-left">Ürün</th>
+                                <th class="px-4 py-3 text-center">Adet</th>
+                                <th class="px-4 py-3 text-right">Fiyat</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-200">
             `;
 
             let total = 0;
@@ -152,27 +259,36 @@
                 total += itemTotal;
 
                 tableHtml += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td class="text-center">${item.quantity}</td>
-                        <td class="text-end">${itemTotal.toFixed(2)}₺</td>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-900 font-medium">${item.name}</td>
+                        <td class="px-4 py-3 text-center text-gray-500">${item.quantity}</td>
+                        <td class="px-4 py-3 text-right text-gray-900">${itemTotal.toFixed(2)}₺</td>
                     </tr>
                 `;
             });
 
             tableHtml += `
                         </tbody>
-                        <tfoot>
+                        <tfoot class="bg-gray-50 font-semibold">
                             <tr>
-                                <th colspan="2" class="text-end">Toplam:</th>
-                                <th class="text-end">${total.toFixed(2)}₺</th>
+                                <td colspan="2" class="px-4 py-3 text-right">Toplam:</td>
+                                <td class="px-4 py-3 text-right text-blue-600">${total.toFixed(2)}₺</td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
+
+                <div class="mt-3 p-3 bg-blue-50 text-blue-800 text-sm rounded-md flex items-start border border-blue-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                    <span>
+                        Siparişiniz personel tarafından onaylandıktan sonra hazırlanmaya başlanacaktır. Herhangi bir sorunuz olursa lütfen personelimizle iletişime geçin.
+                    </span>
+                </div>
             `;
 
-            $("#cartSummary").html(tableHtml);
+            document.getElementById("cartSummary").innerHTML = tableHtml;
         }
     </script>
 }

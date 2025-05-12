@@ -828,17 +828,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1117"},{"Name":"Content-Type","Value":"text/plain"},{"Name":"ETag","Value":"\u0022hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\u0022"},{"Name":"Last-Modified","Value":"Tue, 22 Apr 2025 11:24:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/ses/havaliman_anons.mp3">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman_anons.mp3'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/ses/havaliman.jy57huyswz.mp3">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman.mp3'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-i\u002Bwjjvqg1MDw/orBTG08\u002BG9yyCFsINqsj3CKnPirJtI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"189946"},{"Name":"Content-Type","Value":"audio/mpeg"},{"Name":"ETag","Value":"\u0022i\u002Bwjjvqg1MDw/orBTG08\u002BG9yyCFsINqsj3CKnPirJtI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Apr 2025 14:49:24 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"jy57huyswz"},{"Name":"integrity","Value":"sha256-Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA\u002BwVkB643\u002BX3yzI="},{"Name":"label","Value":"_content/RestaurantQRSystem/ses/havaliman.mp3"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"129024"},{"Name":"Content-Type","Value":"audio/mpeg"},{"Name":"ETag","Value":"\u0022Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA\u002BwVkB643\u002BX3yzI=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 18:09:58 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/ses/havaliman_anons.x9xkeo4rmt.mp3">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman_anons.mp3'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/ses/havaliman.mp3">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman.mp3'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"x9xkeo4rmt"},{"Name":"integrity","Value":"sha256-i\u002Bwjjvqg1MDw/orBTG08\u002BG9yyCFsINqsj3CKnPirJtI="},{"Name":"label","Value":"_content/RestaurantQRSystem/ses/havaliman_anons.mp3"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"189946"},{"Name":"Content-Type","Value":"audio/mpeg"},{"Name":"ETag","Value":"\u0022i\u002Bwjjvqg1MDw/orBTG08\u002BG9yyCFsINqsj3CKnPirJtI=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Apr 2025 14:49:24 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA\u002BwVkB643\u002BX3yzI="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"129024"},{"Name":"Content-Type","Value":"audio/mpeg"},{"Name":"ETag","Value":"\u0022Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA\u002BwVkB643\u002BX3yzI=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 18:09:58 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/RestaurantQRSystem/uploads/products/0df27f98-4507-4444-a447-f4ce21542031.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\0df27f98-4507-4444-a447-f4ce21542031.jpg'))</AssetFile>

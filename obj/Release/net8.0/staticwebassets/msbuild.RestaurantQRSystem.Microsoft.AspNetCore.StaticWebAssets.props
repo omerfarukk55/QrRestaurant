@@ -1242,23 +1242,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman_anons.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman.mp3'))">
       <SourceType>Package</SourceType>
       <SourceId>RestaurantQRSystem</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/RestaurantQRSystem</BasePath>
-      <RelativePath>ses/havaliman_anons.mp3</RelativePath>
+      <RelativePath>ses/havaliman.mp3</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>x9xkeo4rmt</Fingerprint>
-      <Integrity>i+wjjvqg1MDw/orBTG08+G9yyCFsINqsj3CKnPirJtI=</Integrity>
+      <Fingerprint>jy57huyswz</Fingerprint>
+      <Integrity>Fd0M/SqK7kzHpCBPJ/t/CHIuuhVhA+wVkB643+X3yzI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman_anons.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ses\havaliman.mp3'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\0df27f98-4507-4444-a447-f4ce21542031.jpg'))">
       <SourceType>Package</SourceType>

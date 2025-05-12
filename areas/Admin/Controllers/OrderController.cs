@@ -28,10 +28,11 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var orders = await _context.Orders
-       .Include(o => o.Table)
-       .Include(o => o.OrderItems)
-           .ThenInclude(oi => oi.Product)
-       .ToListAsync();
+         .Include(o => o.Table)
+         .Include(o => o.OrderItems)
+             .ThenInclude(oi => oi.Product)
+         .OrderByDescending(o => o.Id) // Bu satırı ekleyin/değiştirin
+         .ToListAsync();
 
             return View(orders);
         }
