@@ -422,38 +422,43 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ClearTable(int tableId)
+        public async Task<IActionResult> ClearTable(int tableId, int orderId)
         {
             try
             {
-                var table = await _context.Tables
-                    .Include(t => t.Orders.Where(o => o.Status != OrderStatus.Completed && o.Status != OrderStatus.Cancelled && o.Status != OrderStatus.Paid))
-                    .FirstOrDefaultAsync(t => t.Id == tableId);
+                // Belirli siparişi getir
+                var order = await _context.Orders
+                    .FirstOrDefaultAsync(o => o.TableId == tableId && o.Id == orderId &&
+                                              o.Status != OrderStatus.Completed &&
+                                              o.Status != OrderStatus.Cancelled &&
+                                              o.Status != OrderStatus.Paid);
 
-                if (table == null)
+                if (order == null)
                 {
-                    TempData["Error"] = "Masa bulunamadı.";
+                    TempData["Error"] = "Sipariş bulunamadı veya zaten tamamlanmış.";
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
 
-                // Tüm aktif siparişleri tamamlandı olarak işaretle
-                foreach (var order in table.Orders)
-                {
-                    order.Status = OrderStatus.Paid;
-                    order.PaymentStatus = PaymentStatus.Completed;
-                    order.PaymentDate = DateTime.Now;
-                    order.PaymentMethod = "Nakit";
-                    order.PaidAmount = order.TotalAmount;
-                }
+                System.Diagnostics.Debug.WriteLine($"Sipariş #{order.Id} tamamlandı olarak işaretleniyor.");
+
+                // Siparişi ödendi ve tamamlandı olarak güncelle
+                order.Status = OrderStatus.Completed;
+                order.PaymentStatus = PaymentStatus.Completed;
+                order.PaymentDate = DateTime.Now;
+                order.PaymentMethod = "Nakit";
+                order.PaidAmount = order.TotalAmount;
+
+                _context.Update(order);
+
+                // Masanın durumu burada değiştirilmez çünkü yalnızca bir sipariş tamamlandı
 
                 await _context.SaveChangesAsync();
 
-                TempData["Success"] = "Masa başarıyla boşaltıldı, tüm siparişler tamamlandı.";
+                TempData["Success"] = $"Sipariş #{order.Id} başarıyla tamamlandı.";
             }
             catch (Exception ex)
             {
                 TempData["Error"] = $"İşlem sırasında hata oluştu: {ex.Message}";
-                // Hata logla
                 System.Diagnostics.Debug.WriteLine($"ClearTable Error: {ex}");
             }
 
