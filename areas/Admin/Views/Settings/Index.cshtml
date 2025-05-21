@@ -1,52 +1,213 @@
-﻿@model RestaurantQRSystem.Models.RestaurantInfo
+﻿@model RestaurantQRSystem.ViewModels.RestaurantSettingsViewModel
 @{
-    ViewData["Title"] = "Ayarlar";
+    ViewData["Title"] = "Restoran Ayarları";
     Layout = "_AdminLayout";
 }
 
-<h1>Restoran Ayarları</h1>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Restoran Ayarları</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Restoran Ayarları</li>
+    </ol>
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">@TempData["Message"]</div>
-}
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-<form method="post" enctype="multipart/form-data">
+    <!-- SINGLE FORM STARTS HERE -->
+    <form asp-action="Index" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="mb-3">
-        <label asp-for="RestaurantName" class="form-label"></label>
-        <input asp-for="RestaurantName" class="form-control" />
-        <span asp-validation-for="RestaurantName" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Address" class="form-label"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Mevcut Logo</label><br />
-        @if (!string.IsNullOrEmpty(Model.LogoUrl))
-        {
-            <img src="@Model.LogoUrl" height="60" />
-        }
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Yeni Logo Yükle</label>
-        <input type="file" name="logoFile" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Kaydet</button>
-</form>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-cog me-1"></i>
+                        Restoran Bilgileri
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RestaurantName" class="control-label"></label>
+                                    <input asp-for="RestaurantName" class="form-control" />
+                                    <span asp-validation-for="RestaurantName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Currency" class="control-label"></label>
+                                    <select asp-for="Currency" class="form-select">
+                                        <option value="₺">TL (₺)</option>
+                                        <option value="$">USD ($)</option>
+                                        <option value="€">Euro (€)</option>
+                                        <option value="£">GBP (£)</option>
+                                    </select>
+                                    <span asp-validation-for="Currency" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="control-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Address" class="control-label"></label>
+                            <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber" class="control-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="WorkingHours" class="control-label"></label>
+                            <input asp-for="WorkingHours" class="form-control" placeholder="Örn: Pzt-Cum 09:00-22:00, Cts-Paz 10:00-23:00" />
+                            <span asp-validation-for="WorkingHours" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="TaxNumber" class="control-label"></label>
+                            <input asp-for="TaxNumber" class="form-control" />
+                            <span asp-validation-for="TaxNumber" class="text-danger"></span>
+                        </div>
+
+                        <h5 class="mt-4 mb-3">Sosyal Medya</h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FacebookUrl" class="control-label"></label>
+                                    <input asp-for="FacebookUrl" class="form-control" />
+                                    <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="InstagramUrl" class="control-label"></label>
+                                    <input asp-for="InstagramUrl" class="form-control" />
+                                    <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-image me-1"></i>
+                        Logo Yönetimi
+                    </div>
+                    <div class="card-body text-center">
+                        @if (!string.IsNullOrEmpty(Model.CurrentLogoPath))
+                        {
+                            <div class="mb-3">
+                                <img src="@Model.CurrentLogoPath" alt="Restoran Logo" class="img-fluid" style="max-height: 150px;" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <div class="text-muted">
+                                    <i class="fas fa-store fa-5x mb-3"></i>
+                                    <p>Henüz logo yüklenmemiş</p>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label asp-for="LogoFile" class="form-label"></label>
+                            <input asp-for="LogoFile" class="form-control" accept="images/*" />
+                            <span asp-validation-for="LogoFile" class="text-danger"></span>
+                            <div class="form-text">Önerilen boyut: 400x300px, Max: 2MB</div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="ShowLogo" class="form-check-input" />
+                            <label asp-for="ShowLogo" class="form-check-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Önizleme
+                    </div>
+                    <div class="card-body">
+                        <div class="preview-container p-3 border rounded text-center" style="background-color: #f8f9fa;">
+                            @if (Model.ShowLogo && !string.IsNullOrEmpty(Model.CurrentLogoPath))
+                            {
+                                <img src="@Model.CurrentLogoPath" alt="Restoran Logo" class="img-fluid mb-2" style="max-height: 80px;" />
+                            }
+                            <h5>@(string.IsNullOrEmpty(Model.RestaurantName) ? "Restoran Adı" : Model.RestaurantName)</h5>
+                            <p class="small text-muted mb-0">@(string.IsNullOrEmpty(Model.Description) ? "Restoran açıklaması burada görünecek" : Model.Description)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Tüm Ayarları Kaydet
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- SINGLE FORM ENDS HERE -->
+</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Optional: Preview image when a new file is selected
+        document.getElementById('LogoFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const previewImg = document.querySelector('.preview-container img');
+                    if (previewImg) {
+                        previewImg.src = event.target.result;
+                    } else {
+                        const newImg = document.createElement('img');
+                        newImg.src = event.target.result;
+                        newImg.alt = "Restoran Logo";
+                        newImg.className = "img-fluid mb-2";
+                        newImg.style.maxHeight = "80px";
+                        document.querySelector('.preview-container').prepend(newImg);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 }

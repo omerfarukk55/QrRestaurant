@@ -71,7 +71,7 @@ namespace RestaurantQRSystem.ViewModels
 
             System.Diagnostics.Debug.WriteLine($"FromTable - Dönüşüm tamamlandı, ViewModel siparişleri: {viewModel.Orders.Count}");
 
-            return viewModel;
+            return viewModel;   
         }
     }
 

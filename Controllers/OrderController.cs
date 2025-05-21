@@ -104,7 +104,7 @@ namespace RestaurantQRSystem.Controllers
                 // Yeni sipariş oluşturuyoruz
                 var order = new Order
                 {
-                    TableId = model.TableId,
+                    TableId = model.TableId,        
                     OrderDate = DateTime.Now,
                     Status = OrderStatus.Received,
                     TotalAmount = totalAmount,

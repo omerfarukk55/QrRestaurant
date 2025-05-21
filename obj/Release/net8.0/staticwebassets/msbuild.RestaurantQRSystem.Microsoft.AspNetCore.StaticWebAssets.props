@@ -90,6 +90,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logo.png'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logos\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>RestaurantQRSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RestaurantQRSystem</BasePath>
+      <RelativePath>images/logos/86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>i1royyn73r</Fingerprint>
+      <Integrity>GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logos\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\products\balık.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>RestaurantQRSystem</SourceId>
@@ -1331,6 +1349,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\83aa9a75-405c-4edb-a67e-16245d76120b.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>RestaurantQRSystem</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RestaurantQRSystem</BasePath>
+      <RelativePath>uploads/products/83aa9a75-405c-4edb-a67e-16245d76120b.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>lo5kc7viqe</Fingerprint>
+      <Integrity>xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\83aa9a75-405c-4edb-a67e-16245d76120b.png'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\products\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg'))">
       <SourceType>Package</SourceType>

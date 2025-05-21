@@ -8,6 +8,7 @@ using RestaurantQRSystem.Models;
 using RestaurantQRSystem.Models.Enums;
 using Microsoft.AspNetCore.SignalR;
 using RestaurantQRSystem.Hubs;
+using RestaurantQRSystem.ViewModels;
 
 namespace RestaurantQRSystem.Areas.Admin.Controllers
 {
@@ -44,8 +45,20 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
                 .Include(o => o.Table)
                 .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null) return NotFound();
-            return View(order);
+
+            // Get restaurant info
+            var restaurantInfo = await _context.RestaurantInfos.FirstOrDefaultAsync();
+
+            // Create the view model
+            var viewModel = new OrderPrintViewModel
+            {
+                Order = order,
+                RestaurantInfo = restaurantInfo
+            };
+
+            return View(viewModel); // Return the ViewModel instead of just the Order
         }
 
         // GET: Admin/Order/PrintReceipt/5
@@ -56,14 +69,22 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
                 .Include(o => o.Table)
                 .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(o => o.Id == id);
-
             if (order == null)
             {
                 return NotFound();
             }
 
-            // Bu View için layout kullanılmayacak
-            return View("PrintReceipt", order);
+            // Get restaurant info
+            var restaurantInfo = await _context.RestaurantInfos.FirstOrDefaultAsync();
+
+            // Create the view model
+            var viewModel = new OrderPrintViewModel
+            {
+                Order = order,
+                RestaurantInfo = restaurantInfo
+            };
+
+            return View(viewModel);
         }
 
         // Sipariş Durumu Güncelle (Kısa method, POST olacak)

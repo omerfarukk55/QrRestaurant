@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg",
+      "PackagePath": "staticwebassets\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg"
+    },
+    {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\products\\balık.jpg",
       "PackagePath": "staticwebassets\\images\\products\\balık.jpg"
     },
@@ -295,6 +299,10 @@
     {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg",
       "PackagePath": "staticwebassets\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg"
+    },
+    {
+      "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png"
     },
     {
       "Id": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg",

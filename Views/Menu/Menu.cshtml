@@ -3,6 +3,8 @@
     Layout = null;
     var table = ViewBag.Table as RestaurantQRSystem.Models.Table;
     var categories = ViewBag.Categories as IEnumerable<dynamic>;
+    var restaurantInfo = ViewBag.RestaurantInfo ;
+    var restaurantName = restaurantInfo?.RestaurantName ?? "Hansar Balık Evi"; // Fallback to default name
 }
 
 <!DOCTYPE html>
@@ -10,7 +12,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hansar Balık Evi</title>
+    <title>@ViewData["Title"] - @(ViewBag.RestaurantInfo?.RestaurantName)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -35,10 +37,19 @@
 <body class="bg-gray-50 pb-24">
     <!-- Restaurant Header -->
     <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white text-center py-8 px-4 shadow-lg mb-6">
-        <div className="flex justify-center mb-3">
-            <Anchor className="h-12 w-12" />
-        </div>
-        <h1 class=" text-3xl font-bold tracking-wide mb-2">Hansar Balık Evi</h1>
+        @if (restaurantInfo?.ShowLogo == true && !string.IsNullOrEmpty(restaurantInfo?.LogoUrl))
+        {
+            <div class="flex justify-center mb-3">
+                <img src="@restaurantInfo.LogoUrl" alt="@restaurantName Logo" class="h-20 object-contain" />
+            </div>
+        }
+        else
+        {
+            <div class="flex justify-center mb-3">
+                <i class="fas fa-utensils text-white text-4xl"></i>
+            </div>
+        }
+        <h1 class="text-3xl font-bold tracking-wide mb-2">@restaurantName</h1>
         <h2 class="inline-block bg-white text-blue-800 px-4 py-2 rounded-full font-medium mt-2 shadow-sm transform transition-transform hover:scale-105">@table.Name Menüsü</h2>
     </header>
 

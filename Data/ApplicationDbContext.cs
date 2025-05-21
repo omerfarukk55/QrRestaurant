@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Models;
+using System.Reflection.Emit;
 
 namespace RestaurantQRSystem.Data
 {
@@ -19,6 +20,7 @@ namespace RestaurantQRSystem.Data
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<RestaurantInfo> RestaurantInfo { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -50,6 +52,30 @@ namespace RestaurantQRSystem.Data
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<RestaurantInfo>()
+        .Property(r => r.Id)
+        .ValueGeneratedOnAdd();
+            builder.Entity<RestaurantInfo>().HasData(
+                new RestaurantInfo
+                {
+                    Id = 1,
+                    RestaurantName = "QR Restaurant",
+                    Description = "Modern dijital menü ve sipariş sistemi",
+                    Address = "Örnek Mah. Restoran Cad. No:123, İstanbul",
+                    Phone = "+90 (212) 123 45 67",
+                    Email = "info@qrrestaurant.com",
+                    LogoUrl = null, // Logo is initially empty
+                    FacebookUrl = "https://facebook.com/qrrestaurant",
+                    InstagramUrl = "https://instagram.com/qrrestaurant",
+                    ShowLogo = true,
+                    WorkingHours = "Hafta içi: 09:00-23:00, Hafta sonu: 10:00-00:00",
+                    TaxNumber = "1234567890",
+                    Currency = "₺",
+                    LastUpdated = DateTime.Now
+                }
+            );
         }
+
+
     }
 }

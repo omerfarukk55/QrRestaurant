@@ -86,20 +86,28 @@ namespace RestaurantQRSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RestaurantInfos",
+                name: "RestaurantInfo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RestaurantName = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
                     Phone = table.Column<string>(type: "TEXT", nullable: false),
-                    LogoUrl = table.Column<string>(type: "TEXT", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    LogoUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    FacebookUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    InstagramUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    ShowLogo = table.Column<bool>(type: "INTEGER", nullable: false),
+                    WorkingHours = table.Column<string>(type: "TEXT", nullable: false),
+                    TaxNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Currency = table.Column<string>(type: "TEXT", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RestaurantInfos", x => x.Id);
+                    table.PrimaryKey("PK_RestaurantInfo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,7 +265,7 @@ namespace RestaurantQRSystem.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     OrderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    TotalAmount = table.Column<int>(type: "INTEGER", nullable: false),
                     CustomerName = table.Column<string>(type: "TEXT", nullable: false),
                     CustomerNote = table.Column<string>(type: "TEXT", nullable: false),
                     TableId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -316,8 +324,8 @@ namespace RestaurantQRSystem.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     OrderId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<decimal>(type: "TEXT", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "TEXT", nullable: false)
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    UnitPrice = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -359,6 +367,11 @@ namespace RestaurantQRSystem.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "RestaurantInfo",
+                columns: new[] { "Id", "Address", "Currency", "Description", "Email", "FacebookUrl", "InstagramUrl", "LastUpdated", "LogoUrl", "Phone", "RestaurantName", "ShowLogo", "TaxNumber", "WorkingHours" },
+                values: new object[] { 1, "Örnek Mah. Restoran Cad. No:123, İstanbul", "₺", "Modern dijital menü ve sipariş sistemi", "info@qrrestaurant.com", "https://facebook.com/qrrestaurant", "https://instagram.com/qrrestaurant", new DateTime(2025, 5, 15, 14, 59, 18, 970, DateTimeKind.Local).AddTicks(4668), null, "+90 (212) 123 45 67", "QR Restaurant", true, "1234567890", "Hafta içi: 09:00-23:00, Hafta sonu: 10:00-00:00" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -464,7 +477,7 @@ namespace RestaurantQRSystem.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "RestaurantInfos");
+                name: "RestaurantInfo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

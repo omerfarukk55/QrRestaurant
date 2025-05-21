@@ -5,44 +5,112 @@
 }
 
 <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>Admin Girişi</h4>
+    <div class="col-md-6 col-lg-5">
+        <div class="card border-0 shadow-lg rounded-3 overflow-hidden">
+            <!-- Card Header -->
+            <div class="card-header bg-gradient-primary p-4 border-0">
+                <h4 class="text-white mb-0 d-flex align-items-center">
+                    <i class="fas fa-sign-in-alt me-2"></i>Admin Girişi
+                </h4>
             </div>
-            <div class="card-body">
+
+            <!-- Card Body -->
+            <div class="card-body p-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" role="alert"></div>
+
                 <form asp-area="Admin" asp-controller="Account" asp-action="Login" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-                    
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" placeholder="Email adresinizi girin" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    <!-- Email Field -->
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label fw-medium"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-envelope text-muted"></i>
+                            </span>
+                            <input asp-for="Email"
+                                   class="form-control border-start-0 ps-0"
+                                   placeholder="Email adresinizi girin" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label asp-for="Password" class="form-label"></label>
-                        <input asp-for="Password" class="form-control" placeholder="Şifrenizi girin" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <!-- Password Field -->
+                    <div class="mb-4">
+                        <label asp-for="Password" class="form-label fw-medium"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-lock text-muted"></i>
+                            </span>
+                            <input asp-for="Password"
+                                   class="form-control border-start-0 ps-0"
+                                   placeholder="Şifrenizi girin" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
                     </div>
-                    
-                    <div class="mb-3 form-check">
-                        <input asp-for="RememberMe" class="form-check-input" />
-                        <label asp-for="RememberMe" class="form-check-label"></label>
+
+                    <!-- Remember Me Checkbox -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input asp-for="RememberMe" class="form-check-input" />
+                            <label asp-for="RememberMe" class="form-check-label small"></label>
+                        </div>
                     </div>
-                    
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary py-2 fw-medium">
                             <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
                         </button>
                     </div>
                 </form>
             </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer bg-light py-3 text-center small text-muted border-0">
+                Güvenli giriş sistemi © @DateTime.Now.Year Restoran QR Sistemi
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="text-center small text-muted mt-3">
+            Teknik destek için: <a href="mailto:destek@restoranqr.com" class="text-decoration-none">destek@restoranqr.com</a>
         </div>
     </div>
 </div>
 
+<!-- CSS Styles to add in the head or in a style tag -->
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(to right, #0d6efd, #0b5ed7) !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #0d6efd, #0b5ed7);
+        border: none;
+        transition: all 0.3s;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #0b5ed7, #0a58ca);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
+        }
+
+    .form-control:focus, .form-check-input:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .card {
+        transition: all 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+</style>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

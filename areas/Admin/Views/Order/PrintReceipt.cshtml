@@ -1,147 +1,99 @@
-@model RestaurantQRSystem.Models.Order
+@model RestaurantQRSystem.ViewModels.OrderPrintViewModel
+
 @{
-    Layout = null; // Bu view için layout kullanma
+    ViewData["Title"] = "Sipariş Yazdır #" + Model.Order.Id;
+    Layout = null; // Often print views have no layout
 }
+
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sipariş Fişi - #@Model.Id</title>
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"]</title>
     <style>
+        /* Add your print styles here */
         body {
-            font-family: 'Courier New', Courier, monospace; /* Fiş görünümü için */
-            font-size: 10pt;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
             margin: 0;
             padding: 10px;
-            width: 280px; /* Tipik fiş genişliği, ayarlayabilirsiniz */
-            background-color: #fff; /* Arka planı beyaz yap */
         }
         .header {
             text-align: center;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed #000;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
         }
-        .header h4 {
-            margin: 0;
-            font-size: 12pt;
+        .restaurant-logo {
+            max-height: 60px;
+            margin-bottom: 5px;
         }
-        .header p {
-            margin: 2px 0;
-            font-size: 9pt;
-        }
-        .info p {
-            margin: 2px 0;
-            font-size: 9pt;
-        }
-        .info {
-             margin-bottom: 10px;
-             border-bottom: 1px dashed #000;
-             padding-bottom: 5px;
-        }
-        .items table {
+        table {
             width: 100%;
-            font-size: 9pt;
             border-collapse: collapse;
         }
-        .items th, .items td {
-            padding: 2px 0;
-            vertical-align: top;
-        }
-        .items thead th {
-            border-bottom: 1px solid #000;
+        th, td {
+            padding: 5px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-        .items .qty { text-align: center; width: 40px; }
-        .items .price { text-align: right; width: 70px; }
         .total {
-            margin-top: 10px;
-            padding-top: 5px;
-            border-top: 1px solid #000;
             font-weight: bold;
-        }
-        .note {
+            text-align: right;
             margin-top: 10px;
-            font-size: 9pt;
-            border-top: 1px dashed #000;
-            padding-top: 5px;
         }
-
         @@media print {
-            body {
-                -webkit-print-color-adjust: exact;
-                width: auto; /* Yazdırırken genişliği otomatik ayarla */
-                margin: 0;
-                padding: 0;
-            }
-            /* Yazdırmada sayfa kenar boşluklarını sıfırlamaya çalış */
-            @@page {
-                margin: 5mm;
-            }
+            @@page { margin: 0.5cm; }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h4>RESTAURANT ADI</h4> @* Burayı kendi bilgilerinizle güncelleyin *@
-        <p>Adres Bilgisi</p>
-        <p>Telefon Numarası</p>
+        @if (Model.RestaurantInfo != null)
+        {
+            @if (Model.RestaurantInfo.ShowLogo && !string.IsNullOrEmpty(Model.RestaurantInfo.LogoUrl))
+            {
+                <img src="@Model.RestaurantInfo.LogoUrl" alt="@Model.RestaurantInfo.RestaurantName" class="restaurant-logo" />
+            }
+            <h2>@Model.RestaurantInfo.RestaurantName</h2>
+            <p>@Model.RestaurantInfo.Address</p>
+            <p>@Model.RestaurantInfo.Phone</p>
+        }
+        <h3>Sipariş #@Model.Order.Id</h3>
+        <p>Tarih: @Model.Order.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+        <p>Masa: @Model.Order.Table.Name</p>
     </div>
 
-    <div class="info">
-        <p>Sipariş No: #@Model.Id</p>
-        <p>Tarih: @Model.OrderDate.ToString("dd.MM.yy HH:mm")</p>
-        <p>Masa: @Model.Table.Name (@Model.Table.Id)</p>
-        <p>Müşteri: @(string.IsNullOrEmpty(Model.CustomerName) ? "Misafir" : Model.CustomerName)</p>
-    </div>
-
-    <div class="items">
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Ürün</th>
+                <th>Adet</th>
+                <th>Fiyat</th>
+                <th>Toplam</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order.OrderItems)
+            {
                 <tr>
-                    <th>Ürün</th>
-                    <th class="qty">Adet</th>
-                    <th class="price">Tutar</th>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice.ToString("N2") @(Model.RestaurantInfo?.Currency ?? "₺")</td>
+                    <td>@((item.UnitPrice * item.Quantity).ToString("N2")) @(Model.RestaurantInfo?.Currency ?? "₺")</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.OrderItems)
-                {
-                    <tr>
-                        <td>@item.Product.Name</td>
-                        <td class="qty">@item.Quantity</td>
-                        <td class="price">@((item.UnitPrice * item.Quantity).ToString("0.00"))</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 
     <div class="total">
-        <table style="width:100%;">
-            <tr>
-                <td style="text-align:right;">TOPLAM:</td>
-                <td style="text-align:right; width: 70px;">@Model.TotalAmount.ToString("0.00") ₺</td>
-            </tr>
-        </table>
+        <p>Toplam Tutar: @Model.Order.TotalAmount.ToString("N2") @(Model.RestaurantInfo?.Currency ?? "₺")</p>
     </div>
 
-    @if (!string.IsNullOrEmpty(Model.CustomerNote))
-    {
-        <div class="note">
-            <strong>Not:</strong> @Model.CustomerNote
-        </div>
-    }
-
-    <script type="text/javascript">
-        // Sayfa yüklendiğinde otomatik olarak yazdırma penceresini aç
+    <script>
+        // Auto-print when the page loads
         window.onload = function() {
             window.print();
-            // Tarayıcıya bağlı olarak, yazdırma sonrası pencereyi kapatmayı deneyebilir.
-            // setTimeout(function() { window.close(); }, 100); 
         }
     </script>
 </body>
-</html> 
+</html>

@@ -13,8 +13,31 @@ namespace RestaurantQRSystem.Controllers
         public MenuController(ApplicationDbContext context)
         {
             _context = context;
-        }
 
+        }
+        public async Task<IActionResult> Menu(int tableId)
+        {
+            var table = await _context.Tables.FindAsync(tableId);
+            if (table == null)
+            {
+                return NotFound();
+            }
+
+            // Fetch categories and their products
+            var categories = await _context.Categories
+        .Include(c => c.Products)
+        .Where(c => c.IsActive)
+        .ToListAsync();
+
+            // Fetch restaurant info
+
+            // Set ViewBag data
+            ViewBag.Table = table;
+            ViewBag.Categories = categories;
+            
+            ViewBag.RestaurantInfo = await _context.RestaurantInfos.FirstOrDefaultAsync();
+            return View();
+        }
         // /Menu/Scan/{qrCode} QR'dan gelinen masa
         [HttpGet("Menu/Scan/{qrCode}")]
         public async Task<IActionResult> Scan(string qrCode)
@@ -36,6 +59,9 @@ namespace RestaurantQRSystem.Controllers
                         .ToList()
                 })
                 .ToListAsync();
+
+            // Bu satırı ekleyin - RestaurantInfo verisini yükle
+            ViewBag.RestaurantInfo = await _context.RestaurantInfos.FirstOrDefaultAsync();
 
             ViewBag.Table = table;
             ViewBag.Categories = categories;

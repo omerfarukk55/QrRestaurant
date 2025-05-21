@@ -202,6 +202,84 @@ namespace RestaurantQRSystem.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("RestaurantInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FacebookUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InstagramUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RestaurantName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("ShowLogo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TaxNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WorkingHours")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RestaurantInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Örnek Mah. Restoran Cad. No:123, İstanbul",
+                            Currency = "₺",
+                            Description = "Modern dijital menü ve sipariş sistemi",
+                            Email = "info@qrrestaurant.com",
+                            FacebookUrl = "https://facebook.com/qrrestaurant",
+                            InstagramUrl = "https://instagram.com/qrrestaurant",
+                            LastUpdated = new DateTime(2025, 5, 15, 14, 59, 18, 970, DateTimeKind.Local).AddTicks(4668),
+                            Phone = "+90 (212) 123 45 67",
+                            RestaurantName = "QR Restaurant",
+                            ShowLogo = true,
+                            TaxNumber = "1234567890",
+                            WorkingHours = "Hafta içi: 09:00-23:00, Hafta sonu: 10:00-00:00"
+                        });
+                });
+
             modelBuilder.Entity("RestaurantQRSystem.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -343,8 +421,8 @@ namespace RestaurantQRSystem.Migrations
                     b.Property<int?>("TableId1")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -367,11 +445,11 @@ namespace RestaurantQRSystem.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -449,37 +527,6 @@ namespace RestaurantQRSystem.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("RestaurantQRSystem.Models.RestaurantInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogoUrl")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RestaurantName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RestaurantInfos");
                 });
 
             modelBuilder.Entity("RestaurantQRSystem.Models.Table", b =>

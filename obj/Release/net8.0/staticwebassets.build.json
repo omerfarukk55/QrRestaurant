@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ftRPsVsoD7qU2zf3pQuDsB3cs1Omaq4nOBGF8EUJsOE=",
+  "Hash": "XkZLtyPzJqhB4Q7NkyT05wkHF4eBxMRMY/DERUob6AA=",
   "Source": "RestaurantQRSystem",
   "BasePath": "_content/RestaurantQRSystem",
   "Mode": "Default",
@@ -1380,6 +1380,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg",
+      "SourceId": "RestaurantQRSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
+      "BasePath": "_content/RestaurantQRSystem",
+      "RelativePath": "images/logos/86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i1royyn73r",
+      "Integrity": "GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg"
     },
     {
       "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\products\\balık.jpg",
@@ -2829,6 +2850,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\623e79c8-4c4c-461f-8c88-3924959a9ded.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png",
+      "SourceId": "RestaurantQRSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\",
+      "BasePath": "_content/RestaurantQRSystem",
+      "RelativePath": "uploads/products/83aa9a75-405c-4edb-a67e-16245d76120b#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "lo5kc7viqe",
+      "Integrity": "xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png"
     },
     {
       "Identity": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\95f7ff77-dc85-49fc-bf72-2c65fb865825.jpg",
@@ -5627,6 +5669,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-DV54+s0GCUDRUiwkuAa1D+lgwypnah15dbtvSe2tI7E="
+        }
+      ]
+    },
+    {
+      "Route": "images/logos/86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.i1royyn73r.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "657593"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 11:50:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i1royyn73r"
+        },
+        {
+          "Name": "label",
+          "Value": "images/logos/86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA="
+        }
+      ]
+    },
+    {
+      "Route": "images/logos/86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\images\\logos\\86de6bdb-909b-43b4-8cb0-51b652aaec56_Flux_Dev_A_futuristic_and_modern_illustration_of_AWS_CodeWhisp_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "657593"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 11:50:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GgfQUW8frfX0jpnaceTePBrTqc5AZAwO80m+VmxaJoA="
         }
       ]
     },
@@ -11285,6 +11409,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-OkPsPMyHtEsgjpWaJuPsrFIO0H2eWXGJuO0BduBxVog="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/83aa9a75-405c-4edb-a67e-16245d76120b.lo5kc7viqe.png",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "387928"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:06:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lo5kc7viqe"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/products/83aa9a75-405c-4edb-a67e-16245d76120b.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/products/83aa9a75-405c-4edb-a67e-16245d76120b.png",
+      "AssetFile": "C:\\Users\\omerf\\source\\repos\\RestaurantQRSystem\\RestaurantQRSystem\\wwwroot\\uploads\\products\\83aa9a75-405c-4edb-a67e-16245d76120b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "387928"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:06:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xdFB/Mn2lXZvkH/UcydjRkqBi/Ic1FPvYta4mArUV6U="
         }
       ]
     },

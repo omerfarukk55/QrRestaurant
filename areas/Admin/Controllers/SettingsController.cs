@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantQRSystem.Data;
 using RestaurantQRSystem.Models;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using RestaurantQRSystem.ViewModels;
+using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RestaurantQRSystem.Areas.Admin.Controllers
 {
@@ -25,47 +26,134 @@ namespace RestaurantQRSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var info = await _context.RestaurantInfos.FirstOrDefaultAsync() ?? new RestaurantInfo();
-            return View(info);
+
+            // Map entity to view model
+            var viewModel = new RestaurantSettingsViewModel
+            {
+                RestaurantName = info.RestaurantName,
+                Description = info.Description ?? "",
+                Address = info.Address ?? "",
+                PhoneNumber = info.Phone ?? "",
+                Email = info.Email ?? "",
+                CurrentLogoPath = info.LogoUrl,
+                FacebookUrl = info.FacebookUrl ?? "",
+                InstagramUrl = info.InstagramUrl ?? "",
+                ShowLogo = info.ShowLogo,
+                WorkingHours = info.WorkingHours ?? "",
+                TaxNumber = info.TaxNumber ?? "",
+                Currency = info.Currency ?? "₺"
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(RestaurantInfo model, IFormFile logoFile)
+        public async Task<IActionResult> Index(RestaurantSettingsViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Logo işle
-                if (logoFile != null && logoFile.Length > 0)
+                foreach (var state in ModelState)
                 {
-                    var fileName = "logo_" + Path.GetFileName(logoFile.FileName);
-                    var path = Path.Combine(_env.WebRootPath, "uploads", fileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
+                    foreach (var error in state.Value.Errors)
                     {
-                        await logoFile.CopyToAsync(stream);
+                        Console.WriteLine($"Field: {state.Key}, Error: {error.ErrorMessage}");
                     }
-                    model.LogoUrl = "/uploads/" + fileName;
                 }
+                return View(model);
+            }
 
+            try
+            {
                 var current = await _context.RestaurantInfos.FirstOrDefaultAsync();
 
                 if (current == null)
                 {
-                    _context.RestaurantInfos.Add(model);
+                    current = new RestaurantInfo { Id = 1 };
+                    _context.RestaurantInfos.Add(current);
+                    Console.WriteLine("Creating new RestaurantInfo entity");
                 }
                 else
                 {
-                    current.RestaurantName = model.RestaurantName;
-                    current.Address = model.Address;
-                    current.Email = model.Email;
-                    current.Phone = model.Phone;
-                    if (!string.IsNullOrEmpty(model.LogoUrl))
-                        current.LogoUrl = model.LogoUrl;
+                    Console.WriteLine($"Updating existing RestaurantInfo with ID: {current.Id}");
+                    // Detach and re-attach to ensure clean tracking
+                    _context.Entry(current).State = EntityState.Detached;
+                    _context.Entry(current).State = EntityState.Modified;
                 }
-                await _context.SaveChangesAsync();
-                TempData["Message"] = "Ayarlar başarıyla kaydedildi.";
+
+           
+                    // Logo processing code...
+                    if (model.LogoFile != null && model.LogoFile.Length > 0)
+                    {
+                        // Eski logoyu sil
+                        if (!string.IsNullOrEmpty(current.LogoUrl))
+                        {
+                            var oldPath = Path.Combine(_env.WebRootPath, "images", "logos", Path.GetFileName(current.LogoUrl));
+                            if (System.IO.File.Exists(oldPath))
+                            {
+                                System.IO.File.Delete(oldPath);
+                            }
+                        }
+
+                        // Yeni logoyu kaydet
+                        string uploadsFolder = Path.Combine(_env.WebRootPath, "images", "logos");
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.LogoFile.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await model.LogoFile.CopyToAsync(fileStream);
+                        }
+
+                        current.LogoUrl = "/images/logos/" + uniqueFileName;
+                    }
+                
+
+                // Update all properties
+                current.RestaurantName = model.RestaurantName;
+                current.Description = model.Description;
+                current.Address = model.Address;
+                current.Phone = model.PhoneNumber;
+                current.Email = model.Email;
+                current.FacebookUrl = model.FacebookUrl;
+                current.InstagramUrl = model.InstagramUrl;
+                current.ShowLogo = model.ShowLogo;
+                current.WorkingHours = model.WorkingHours;
+                current.TaxNumber = model.TaxNumber;
+                current.Currency = model.Currency;
+                current.LastUpdated = DateTime.Now;
+
+                Console.WriteLine($"About to save - Name: {current.RestaurantName}, Address: {current.Address}");
+
+                var saveResult = await _context.SaveChangesAsync();
+                Console.WriteLine($"SaveChangesAsync result: {saveResult} records affected");
+
+                // Verify save was successful
+                var verification = await _context.RestaurantInfos.AsNoTracking().FirstOrDefaultAsync();
+                Console.WriteLine($"Verification - ID: {verification?.Id}, Name: {verification?.RestaurantName}, Updated: {verification?.LastUpdated}");
+
+                TempData["Success"] = "Restoran ayarları başarıyla kaydedildi.";
                 return RedirectToAction("Index");
             }
-            return View(model);
+            catch (DbUpdateException dbEx)
+            {
+                Console.WriteLine($"Database update error: {dbEx.Message}");
+                Console.WriteLine($"Inner exception: {dbEx.InnerException?.Message}");
+                ModelState.AddModelError("", "Veritabanı güncelleme hatası: " + dbEx.Message);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General error: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+                ModelState.AddModelError("", "Ayarlar kaydedilirken bir hata oluştu: " + ex.Message);
+                return View(model);
+            }
         }
     }
 }
